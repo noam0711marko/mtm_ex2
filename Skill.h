@@ -23,8 +23,15 @@ public:
     const std::string& getName() const;
     const unsigned int& getRequiredPoints() const;
 
-
+    friend std::ostream& operator<<(std::ostream&, const Skill&);
+    friend bool operator<(const Skill&, const Skill&);
+    friend bool operator==(const Skill&, const Skill&);
 };
+
+bool operator<=(const Skill&, const Skill&);
+bool operator>(const Skill&, const Skill&);
+bool operator>=(const Skill&, const Skill&);
+bool operator!=(const Skill&, const Skill&);
 
 
 #endif //MTM_EX2_SKILL_H
