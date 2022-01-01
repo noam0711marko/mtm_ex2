@@ -11,13 +11,19 @@
 class Skill {
     unsigned int skill_id;
     std::string skill_name;
-    unsigned int points_for_purchase;
+    unsigned int required_points_for_purchase;
 
 public:
     Skill(unsigned int id, std::string name, unsigned int points);
     ~Skill()=default;
     Skill(Skill&)=default;
     Skill& operator=(const Skill&)=default;
+
+    const unsigned int& getId() const;
+    const std::string& getName() const;
+    const unsigned int& getRequiredPoints() const;
+
+
 };
 
 
