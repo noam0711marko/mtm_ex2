@@ -3,4 +3,4 @@ project(mtm_ex2)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(mtm_ex2 dry_sliced_vector.cpp) ##main.cpp Skill.cpp Skill.h)
+add_executable(mtm_ex2  dry_part_debug.cpp) #dry_sliced_function.cpp main.cpp Skill.cpp Skill.h)
