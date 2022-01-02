@@ -39,7 +39,9 @@ int main() {
         cout << "s11 id isn't smaller than s2 id: " << s11.getId() << " >= " << s2.getId();
         return 1;
     }
-    cout << std::endl;
+    cout << std::endl << std::endl;
+    cout << "\033[91:1m" <<"Don't forget to handle exceptions!!" << "\033[0m" << std::endl;
 
     return 0;
 }
+

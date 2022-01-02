@@ -47,7 +47,7 @@ int Skill::operator++(int) {
 
 int &Skill::operator+=(const int& points) {
     if(points<0){
-        //throw NegativePoints; /*update this*/
+        //throw NegativePoints; /* don't forget to update this! */
     }
     this->required_points_for_purchase+=points;
     return this->required_points_for_purchase;
@@ -55,7 +55,7 @@ int &Skill::operator+=(const int& points) {
 
 Skill Skill::operator+(const int& points) {
     if(points<0){
-        //throw NegativePoints; /*update this*/
+        //throw NegativePoints; /* don't forget to update this! */
     }
     *this+=points;
     return *this;
@@ -89,7 +89,5 @@ bool operator!=(const Skill& skill_1, const Skill& skill_2) {
     }
     return true;
 }
-
-
 
 
