@@ -13,7 +13,14 @@ class A {
 public:
     std::vector<int*> values;
     void add(int x) { values.push_back(new int(x)); }
+    ~A();
 };
+A::~A() {
+    int len=values.size();
+    for (int i=0; i<len; ++i){
+        delete(values[i]);
+    }
+}
 int main() {
     A a, sliced;
     a.add(0); a.add(1); a.add(2); a.add(3); a.add(4); a.add(5);
