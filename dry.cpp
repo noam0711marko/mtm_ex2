@@ -22,8 +22,8 @@ std::vector<T> slice(std::vector<T> vec, int start, int step, int stop){
 /*** to fix: ***
 class A {
 public:
- std::vector<int*> values;
-void add(int x) { values.push_back(new int(x)); }
+    std::vector<int*> values;
+    void add(int x) { values.push_back(new int(x)); }
 };
  */
 
