@@ -4,11 +4,11 @@
 
 #include "Skill.h"
 
-Skill::Skill(unsigned int id, std::string name, unsigned int points):
+Skill::Skill(int id, std::string name, int points):
         skill_id(id), skill_name(name), required_points_for_purchase(points) {
 }
 
-const unsigned int &Skill::getId() const {
+const int &Skill::getId() const {
     return skill_id;
 }
 
@@ -16,7 +16,7 @@ const std::string &Skill::getName() const {
     return skill_name;
 }
 
-const unsigned int &Skill::getRequiredPoints() const {
+const int &Skill::getRequiredPoints() const {
     return required_points_for_purchase;
 }
 
@@ -38,6 +38,29 @@ bool operator==(const Skill& skill_1, const Skill& skill_2) {
     }
     return false;
 }
+
+int Skill::operator++(int) {
+    Skill res=*this;
+    ++res.required_points_for_purchase;
+    return res.required_points_for_purchase;
+}
+
+int &Skill::operator+=(const int& points) {
+    if(points<0){
+        //throw NegativePoints; /*update this*/
+    }
+    this->required_points_for_purchase+=points;
+    return this->required_points_for_purchase;
+}
+
+Skill Skill::operator+(const int& points) {
+    if(points<0){
+        //throw NegativePoints; /*update this*/
+    }
+    *this+=points;
+    return *this;
+}
+
 
 bool operator<=(const Skill& skill_1, const Skill& skill_2) {
     if(skill_1<skill_2 || skill_1==skill_2){

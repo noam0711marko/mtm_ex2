@@ -9,29 +9,38 @@
 
 
 class Skill {
-    unsigned int skill_id;
+    int skill_id;
     std::string skill_name;
-    unsigned int required_points_for_purchase;
+    int required_points_for_purchase;
 
 public:
-    Skill(unsigned int id, std::string name, unsigned int points);
+    Skill(int id, std::string name, int points);
     ~Skill()=default;
     Skill(Skill&)=default;
     Skill& operator=(const Skill&)=default;
 
-    const unsigned int& getId() const;
+    const int& getId() const;
     const std::string& getName() const;
-    const unsigned int& getRequiredPoints() const;
+    const int& getRequiredPoints() const;
 
     friend std::ostream& operator<<(std::ostream&, const Skill&);
     friend bool operator<(const Skill&, const Skill&);
     friend bool operator==(const Skill&, const Skill&);
+
+    int& operator++()=delete;
+    int operator++(int);
+    int& operator+=(const int&);
+
+    Skill operator+(const int&);
+
 };
 
 bool operator<=(const Skill&, const Skill&);
 bool operator>(const Skill&, const Skill&);
 bool operator>=(const Skill&, const Skill&);
 bool operator!=(const Skill&, const Skill&);
+
+;
 
 
 #endif //MTM_EX2_SKILL_H
