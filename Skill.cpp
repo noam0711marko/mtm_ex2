@@ -4,7 +4,7 @@
 
 #include "Skill.h"
 
-Skill::Skill(int id, std::string name, int points):
+Skill::Skill(int id, const std::string& name, int points):
         skill_id(id), skill_name(name), required_points_for_purchase(points) {
 }
 
@@ -16,7 +16,7 @@ const std::string &Skill::getName() const {
     return skill_name;
 }
 
-const int &Skill::getRequiredPoints() const {
+int Skill::getRequiredPoints() const {
     return required_points_for_purchase;
 }
 
@@ -47,7 +47,7 @@ int Skill::operator++(int) {
 
 int &Skill::operator+=(const int& points) {
     if(points<0){
-        //throw NegativePoints; /* don't forget to update this! */
+        throw NegativePoints();
     }
     this->required_points_for_purchase+=points;
     return this->required_points_for_purchase;
@@ -55,7 +55,7 @@ int &Skill::operator+=(const int& points) {
 
 Skill Skill::operator+(const int& points) {
     if(points<0){
-        //throw NegativePoints; /* don't forget to update this! */
+        throw NegativePoints();
     }
     *this+=points;
     return *this;
