@@ -14,14 +14,14 @@ class Skill {
     int required_points_for_purchase;
 
 public:
-    Skill(int id, std::string name, int points);
+    Skill(int id, const std::string& name, int points);
     ~Skill()=default;
     Skill(Skill&)=default;
     Skill& operator=(const Skill&)=default;
 
     const int& getId() const;
     const std::string& getName() const;
-    const int& getRequiredPoints() const;
+    int getRequiredPoints() const;
 
     friend std::ostream& operator<<(std::ostream&, const Skill&);
     friend bool operator<(const Skill&, const Skill&);
@@ -32,6 +32,8 @@ public:
     int& operator+=(const int&);
 
     Skill operator+(const int&);
+
+    class NegativePoints : std::exception{};
 
 };
 
