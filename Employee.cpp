@@ -61,7 +61,6 @@ ostream &Employee::printShort(ostream &os) const{
     return os;
 }
 
-//code duplication - need to fix it
 ostream &Employee::printLong(ostream &os) const{
     printFirstLastName(os);
     printIdBirthYear(os);
