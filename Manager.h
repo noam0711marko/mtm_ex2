@@ -1,26 +1,32 @@
-//
-// Created by dolle on 03/01/2022.
-//
-
 #ifndef MTM_EX2_MANAGER_H
 #define MTM_EX2_MANAGER_H
+
 #include "Employee.h"
 #include "Citizen.h"
 
 class Manager: public Citizen{
     int salary;
-    std::set<Employee*> employees;
+    set<Employee*> employees;
 public:
     Manager(int newId1, const string &newFirstName1, const string &newLastName1, int newYear1, int newId);
+
     int getSalary();
+
     void addEmployee(Employee* employee);
     void removeEmployee(int id_to_remove);
-    class EmployeeIsNotHired{};
-    void setSalary(int to_add);
-    ostream &printShort(ostream&) const;
-    ostream &printLong(ostream&) const;
-    virtual Manager* clone() const override;
 
+
+    void setSalary(int to_add);
+
+    ostream &printShort(ostream&) const override;
+    ostream &printLong(ostream&) const override;
+
+    ostream &printSalary(ostream&) const;
+    ostream &printEmployees(ostream&) const;
+
+    Manager* clone() const override;
+
+    class EmployeeIsNotHired : std::exception{};
 };
 
 

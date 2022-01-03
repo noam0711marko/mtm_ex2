@@ -24,14 +24,14 @@ int Citizen::getBirthYear() const{
     return year_of_birth;
 }
 
-ostream &Citizen::printFirstLastName(ostream &out) const{
-    out << first_name << " " << last_name << endl;
-    return out;
+ostream &Citizen::printFirstLastName(ostream &os) const{
+    os << first_name << " " << last_name << endl;
+    return os;
 }
 
-ostream &Citizen::printIdBirthYear(ostream &out) const{
-    out << "id - " << id << " birth_year - " << year_of_birth << endl;
-    return out;
+ostream &Citizen::printIdBirthYear(ostream &os) const{
+    os << "id - " << id << " birth_year - " << year_of_birth << endl;
+    return os;
 }
 
 bool operator<(const Citizen& citizen_1, const Citizen& citizen_2) {
