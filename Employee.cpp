@@ -29,8 +29,8 @@ void Employee::learnSkill(const Skill& to_add) {
 void Employee::forgetSkill(const int &id_to_forget) {
     for(const shared_ptr<Skill> &n : skills){
         if(n->getId()==id_to_forget){
-            skills.erase(n);
             setScore(-n->getRequiredPoints()); //remove skill points of removed skills (?)
+            skills.erase(n);
             return;
         }
     }
@@ -165,7 +165,8 @@ int main(){
     std::cout << "\033[1:93m";
     noam.printLong(std::cout);
     std::cout << "\033[0m";
-    Employee noam2 = *noam.clone();
+    Employee* ptr=noam.clone();
+    Employee noam2 = *ptr;
     std::cout << endl << endl << "\033[4:97m" <<  "Meet Noam's clone." << "\033[0m" << endl << "here is some details about him: " << endl;
     std::cout << "\033[0:95m";
     noam2.printLong(std::cout);
@@ -183,6 +184,6 @@ int main(){
     noam.printLong(std::cout);
     std::cout << "\033[0m";
     std::cout << endl << "That's a relief! Noam's clone was just a copy!" << endl;
-
+    delete(ptr);
 }
 
