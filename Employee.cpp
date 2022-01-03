@@ -54,31 +54,31 @@ void Employee::setScore(int add_to_score) {
     score+=add_to_score;
 }
 
-ostream &Employee::printShort(ostream &out) const{
-    printFirstLastName(out);
-    out << "Salary: " << salary << " Score: " << score << endl;
-    return out;
+ostream &Employee::printShort(ostream &os) const{
+    printFirstLastName(os);
+    os << "Salary: " << salary << " Score: " << score << endl;
+    return os;
 }
 
 //code duplication - need to fix it
-ostream &Employee::printLong(ostream &out) const{
-    printFirstLastName(out);
-    printIdBirthYear(out);
-    printSalaryScore(out);
-    printSkills(out);
-    return out;
+ostream &Employee::printLong(ostream &os) const{
+    printFirstLastName(os);
+    printIdBirthYear(os);
+    printSalaryScore(os);
+    printSkills(os);
+    return os;
 }
 
-ostream &Employee::printSalaryScore(ostream& out) const {
-    out << "Salary: " << salary << " Score: " << score << endl;
-    return out;
+ostream &Employee::printSalaryScore(ostream& os) const {
+    os << "Salary: " << salary << " Score: " << score << endl;
+    return os;
 }
 
-ostream &Employee::printSkills(ostream& out) const {
+ostream &Employee::printSkills(ostream& os) const {
     for(const shared_ptr<Skill> &n : skills){
-        out << n->getName() << endl;
+        os << n->getName() << endl;
     }
-    return out;
+    return os;
 }
 
 Employee* Employee::clone() const {
