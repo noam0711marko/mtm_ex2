@@ -81,4 +81,3 @@ bool operator!=(const Citizen& citizen_1, const Citizen& citizen_2) {
     }
     return true;
 }
-

@@ -45,4 +45,3 @@ bool operator>=(const Citizen&, const Citizen&);
 bool operator!=(const Citizen&, const Citizen&);
 
 #endif //MTM_EX2_CITIZEN_H
-
