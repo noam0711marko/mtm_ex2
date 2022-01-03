@@ -165,5 +165,24 @@ int main(){
     std::cout << "\033[1:93m";
     noam.printLong(std::cout);
     std::cout << "\033[0m";
+    Employee noam2 = *noam.clone();
+    std::cout << endl << endl << "\033[4:97m" <<  "Meet Noam's clone." << "\033[0m" << endl << "here is some details about him: " << endl;
+    std::cout << "\033[0:95m";
+    noam2.printLong(std::cout);
+    std::cout << "\033[0m";
+    std::cout << endl << "Oh no! it seems to be a bug which deletes skills from Noam's clone!" << endl;
+    for (int i=1; i<=3; ++i){
+        noam2.forgetSkill(i);
+    }
+    std::cout << "Noam's clone details right now:" << endl;
+    std::cout << "\033[0:95m";
+    noam2.printLong(std::cout);
+    std::cout << "\033[0m";
+    std::cout << endl << "Lets make sure Noam still have his skills:" << endl;
+    std::cout << "\033[0:93m";
+    noam.printLong(std::cout);
+    std::cout << "\033[0m";
+    std::cout << endl << "That's a relief! Noam's clone was just a copy!" << endl;
+
 }
 
