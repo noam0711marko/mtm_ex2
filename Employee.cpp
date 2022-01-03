@@ -56,7 +56,7 @@ void Employee::setScore(int add_to_score) {
 
 ostream &Employee::printShort(ostream &out) const{
     out << "Short_Print" << endl;
-    out << this->getFirstName() << " " << this->getLastName() << endl;
+    printFirstLastName(out);
     out << "Salary: " << salary << " Score: " << score << endl;
     return out;
 }
@@ -64,14 +64,25 @@ ostream &Employee::printShort(ostream &out) const{
 //code duplication - need to fix it
 ostream &Employee::printLong(ostream &out) const{
     out << "Long_Print" << endl;
-    out << this->getFirstName() << " " << this->getLastName() << endl;
-    out << "id - " << this->getId() << " birth_year - " << this->getBirthYear() << endl;
+    printFirstLastName(out);
+    printIdBirthYear(out);
+    printSalaryScore(out);
+    printSkills(out);
+    return out;
+}
+
+ostream &Employee::printSalaryScore(ostream& out) const {
     out << "Salary: " << salary << " Score: " << score << endl;
+    return out;
+}
+
+ostream &Employee::printSkills(ostream& out) const {
     for(const shared_ptr<Skill> &n : skills){
         out << n->getName() << endl;
     }
     return out;
 }
+
 /*
 shared_ptr<Employee> Employee::clone() const {
     shared_ptr<Employee> clone(new Employee(*this));

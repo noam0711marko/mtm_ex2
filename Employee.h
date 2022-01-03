@@ -41,6 +41,9 @@ public:
     ostream &printShort(ostream&) const;
     ostream &printLong(ostream&) const;
 
+    ostream &printSalaryScore(ostream&) const;
+    ostream &printSkills(ostream&) const;
+
     //shared_ptr<Employee> clone() const;
 
     class SkillAlreadyLearned : std::exception{};

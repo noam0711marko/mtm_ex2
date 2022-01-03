@@ -36,6 +36,9 @@ public:
     virtual ostream &printShort(ostream &) const = 0;
     virtual ostream &printLong(ostream &) const = 0;
 
+    ostream & printFirstLastName(ostream &out) const;
+    ostream & printIdBirthYear(ostream &out) const;
+
     //virtual shared_ptr<Citizen> clone() const=0;
 };
 
