@@ -36,7 +36,7 @@ public:
     virtual ostream &printShort(ostream &) const = 0;
     virtual ostream &printLong(ostream &) const = 0;
 
-    virtual shared_ptr<Citizen> clone() const = 0;
+    //virtual shared_ptr<Citizen> clone() const=0;
 };
 
 bool operator<=(const Citizen&, const Citizen&);
