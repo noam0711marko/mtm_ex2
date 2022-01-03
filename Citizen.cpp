@@ -33,12 +33,6 @@ ostream &Citizen::printIdBirthYear(ostream &out) const{
     out << "id - " << id << " birth_year - " << year_of_birth << endl;
     return out;
 }
-/*
-shared_ptr<Citizen> Citizen::clone() const{
-    shared_ptr<Citizen> clone(new Citizen(*this));
-    return clone;
-}
-*/
 
 bool operator<(const Citizen& citizen_1, const Citizen& citizen_2) {
     if(citizen_1.id<citizen_2.id){
