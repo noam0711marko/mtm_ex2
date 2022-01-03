@@ -1,10 +1,10 @@
-//
-// Created by Noam Marko on 01/01/2022.
-//
-
 #include "Skill.h"
 
-Skill::Skill(int id, const std::string& name, int points):
+using std::string;
+using std::ostream;
+using std::endl;
+
+Skill::Skill(int id, const string& name, int points):
         skill_id(id), skill_name(name), required_points_for_purchase(points) {
 }
 
@@ -12,7 +12,7 @@ const int &Skill::getId() const {
     return skill_id;
 }
 
-const std::string &Skill::getName() const {
+const string &Skill::getName() const {
     return skill_name;
 }
 
@@ -20,8 +20,8 @@ int Skill::getRequiredPoints() const {
     return required_points_for_purchase;
 }
 
-std::ostream &operator<<(std::ostream& os, const Skill& skill) {
-    os<<skill.skill_name<<std::endl;
+ostream &operator<<(ostream& os, const Skill& skill) {
+    os<<skill.skill_name<<endl;
     return os;
 }
 
