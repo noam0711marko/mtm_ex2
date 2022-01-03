@@ -74,8 +74,8 @@ ostream &Employee::printLong(ostream &out) const{
     return out;
 }
 
-shared_ptr<Employee> Employee::clone() const {
-    shared_ptr<Employee> clone(new Employee(*this));
+Employee* Employee::clone() const {
+    Employee* clone=new Employee(*this);
     return clone;
 }
 

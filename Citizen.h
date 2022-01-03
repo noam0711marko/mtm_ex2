@@ -13,6 +13,7 @@ using std::shared_ptr;
 using std::ostream;
 
 class Citizen {
+protected:
     int id;
     string first_name;
     string last_name;
@@ -36,7 +37,7 @@ public:
     virtual ostream &printShort(ostream &) const = 0;
     virtual ostream &printLong(ostream &) const = 0;
 
-    virtual shared_ptr<Citizen> clone() const = 0;
+    virtual Citizen* clone() const = 0;
 };
 
 bool operator<=(const Citizen&, const Citizen&);
