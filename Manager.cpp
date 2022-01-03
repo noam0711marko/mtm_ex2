@@ -4,8 +4,8 @@
 using std::endl;
 
 
-Manager::Manager(int newId1, const string &newFirstName1, const string &newLastName1, int newYear1, int newId)
-    :Citizen(newId1,newFirstName1,newLastName1,newId1),salary(0),employees()
+Manager::Manager(int newId1, const string &newFirstName1, const string &newLastName1, int newYear1)
+    :Citizen(newId1,newFirstName1,newLastName1,newYear1),salary(0),employees()
     {}
 
 int Manager::getSalary() {
@@ -36,11 +36,12 @@ salary+= to_add;
 
 ostream &Manager::printShort(ostream & os) const {
     printFirstLastName(os);
+    printSalary(os);
     return os;
 }
 
 ostream &Manager::printLong(ostream & os) const {
-    printShort(os);
+    printFirstLastName(os);
     printIdBirthYear(os);
     printSalary(os);
     os<<"Employees:"<<endl;

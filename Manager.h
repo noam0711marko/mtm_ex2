@@ -8,7 +8,7 @@ class Manager: public Citizen{
     int salary;
     set<Employee*> employees;
 public:
-    Manager(int newId1, const string &newFirstName1, const string &newLastName1, int newYear1, int newId);
+    Manager(int newId1, const string &newFirstName1, const string &newLastName1, int newYear1);
 
     int getSalary();
 
