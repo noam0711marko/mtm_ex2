@@ -1,7 +1,3 @@
-//
-// Created by Noam Marko on 03/01/2022.
-//
-
 #ifndef MTM_EX2_EMPLOYEE_H
 #define MTM_EX2_EMPLOYEE_H
 

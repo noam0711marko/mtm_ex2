@@ -13,6 +13,7 @@ using std::shared_ptr;
 using std::ostream;
 
 class Citizen {
+protected:
     int id;
     string first_name;
     string last_name;
