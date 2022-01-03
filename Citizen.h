@@ -1,7 +1,3 @@
-//
-// Created by dolle on 02/01/2022.
-//
-
 //////////////////////////////////////////////////////
 //////// don't forget to abstract this class /////////
 //////////////////////////////////////////////////////
@@ -14,6 +10,7 @@
 
 using std::string;
 using std::shared_ptr;
+using std::ostream;
 
 class Citizen {
     int id;
@@ -36,8 +33,8 @@ public:
     friend bool operator<(const Citizen&, const Citizen&);
     friend bool operator==(const Citizen&, const Citizen&);
 
-    std::ostream &printShort(std::ostream &) const;
-    virtual std::ostream &printLong(std::ostream &) const;
+    ostream &printShort(ostream &) const;
+    ostream &printLong(ostream &) const;
 
     shared_ptr<Citizen> clone() const;
 };
