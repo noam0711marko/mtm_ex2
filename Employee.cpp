@@ -56,7 +56,8 @@ void Employee::setScore(int add_to_score) {
 
 ostream &Employee::printShort(ostream &os) const{
     printFirstLastName(os);
-    os << "Salary: " << salary << " Score: " << score << endl;
+    printSalaryScore(os);
+    os << endl;
     return os;
 }
 
@@ -70,11 +71,12 @@ ostream &Employee::printLong(ostream &os) const{
 }
 
 ostream &Employee::printSalaryScore(ostream& os) const {
-    os << "Salary: " << salary << " Score: " << score << endl;
+    os << "Salary: " << salary << " Score: " << score;
     return os;
 }
 
 ostream &Employee::printSkills(ostream& os) const {
+    os << " Skills:" << endl;
     for(const shared_ptr<Skill> &n : skills){
         os << n->getName() << endl;
     }
