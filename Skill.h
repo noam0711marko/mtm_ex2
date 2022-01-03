@@ -1,29 +1,27 @@
-//
-// Created by Noam Marko on 01/01/2022.
-//
-
 #ifndef MTM_EX2_SKILL_H
 #define MTM_EX2_SKILL_H
 
 #include <iostream>
 
+using std::string;
+using std::ostream;
 
 class Skill {
     int skill_id;
-    std::string skill_name;
+    string skill_name;
     int required_points_for_purchase;
 
 public:
-    Skill(int id, const std::string& name, int points);
+    Skill(int id, const string& name, int points);
     ~Skill()=default;
     Skill(Skill&)=default;
     Skill& operator=(const Skill&)=default;
 
     const int& getId() const;
-    const std::string& getName() const;
+    const string& getName() const;
     int getRequiredPoints() const;
 
-    friend std::ostream& operator<<(std::ostream&, const Skill&);
+    friend ostream& operator<<(ostream&, const Skill&);
     friend bool operator<(const Skill&, const Skill&);
     friend bool operator==(const Skill&, const Skill&);
 
