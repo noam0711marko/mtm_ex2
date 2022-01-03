@@ -23,7 +23,7 @@ string Citizen::getLastName() const{
 int Citizen::getBirthYear() const{
     return year_of_birth;
 }
-
+/*
 ostream &Citizen::printShort(ostream &out) const{
     out << first_name << " " << last_name << endl;
     return out;
@@ -39,6 +39,7 @@ shared_ptr<Citizen> Citizen::clone() const{
     shared_ptr<Citizen> clone(new Citizen(*this));
     return clone;
 }
+*/
 
 bool operator<(const Citizen& citizen_1, const Citizen& citizen_2) {
     if(citizen_1.id<citizen_2.id){

@@ -14,7 +14,7 @@ class Skill {
 public:
     Skill(int id, const string& name, int points);
     ~Skill()=default;
-    Skill(Skill&)=default;
+    Skill(const Skill&)=default;
     Skill& operator=(const Skill&)=default;
 
     const int& getId() const;

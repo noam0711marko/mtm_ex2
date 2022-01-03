@@ -21,8 +21,8 @@ class Citizen {
 protected:
     Citizen(int new_id, const string& new_first_name, const string& new_last_name, int new_year);
     ~Citizen() = default;
-    Citizen(const Citizen &old) = default;
-    Citizen &operator=(const Citizen &old) = default;
+    Citizen(const Citizen&) = default;
+    Citizen &operator=(const Citizen&) = default;
 
 public:
     int getId() const;
@@ -33,10 +33,10 @@ public:
     friend bool operator<(const Citizen&, const Citizen&);
     friend bool operator==(const Citizen&, const Citizen&);
 
-    ostream &printShort(ostream &) const;
-    ostream &printLong(ostream &) const;
+    virtual ostream &printShort(ostream &) const = 0;
+    virtual ostream &printLong(ostream &) const = 0;
 
-    shared_ptr<Citizen> clone() const;
+    virtual shared_ptr<Citizen> clone() const = 0;
 };
 
 bool operator<=(const Citizen&, const Citizen&);

@@ -4,8 +4,11 @@
 using std::cout;
 
 int main() {
-    Skill s1(1,"C++",0);
-    cout << s1;
+    std::string string1="C++";
+    Skill s1(1,string1,0);
+    cout << "before the change: " << "string 1 is " << string1 << ", and s1 is: " << s1;
+    string1 = "Python";
+    cout << "after the change: " << "string 1 is " << string1 << ", and s1 is: " << s1;
     Skill s2(2,"C",1);
     s1+=2;
     cout << "required points to purchase " << s1 << "is: " << s1.getRequiredPoints() << std::endl << std::endl;
