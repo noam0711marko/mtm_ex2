@@ -38,10 +38,13 @@ public:
     void setSalary(int add_to_salary);
     void setScore(int add_to_score);
 
-    ostream &printShort(ostream&) const;
-    ostream &printLong(ostream&) const;
+    ostream &printShort(ostream&) const override;
+    ostream &printLong(ostream&) const override;
 
-    shared_ptr<Employee> clone() const;
+    ostream &printSalaryScore(ostream&) const;
+    ostream &printSkills(ostream&) const;
+
+    Employee* clone() const override;
 
     class SkillAlreadyLearned : std::exception{};
     class CanNotLearnSkill : std::exception{};
