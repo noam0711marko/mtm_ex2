@@ -90,4 +90,3 @@ bool operator!=(const Skill& skill_1, const Skill& skill_2) {
     return true;
 }
 
-

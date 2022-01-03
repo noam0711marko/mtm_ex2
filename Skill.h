@@ -43,3 +43,4 @@ bool operator!=(const Skill&, const Skill&);
 
 
 #endif //MTM_EX2_SKILL_H
+
