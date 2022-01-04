@@ -114,3 +114,21 @@ ostream &Workplace::printGroups(ostream& os) const {
 int Workplace::getNumOfManagers() const {
     return (int)managers.size();
 }
+
+template<typename Condition>
+void Workplace::hireEmployee(Condition hiringCondition, Employee *employee, int manager_id) {
+    if(!hiringCondition(employee)){
+        throw EmployeeNotSelected();
+    }
+    if(!hasManager(manager_id)){
+        throw ManagerIsNotHired();
+    }
+    for(const shared_ptr<Manager>& n : managers){
+        if(hasEmployeeInManager(employee->getId(), n->getId())){
+            throw EmployeeAlreadyHired();
+        }
+    }
+    shared_ptr<Manager> manager= getManager(manager_id);
+    manager->addEmployee(employee);
+    employee->setSalary(employee_salary);
+}

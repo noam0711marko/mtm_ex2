@@ -27,7 +27,8 @@ public:
     int getWorkersSalary() const;
     int getManagersSalary() const;
 
-    //hireEmployee
+    template<typename Condition>
+    void hireEmployee (Condition hiringCondition, Employee* employee, int manager_id);
 
     void hireManager(Manager* manager_to_hire);
 
@@ -48,6 +49,8 @@ public:
     class CanNotHireManager : std::exception{};
     class ManagerIsNotHired : std::exception{};
     class EmployeeIsNotHired : std::exception{};
+    class EmployeeNotSelected : std::exception{};
+    class EmployeeAlreadyHired : std::exception{};
 
     shared_ptr<Manager> getManager(int manager_id);
     shared_ptr<Employee> getEmployeeFromManager(int employee_id, int manager_id);

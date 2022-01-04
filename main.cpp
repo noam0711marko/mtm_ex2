@@ -195,16 +195,16 @@ int main() {
             return emp->getId()>0;
         }
     };
-    Workplace Meta(1, "Meta", 10000, 20000);
-    Employee* e1_ptr = &e1;
-    Employee* e2_ptr = &e2;
-    Manager* m1_ptr = &m1;
-    Meta.hireManager(m1_ptr);
+    Workplace Meta(1,"Meta", 10000, 20000);
+    Employee* e11 = new Employee(1, "John", "Williams", 2002);
+    Employee* e22 = new Employee(2, "Alex", "Martinez", 2000);
+    Manager* m11 = new Manager(1,"Robert", "stark", 1980);
+    Meta.hireManager(m11);
     Condition condition;
-    /*Meta.hireEmployee(condition,e1_ptr,m1_ptr->getId());
-    Meta.hireEmployee(condition,e2_ptr,m1_ptr->getId());*/
+    Meta.hireEmployee(condition,e11,m11->getId());
+    Meta.hireEmployee(condition,e22,m11->getId());
     cout << Meta;
-    Meta.fireManager(m1_ptr->getId());
+    Meta.fireManager(m11->getId());
     cout << Meta;
 
 
