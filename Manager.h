@@ -24,7 +24,7 @@ public:
     ostream &printSalary(ostream&) const;
     ostream &printEmployees(ostream&) const;
 
-    Manager* clone() const override;
+    Citizen* clone() const override;
 
     class EmployeeIsNotHired : std::exception{};
 };

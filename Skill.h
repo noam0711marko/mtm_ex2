@@ -2,6 +2,9 @@
 #define MTM_EX2_SKILL_H
 
 #include <iostream>
+#include "memory"
+
+using std::shared_ptr;
 
 using std::string;
 using std::ostream;
@@ -39,6 +42,7 @@ bool operator<=(const Skill&, const Skill&);
 bool operator>(const Skill&, const Skill&);
 bool operator>=(const Skill&, const Skill&);
 bool operator!=(const Skill&, const Skill&);
+
 
 
 
