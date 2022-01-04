@@ -6,7 +6,7 @@ using std::ostream;
 using std::string;
 
 Citizen::Citizen(int new_id, const string& new_first_name, const string& new_last_name, int new_year) :
-    id(new_id), first_name(new_first_name), last_name(new_last_name), year_of_birth(new_year) {}
+        id(new_id), first_name(new_first_name), last_name(new_last_name), year_of_birth(new_year) {}
 
 int Citizen::getId() const {
     return id;
@@ -35,14 +35,14 @@ ostream &Citizen::printIdBirthYear(ostream &os) const{
 }
 
 bool operator<(const Citizen& citizen_1, const Citizen& citizen_2) {
-    if(citizen_1.id<citizen_2.id){
+    if(citizen_1.id < citizen_2.id){
         return true;
     }
     return false;
 }
 
 bool operator==(const Citizen& citizen_1, const Citizen& citizen_2) {
-    if(citizen_1.id==citizen_2.id){
+    if(citizen_1.id == citizen_2.id){
         return true;
     }
     return false;

@@ -3,6 +3,7 @@
 #include "Citizen.h"
 #include "Employee.h"
 #include "Manager.h"
+#include "Workplace.h"
 
 /*
 ========================== Skill unit-testing =================================
@@ -184,6 +185,28 @@ int main() {
     m1.printShort(std::cout);
     std::cout << "Long Print" << endl;
     m1.printLong(std::cout);
+
+    std::cout << endl << endl;
+
+    std::cout << "\033[4:94m" << "TESTING WORKPLACE BY PDF" << "\033[0m" << endl;
+    class Condition{
+    public:
+        bool operator()(Employee* emp){
+            return emp->getId()>0;
+        }
+    };
+    Workplace Meta(1,"Meta", 10000, 20000);
+    Employee* e11 = new Employee(1, "John", "Williams", 2002);
+    Employee* e22 = new Employee(2, "Alex", "Martinez", 2000);
+    Manager* m11 = new Manager(1,"Robert", "stark", 1980);
+    Meta.hireManager(m11);
+    Condition condition;
+    Meta.hireEmployee(condition,e11,m11->getId());
+    Meta.hireEmployee(condition,e22,m11->getId());
+    cout << Meta;
+    Meta.fireManager(m11->getId());
+    cout << Meta;
+
 
     return 0;
 }

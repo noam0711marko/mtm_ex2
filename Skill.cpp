@@ -4,16 +4,16 @@ using std::string;
 using std::ostream;
 using std::endl;
 
-Skill::Skill(int id, const string& name, int points):
-        skill_id(id), skill_name(name), required_points_for_purchase(points) {
+Skill::Skill(int new_id, const string& new_name, int new_required_points):
+        id(new_id), name(new_name), required_points_for_purchase(new_required_points) {
 }
 
 const int &Skill::getId() const {
-    return skill_id;
+    return id;
 }
 
 const string &Skill::getName() const {
-    return skill_name;
+    return name;
 }
 
 int Skill::getRequiredPoints() const {
@@ -21,19 +21,19 @@ int Skill::getRequiredPoints() const {
 }
 
 ostream &operator<<(ostream& os, const Skill& skill) {
-    os<<skill.skill_name<<endl;
+    os << skill.name << endl;
     return os;
 }
 
 bool operator<(const Skill& skill_1, const Skill& skill_2) {
-    if(skill_1.skill_id<skill_2.skill_id){
+    if(skill_1.id < skill_2.id){
         return true;
     }
     return false;
 }
 
 bool operator==(const Skill& skill_1, const Skill& skill_2) {
-    if(skill_1.skill_id==skill_2.skill_id){
+    if(skill_1.id == skill_2.id){
         return true;
     }
     return false;
