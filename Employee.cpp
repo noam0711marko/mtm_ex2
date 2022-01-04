@@ -61,7 +61,6 @@ ostream &Employee::printShort(ostream &os) const{
     return os;
 }
 
-//code duplication - need to fix it
 ostream &Employee::printLong(ostream &os) const{
     printFirstLastName(os);
     printIdBirthYear(os);
@@ -83,7 +82,7 @@ ostream &Employee::printSkills(ostream& os) const {
     return os;
 }
 
-Employee* Employee::clone() const {
-    Employee* copy=new Employee(*this);
+Citizen* Employee::clone() const {
+    Citizen* copy=new Employee(*this);
     return copy;
 }

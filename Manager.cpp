@@ -22,9 +22,9 @@ void Manager::removeEmployee(int id_to_remove) {
         int curr_id=(*it)->getId();
         if (curr_id == id_to_remove) {
             employees.erase(it);
-            it++;
-            curr_id=(*it)->getId();
+            return;
         }
+        ++it;
     }
     throw EmployeeIsNotHired();
 
@@ -50,8 +50,8 @@ ostream &Manager::printLong(ostream & os) const {
     return os;
 }
 
-Manager *Manager::clone() const {
-    Manager* copy=new Manager(*this);
+Citizen *Manager::clone() const {
+    Citizen* copy=new Manager(*this);
     return copy;
 }
 

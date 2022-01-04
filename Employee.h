@@ -40,7 +40,7 @@ public:
     ostream &printSalaryScore(ostream&) const;
     ostream &printSkills(ostream&) const;
 
-    Employee* clone() const override;
+    Citizen* clone() const override;
 
     class SkillAlreadyLearned : std::exception{};
     class CanNotLearnSkill : std::exception{};
