@@ -3,7 +3,6 @@
 
 using std::endl;
 
-
 Manager::Manager(int newId1, const string &newFirstName1, const string &newLastName1, int newYear1)
     :Citizen(newId1,newFirstName1,newLastName1,newYear1),salary(0),employees()
     {}
@@ -13,11 +12,11 @@ int Manager::getSalary() {
 }
 
 void Manager::addEmployee(Employee* employee) {
-      employees.insert(employee);
+      employees.insert(shared_ptr<Employee> (new Employee(*employee)));
 }
 
 void Manager::removeEmployee(int id_to_remove) {
-    set<Employee*>::iterator it= employees.begin();
+    /*set<Employee*>::iterator it= employees.begin();
     while(it!=employees.end()) {
         int curr_id=(*it)->getId();
         if (curr_id == id_to_remove) {
@@ -27,7 +26,14 @@ void Manager::removeEmployee(int id_to_remove) {
         ++it;
     }
     throw EmployeeIsNotHired();
-
+*/
+    for(const shared_ptr<Employee> &n : employees){
+        if(n->getId()==id_to_remove){
+            employees.erase(n);
+            return;
+        }
+    }
+    throw EmployeeIsNotHired();
 }
 
 void Manager::setSalary(int to_add) {
@@ -61,11 +67,14 @@ ostream &Manager::printSalary(ostream &os) const {
 }
 
 ostream &Manager::printEmployees(ostream &os) const {
-    set<Employee*>::iterator it=employees.begin();
+    /*set<Employee*>::iterator it=employees.begin();
     while (it!=employees.end()){
         Employee* temp= *it;
         temp->printShort(os);
         it++;
+    }*/
+    for(const shared_ptr<Employee> &n : employees){
+            n->printShort(os);
     }
     return os;
 }
