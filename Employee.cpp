@@ -37,9 +37,9 @@ void Employee::forgetSkill(const int &id_to_forget) {
     throw DidNotLearnSkill();
 }
 
-bool Employee::hasSkill(int id) {
+bool Employee::hasSkill(int skill_id) {
     for(const shared_ptr<Skill> &n : skills){
-        if(n->getId()==id){
+        if(n->getId() == skill_id){
             return true;
         }
     }

@@ -10,12 +10,12 @@ using std::string;
 using std::ostream;
 
 class Skill {
-    int skill_id;
-    string skill_name;
+    int id;
+    string name;
     int required_points_for_purchase;
 
 public:
-    Skill(int id, const string& name, int points);
+    Skill(int new_id, const string& new_name, int new_required_points);
     ~Skill()=default;
     Skill(const Skill&)=default;
     Skill& operator=(const Skill&)=default;

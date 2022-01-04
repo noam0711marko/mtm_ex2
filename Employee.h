@@ -33,7 +33,7 @@ public:
     void learnSkill(const Skill&);
     void forgetSkill(const int& id_to_forget);
 
-    bool hasSkill(int id);
+    bool hasSkill(int skill_id);
 
     void setSalary(int add_to_salary);
     void setScore(int add_to_score);
