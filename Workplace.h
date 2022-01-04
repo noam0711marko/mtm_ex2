@@ -27,8 +27,15 @@ public:
     int getWorkersSalary() const;
     int getManagersSalary() const;
 
-    template<typename Condition>
-    void hireEmployee (Condition hiringCondition, Employee* employee, int manager_id);
+    void hireEmployeeAction(Employee *employee, int manager_id);
+
+    template<class Condition>
+    void hireEmployee(Condition hiringCondition, Employee *employee, int manager_id) {
+        if(!hiringCondition(employee)){
+            throw EmployeeNotSelected();
+        }
+        hireEmployeeAction(employee, manager_id);
+    }
 
     void hireManager(Manager* manager_to_hire);
 

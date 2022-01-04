@@ -115,11 +115,7 @@ int Workplace::getNumOfManagers() const {
     return (int)managers.size();
 }
 
-template<typename Condition>
-void Workplace::hireEmployee(Condition hiringCondition, Employee *employee, int manager_id) {
-    if(!hiringCondition(employee)){
-        throw EmployeeNotSelected();
-    }
+void Workplace::hireEmployeeAction(Employee *employee, int manager_id) {
     if(!hasManager(manager_id)){
         throw ManagerIsNotHired();
     }
