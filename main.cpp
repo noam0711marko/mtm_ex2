@@ -4,6 +4,8 @@
 #include "Employee.h"
 #include "Manager.h"
 #include "Workplace.h"
+#include "Faculty.h"
+#include "vector"
 
 /*
 ========================== Skill unit-testing =================================
@@ -191,7 +193,7 @@ int main() {
     std::cout << "\033[4:94m" << "TESTING WORKPLACE BY PDF" << "\033[0m" << endl;
     class Condition{
     public:
-        bool operator()(Employee* emp){
+        virtual bool operator()(Employee* emp){
             return emp->getId()>0;
         }
     };
@@ -206,6 +208,40 @@ int main() {
     cout << Meta;
     Meta.fireManager(m11->getId());
     cout << Meta;
+
+    std::cout << endl << endl;
+
+    std::cout << "\033[4:94m" << "TESTING FACULTY BY PDF" << "\033[0m" << endl;
+
+    class FacultyCondition1: public Condition{
+        bool operator()(Employee* employee) override{
+            cout << "Condition 1 Called" << endl;
+            return employee->getId() > 0;
+        }
+    };
+    class FacultyCondition2: public Condition{
+        bool operator()(Employee* employee) override{
+            cout << "Condition 2 Called" << endl;
+            return employee->getId() > 3;
+        }
+    };
+    std::vector<Faculty<Condition>> Faculties;
+    FacultyCondition1 fc1;
+    FacultyCondition2 fc2;
+    Skill skill1(1,"Programming with c++",0);
+    Skill skill2(2,"Programming with c",10);
+    Faculty<Condition> faculty1(1,&fc1,skill1, 10);
+    Faculty<Condition> faculty2(3,&fc2,skill2, 10);
+    Employee e111(10, "John", "Williams", 2002);
+    Employee e222(20, "Alex", "Martinez", 2000);
+    Faculties.push_back(faculty1);
+    Faculties.push_back(faculty2);
+    for(Faculty<Condition> faculty:Faculties){
+        faculty.teach(&e111);
+        faculty.teach(&e222);
+    }
+    e111.printLong(cout);
+    e222.printLong(cout);
 
 
     return 0;
