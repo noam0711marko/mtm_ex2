@@ -12,7 +12,7 @@ class Faculty {
     int points_from_faculty;
 
 public:
-    Faculty<Condition>(int new_id, Condition* new_condition, const Skill& new_skill, int new_points_from_faculty);
+    Faculty(int new_id, Condition* new_condition, const Skill& new_skill, int new_points_from_faculty);
     ~Faculty() = default;
     Faculty(const Faculty&) = default;
     Faculty &operator=(const Faculty&) = default;
