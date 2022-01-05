@@ -72,6 +72,17 @@ void City::createWorkplace(int new_id, const string &new_name, int new_employee_
     workplaces.insert(new Workplace(new_id, new_name, new_employee_salary, new_manager_salary));
 }
 
+void City::addFaculty(int new_id, const Skill& new_skill, int new_points_from_faculty, Condition* new_condition) {
+    for(const shared_ptr<FacultyBase>& n : faculties){
+        if(n->getId()==new_id){
+            throw FacultyAlreadyExists();
+        }
+    }
+    Faculty<Condition> faculty(new_id, new_skill, new_points_from_faculty, new_condition);
+    FacultyBase* ptr=&faculty;
+    faculties.insert(shared_ptr<FacultyBase>(ptr));
+}
+
 void City::hireManagerAtWorkplace(int manager_id, int workplace_id) const{
     if(!ManagerExist(manager_id)){
         throw ManagerDoesNotExist();
@@ -178,17 +189,6 @@ ostream &City::printAllEmployeesWithSkill(ostream &os, int skill_id) const {
         }
     }
     return os;
-}
-
-template<class Condition>
-void City::addFaculty(int new_id, const Skill& new_skill, int new_points_from_faculty, Condition* new_condition) {
-    for(const shared_ptr<FacultyBase>& n : faculties){
-        if(n->getId()==new_id){
-            throw FacultyAlreadyExists();
-        }
-    }
-    Faculty<Condition> faculty(new_id, new_condition, new_skill, new_points_from_faculty);
-    faculties.insert(shared_ptr<FacultyBase>(faculty));
 }
 
 void City::teachAtFaculty(int employee_id, int faculty_id) const{

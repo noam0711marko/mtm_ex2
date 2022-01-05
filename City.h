@@ -21,8 +21,6 @@ public:
     void addEmployee(int new_id, const string& new_first_name, const string& new_last_name, int new_year);
     void addManager(int new_id, const string& new_first_name, const string& new_last_name, int new_year);
     void createWorkplace(int new_id, const string& new_name, int new_employee_salary, int new_manager_salary);
-
-    template<class Condition>
     void addFaculty(int new_id, const Skill& new_skill, int new_points_from_faculty, Condition* new_condition);
 
     void teachAtFaculty(int employee_id, int faculty_id) const;
