@@ -10,8 +10,7 @@ class City {
     set<Manager, cmp_citizens> managers;
     set<shared_ptr<Citizen>, cmp_citizens_ptr> citizens;
     set<Workplace, cmp_workplaces> workplaces;
-    //template<class Condition>
-    //set<Faculty<Condition>, cmp_faculties<Condition>> faculties;
+    set<shared_ptr<FacultyBase>> faculties;
 
 public:
     City(string new_name);
@@ -22,9 +21,11 @@ public:
     void addEmployee(int new_id, const string& new_first_name, const string& new_last_name, int new_year);
     void addManager(int new_id, const string& new_first_name, const string& new_last_name, int new_year);
     void createWorkplace(int new_id, const string& new_name, int new_employee_salary, int new_manager_salary);
-    //addFaculty
 
-    //teachAtFaculty
+    template<class Condition>
+    void addFaculty(int new_id, Condition* new_condition, const Skill& new_skill, int new_points_from_faculty);
+
+    void teachAtFaculty(int employee_id, int faculty_id);
 
     template<class Condition>
     void hireEmployeeAtWorkplace(Condition hiringCondition, int employee_id, int manager_id, int workplace_id) const{
@@ -58,12 +59,12 @@ public:
     bool ManagerExist(int manager_id) const;
     bool CitizenExist(int citizen_id) const;
     bool WorkplaceExist(int workplace_id) const;
-    //bool FacultyExist(int faculty_id) const;
+    bool FacultyExist(int faculty_id) const;
 
     Employee* getEmployee(int employee_id) const;
     Manager* getManager(int manager_id) const;
     Workplace* getWorkplace(int workplace_id) const;
-    //Employee* getFaculty(int employee_id) const;
+    shared_ptr<FacultyBase> getFaculty(int faculty_id) const;
 
     class CitizenAlreadyExists : std::exception{};
     class WorkplaceAlreadyExists : std::exception{};

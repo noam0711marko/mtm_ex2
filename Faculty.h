@@ -3,14 +3,12 @@
 
 #include "Skill.h"
 #include "Employee.h"
+#include "FacultyBase.h"
 
 
 template<class Condition>
-class Faculty {
-    int id;
+class Faculty : public FacultyBase {
     Condition condition;
-    Skill skill;
-    int points_from_faculty;
 
 public:
     Faculty(int new_id, Condition* new_condition, const Skill& new_skill, int new_points_from_faculty);
@@ -18,18 +16,18 @@ public:
     Faculty(const Faculty&) = default;
     Faculty &operator=(const Faculty&) = default;
 
-    int getId() const;
-    Skill getSkill() const;
-    int getAddedPoints() const;
+    int getId() const override;
+    Skill getSkill() const override;
+    int getAddedPoints() const override;
 
-    void teach(Employee* employee);
+    void teach(Employee* employee) override;
 
     class EmployeeNotAccepted : std::exception{};
 };
 
 template<class Condition>
 Faculty<Condition>::Faculty(int new_id, Condition* new_condition, const Skill& new_skill, int new_points_from_faculty) :
-    id(new_id), condition(*new_condition), skill(new_skill), points_from_faculty(new_points_from_faculty){}
+    FacultyBase(new_id, new_skill, new_points_from_faculty), condition(*new_condition){}
 
 template<class Condition>
 int Faculty<Condition>::getId() const {
@@ -55,12 +53,6 @@ void Faculty<Condition>::teach(Employee* employee) {
     employee->setScore(points_from_faculty);
 }
 
-template<class Condition>
-struct cmp_faculties{
-    bool operator() (const Faculty<Condition>& a, const Faculty<Condition>& b) const {
-        return a.getId()<b.getId();
-    }
-};
 
 
 #endif //MTM_EX2_FACULTY_H

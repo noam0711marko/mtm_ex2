@@ -22,13 +22,13 @@ void Employee::learnSkill(const Skill& to_add) {
     if(to_add.getRequiredPoints()>score){
         throw CanNotLearnSkill();
     }
-    skills.insert(shared_ptr<Skill>(new Skill(to_add)));
+    skills.insert(to_add);
     /*setScore(to_add.getRequiredPoints());*/
 }
 
 void Employee::forgetSkill(const int &id_to_forget) {
-    for(const shared_ptr<Skill> &n : skills){
-        if(n->getId()==id_to_forget){
+    for(const Skill &n : skills){
+        if(n.getId()==id_to_forget){
             /*setScore(-n->getRequiredPoints());*/ //remove skill points of removed skills (?)
             skills.erase(n);
             return;
@@ -38,8 +38,8 @@ void Employee::forgetSkill(const int &id_to_forget) {
 }
 
 bool Employee::hasSkill(int skill_id) {
-    for(const shared_ptr<Skill> &n : skills){
-        if(n->getId() == skill_id){
+    for(const Skill &n : skills){
+        if(n.getId() == skill_id){
             return true;
         }
     }

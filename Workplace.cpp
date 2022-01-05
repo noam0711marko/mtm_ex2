@@ -5,7 +5,7 @@ using std::endl;
 Workplace::Workplace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary) :
     id(new_id), name(new_name), employee_salary(new_employee_salary), manager_salary(new_manager_salary), managers(){}
 
-int Workplace::getID() const {
+int Workplace::getId() const {
     return id;
 }
 
@@ -28,7 +28,7 @@ void Workplace::hireManager(Manager *manager_to_hire) {
     if(manager_to_hire->isManagerHired()){
         throw CanNotHireManager();
     }
-    managers.insert(shared_ptr<Manager>(new Manager(*manager_to_hire)));
+    managers.insert(shared_ptr<Manager>(manager_to_hire));
     manager_to_hire->setSalary(manager_salary);
     manager_to_hire->setManagerWorkplace(id);
 

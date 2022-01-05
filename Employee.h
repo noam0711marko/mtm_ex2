@@ -15,7 +15,7 @@ using std::ostream;
 class Employee : public Citizen {
     int salary;
     int score;
-    set<shared_ptr<Skill>, cmp_skills> skills;
+    set<Skill, cmp_skills> skills;
 
 public:
     Employee(int new_id, const string& new_first_name, const string& new_last_name, int new_year);

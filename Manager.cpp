@@ -16,7 +16,7 @@ void Manager::addEmployee(Employee* employee) {
     if(hasEmployee(employee->getId())){
         throw EmployeeAlreadyHired();
     }
-    employees.insert(shared_ptr<Employee> (new Employee(*employee)));
+    employees.insert(shared_ptr<Employee> (employee));
     employees_ids.insert(employee->getId());
 }
 

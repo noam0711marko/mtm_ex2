@@ -17,7 +17,7 @@ public:
     Workplace(const Workplace&) = default;
     Workplace &operator=(const Workplace&) = default;
 
-    int getID() const;
+    int getId() const;
     string getName() const;
     int getWorkersSalary() const;
     int getManagersSalary() const;
@@ -61,7 +61,7 @@ public:
 
 struct cmp_workplaces{
     bool operator() (const Workplace& a, const Workplace& b) const {
-        return (a.getID()<b.getID());
+        return (a.getId() < b.getId());
     }
 };
 
