@@ -128,3 +128,12 @@ void Workplace::hireEmployeeAction(Employee *employee, int manager_id) {
     manager->addEmployee(employee);
     employee->setSalary(employee_salary);
 }
+
+bool Workplace::hasEmployeeInWorkplace(int employee_id) {
+    for(const shared_ptr<Manager>& n : managers){
+        if(hasEmployeeInManager(employee_id, n->getId())){
+            return true;
+        }
+    }
+    return false;
+}

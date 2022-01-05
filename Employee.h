@@ -12,10 +12,6 @@ using std::set;
 using std::string;
 using std::ostream;
 
-struct cmp_skills{
-    bool operator() (const shared_ptr<Skill>& a, const shared_ptr<Skill>& b) const {return (*a)<(*b); }
-};
-
 class Employee : public Citizen {
     int salary;
     int score;
@@ -45,6 +41,8 @@ public:
     ostream &printSkills(ostream&) const;
 
     Citizen* clone() const override;
+
+    int getNumOfSkills() const;
 
     class SkillAlreadyLearned : std::exception{};
     class CanNotLearnSkill : std::exception{};

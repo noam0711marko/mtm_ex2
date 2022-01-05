@@ -3,18 +3,13 @@
 
 #include "Manager.h"
 
-//there is a typo in their test! they announce on new Workplace instead of Workplace!
-
-struct cmp_managers{
-    bool operator() (const shared_ptr<Manager>& a, const shared_ptr<Manager>& b) const {return (*a)<(*b); }
-};
 
 class Workplace {
     int id;
     string name;
     int employee_salary;
     int manager_salary;
-    set<shared_ptr<Manager>, cmp_managers> managers;
+    set<shared_ptr<Manager>, cmp_citizens> managers;
 
 public:
     Workplace(int new_id, const string& new_name, int new_employee_salary, int new_manager_salary);
@@ -47,6 +42,7 @@ public:
 
     bool hasManager(int manager_id);
     bool hasEmployeeInManager(int employee_id, int manager_id);
+    bool hasEmployeeInWorkplace(int employee_id);
 
     ostream &printGroups(ostream&) const;
 
@@ -63,5 +59,10 @@ public:
     shared_ptr<Employee> getEmployeeFromManager(int employee_id, int manager_id);
 };
 
+struct cmp_workplaces{
+    bool operator() (const shared_ptr<Workplace>& a, const shared_ptr<Workplace>& b) const {
+        return (a->getID()<b->getID());
+    }
+};
 
 #endif //MTM_EX2_WORKPLACE_H
