@@ -8,7 +8,7 @@ Manager::Manager(int new_id, const string &new_first_name, const string &new_las
     : Citizen(new_id, new_first_name, new_last_name, new_birth_year), salary(0),
         employees(), workplace_id(NOT_HIRED), employees_ids() {}
 
-int Manager::getSalary() {
+int Manager::getSalary() const{
     return salary;
 }
 

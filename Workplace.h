@@ -40,9 +40,9 @@ public:
 
     friend ostream& operator<<(ostream&, const Workplace&);
 
-    bool hasManager(int manager_id);
-    bool hasEmployeeInManager(int employee_id, int manager_id);
-    bool hasEmployeeInWorkplace(int employee_id);
+    bool hasManager(int manager_id) const;
+    bool hasEmployeeInManager(int employee_id, int manager_id) const;
+    bool hasEmployeeInWorkplace(int employee_id) const;
 
     ostream &printGroups(ostream&) const;
 
@@ -55,13 +55,13 @@ public:
     class EmployeeNotSelected : std::exception{};
     class EmployeeAlreadyHired : std::exception{};
 
-    shared_ptr<Manager> getManager(int manager_id);
-    shared_ptr<Employee> getEmployeeFromManager(int employee_id, int manager_id);
+    shared_ptr<Manager> getManager(int manager_id) const;
+    shared_ptr<Employee> getEmployeeFromManager(int employee_id, int manager_id) const;
 };
 
 struct cmp_workplaces{
-    bool operator() (const shared_ptr<Workplace>& a, const shared_ptr<Workplace>& b) const {
-        return (a->getID()<b->getID());
+    bool operator() (const Workplace& a, const Workplace& b) const {
+        return (a.getID()<b.getID());
     }
 };
 
