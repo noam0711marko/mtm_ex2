@@ -1,10 +1,7 @@
 #include <iostream>
 #include "Skill.h"
-#include "Citizen.h"
 #include "Employee.h"
-#include "Manager.h"
-#include "Workplace.h"
-#include "Faculty.h"
+#include "City.h"
 #include "vector"
 
 /*
@@ -161,9 +158,9 @@ int main() {
 
 
 
-//========================== Manager unit-testing ===============================//
 using std::cout;
 using std::endl;
+/*
 int main() {
     std::cout << "\033[4:94m" << "TESTING EMPLOYEE BY PDF" << "\033[0m" << endl;
     Employee e1(1, "John", "Williams", 2002);
@@ -191,10 +188,11 @@ int main() {
     std::cout << endl << endl;
 
     std::cout << "\033[4:94m" << "TESTING WORKPLACE BY PDF" << "\033[0m" << endl;
-    class Condition{
+
+    class HiringCondition1 : public Condition{
     public:
-        virtual bool operator()(Employee* emp){
-            return emp->getId()>0;
+        bool operator()(Employee* employee) override{
+            return employee->getId()>0;
         }
     };
     Workplace Meta(1,"Meta", 10000, 20000);
@@ -202,7 +200,7 @@ int main() {
     Employee* e22 = new Employee(2, "Alex", "Martinez", 2000);
     Manager* m11 = new Manager(1,"Robert", "stark", 1980);
     Meta.hireManager(m11);
-    Condition condition;
+    HiringCondition1 condition;
     Meta.hireEmployee(condition,e11,m11->getId());
     Meta.hireEmployee(condition,e22,m11->getId());
     cout << Meta;
@@ -230,19 +228,78 @@ int main() {
     FacultyCondition2 fc2;
     Skill skill1(1,"Programming with c++",0);
     Skill skill2(2,"Programming with c",10);
-    Faculty<Condition> faculty1(1,&fc1,skill1, 10);
-    Faculty<Condition> faculty2(3,&fc2,skill2, 10);
+    Faculty<Condition> faculty1(1,skill1,10,&fc1);
+    Faculty<Condition> faculty2(3,skill2,10,&fc2);
     Employee e111(10, "John", "Williams", 2002);
     Employee e222(20, "Alex", "Martinez", 2000);
     Faculties.push_back(faculty1);
     Faculties.push_back(faculty2);
     for(Faculty<Condition> faculty:Faculties){
-        faculty.teach(&e111);
-        faculty.teach(&e222);
+        faculty.teach(&e1);
+        faculty.teach(&e2);
     }
     e111.printLong(cout);
     e222.printLong(cout);
 
-
     return 0;
 }
+*/
+
+class FacultyCondition1: public Condition{
+    bool operator()(Employee* employee) override{
+        return employee->getId() > 0;
+    }
+};
+
+class FacultyCondition2: public Condition{
+    bool operator()(Employee* employee) override{
+        return employee->getId() > 3;
+    }
+};
+
+class HiringCondition {
+public:
+    bool operator()(Employee *emp) {
+        return emp->getScore() > 5;
+    }
+};
+
+
+int main() {
+    std::cout << endl << endl;
+
+    std::cout << "\033[4:94m" << "TESTING CITY BY TEST" << "\033[0m" << endl;
+    City city ("TLV");
+    Skill skill1(1,"Programming with c++",0);
+    Skill skill2(2,"Programming with c",10);
+    city.addEmployee(11, "John", "Williams", 2002);
+    city.addEmployee(12, "Alex", "Martinez", 2000);
+    city.addEmployee(13, "Lionel", "Smith", 2000);
+    city.addManager(104,"Mohamad","Masarwa",1998);
+    FacultyCondition1 fc1;
+    FacultyCondition2 fc2;
+    city.addFaculty(1001, skill1, 10, &fc1);
+    city.addFaculty(1002, skill2, 15, &fc2);
+    city.teachAtFaculty(11,1001);
+    city.teachAtFaculty(11,1002);
+    city.teachAtFaculty(12,1001);
+    city.teachAtFaculty(13,1001);
+    city.createWorkplace(10001, "Meta", 10000, 20000);
+    city.hireManagerAtWorkplace(104,10001);
+    HiringCondition hiringCondition;
+    city.hireEmployeeAtWorkplace(hiringCondition, 11, 104, 10001);
+    city.hireEmployeeAtWorkplace(hiringCondition, 12, 104, 10001);
+    city.hireEmployeeAtWorkplace(hiringCondition, 13, 104, 10001);
+    city.fireEmployeeAtWorkplace(12,104,10001);
+    cout << "getAllAboveSalary output: " << endl;
+    city.getAllAboveSalary(cout,1000);
+    cout << endl << "printAllEmployeesWithSkill output" << endl;
+    city.printAllEmployeesWithSkill(cout, 1);
+    city.fireManagerAtWorkplace(104,10001);
+    cout << "getAllAboveSalary output: " << endl;
+    city.getAllAboveSalary(cout,1000);
+    cout << endl << "printAllEmployeesWithSkill output" << endl;
+    city.printAllEmployeesWithSkill(cout, 1);
+    return 0;
+}
+

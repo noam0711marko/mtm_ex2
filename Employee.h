@@ -29,7 +29,7 @@ public:
     void learnSkill(const Skill&);
     void forgetSkill(const int& id_to_forget);
 
-    bool hasSkill(int skill_id);
+    bool hasSkill(int skill_id) const;
 
     void setSalary(int add_to_salary);
     void setScore(int add_to_score);
@@ -42,7 +42,6 @@ public:
 
     Citizen* clone() const override;
 
-    int getNumOfSkills() const;
 
     class SkillAlreadyLearned : std::exception{};
     class CanNotLearnSkill : std::exception{};
