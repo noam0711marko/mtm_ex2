@@ -2,6 +2,7 @@
 #define MTM_EX2_WORKPLACE_H
 
 #include "Manager.h"
+#include "Exception.h"
 
 
 class Workplace {
@@ -27,7 +28,7 @@ public:
     template<class Condition>
     void hireEmployee(Condition hiringCondition, Employee *employee, int manager_id) {
         if(!hiringCondition(employee)){
-            throw EmployeeNotSelected();
+            throw Exception::EmployeeNotSelected();
         }
         hireEmployeeAction(employee, manager_id);
     }

@@ -3,18 +3,19 @@
 
 #include "Skill.h"
 #include "Employee.h"
-#include "FacultyBase.h"
+#include "Exception.h"
 
 class Condition{
 public:
-    virtual bool operator()(Employee* employee){
-        return employee->getId()>0;
-    }
+    virtual bool operator()(Employee* employee)=0;
 };
 
 template<class Condition>
-class Faculty : public FacultyBase {
-    Condition condition;
+class Faculty {
+    int id;
+    Skill skill;
+    int points_from_faculty;
+    Condition* condition;
 
 public:
     Faculty(int new_id, const Skill& new_skill, int new_points_from_faculty, Condition* new_condition);
@@ -22,22 +23,26 @@ public:
     Faculty(const Faculty&) = default;
     Faculty &operator=(const Faculty&) = default;
 
-    int getId() const override;
-    Skill getSkill() const override;
-    int getAddedPoints() const override;
+    int getId() const;
+    Skill getSkill() const ;
+    int getAddedPoints() const;
 
-    void teach(Employee* employee) override;
+    friend bool operator<(const Faculty<Condition>&, const Faculty<Condition>&);
+
+    void teach(Employee* employee);
 
 };
 
 template<class Condition>
 Faculty<Condition>::Faculty(int new_id, const Skill& new_skill, int new_points_from_faculty, Condition* new_condition) :
-    FacultyBase(new_id, new_skill, new_points_from_faculty), condition(*new_condition){}
+    id(new_id), skill(new_skill), points_from_faculty(new_points_from_faculty) , condition(new_condition){}
+
 
 template<class Condition>
 int Faculty<Condition>::getId() const {
     return id;
 }
+
 
 template<class Condition>
 Skill Faculty<Condition>::getSkill() const {
@@ -51,13 +56,17 @@ int Faculty<Condition>::getAddedPoints() const {
 
 template<class Condition>
 void Faculty<Condition>::teach(Employee* employee) {
-    if(!condition(employee)){
-        throw EmployeeNotAccepted();
+
+    if(!(*condition)(employee)){
+        throw Exception::EmployeeNotAccepted();
     }
     employee->learnSkill(skill);
     employee->setScore(points_from_faculty);
 }
 
 
+struct cmp_faculties{
+    bool operator() (Faculty<Condition>* a, Faculty<Condition>* b) const {return (*a)<(*b); }
+};
 
 #endif //MTM_EX2_FACULTY_H

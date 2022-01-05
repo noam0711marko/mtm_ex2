@@ -3,60 +3,44 @@
 
 #include <iostream>
 
-    class Exception : public std::exception {
-        class NegativePoints {
-        };
+class Exception : public std::exception {
+public:
+    class NegativePoints : public std::exception{};
 
-        class SkillAlreadyLearned {
-        };
+    class SkillAlreadyLearned : public std::exception{};
 
-        class CanNotLearnSkill {
-        };
+    class CanNotLearnSkill : public std::exception{};
 
-        class DidNotLearnSkill {
-        };
+    class DidNotLearnSkill : public std::exception{};
 
-        class EmployeeAlreadyHired {
-        };
+    class EmployeeAlreadyHired : public std::exception{};
 
-        class EmployeeIsNotHired {
-        };
+    class EmployeeIsNotHired : public std::exception{};
 
-        class ManagerAlreadyHired {
-        };
+    class ManagerAlreadyHired : public std::exception{};
 
-        class CanNotHireManager {
-        };
+    class CanNotHireManager : public std::exception{};
 
-        class ManagerIsNotHired {
-        };
+    class ManagerIsNotHired : public std::exception{};
 
-        class EmployeeNotSelected {
-        };
+    class EmployeeNotSelected : public std::exception{};
 
-        class EmployeeNotAccepted {
-        };
+    class EmployeeNotAccepted : public std::exception{};
 
-        class CitizenAlreadyExists;
+    class CitizenAlreadyExists : public std::exception{};
 
-        class WorkplaceAlreadyExists {
-        };
+    class WorkplaceAlreadyExists : public std::exception{};
 
-        class FacultyAlreadyExists {
-        };
+    class FacultyAlreadyExists : public std::exception{};
 
-        class EmployeeDoesNotExist {
-        };
+    class EmployeeDoesNotExist : public std::exception{};
 
-        class ManagerDoesNotExist {
-        };
+    class ManagerDoesNotExist : public std::exception{};
 
-        class WorkplaceDoesNotExist {
-        };
+    class WorkplaceDoesNotExist : public std::exception{};
 
-        class FacultyDoesNotExist {
-        };
-    };
+    class FacultyDoesNotExist : public std::exception{};
+};
 
 #endif //MTM_EX2_EXCEPTION_H
 

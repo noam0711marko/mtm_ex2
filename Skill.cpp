@@ -47,7 +47,7 @@ int Skill::operator++(int) {
 
 int &Skill::operator+=(const int& points) {
     if(points<0){
-        throw NegativePoints();
+        throw Exception::NegativePoints();
     }
     this->required_points_for_purchase+=points;
     return this->required_points_for_purchase;
@@ -55,7 +55,7 @@ int &Skill::operator+=(const int& points) {
 
 Skill Skill::operator+(const int& points) {
     if(points<0){
-        throw NegativePoints();
+        throw Exception::NegativePoints();
     }
     *this+=points;
     return *this;
