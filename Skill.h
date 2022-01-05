@@ -34,7 +34,6 @@ public:
 
     Skill operator+(const int&);
 
-    class NegativePoints : std::exception{};
 
 };
 

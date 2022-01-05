@@ -48,12 +48,6 @@ public:
 
     int getNumOfManagers() const;
 
-    class ManagerAlreadyHired : std::exception{};
-    class CanNotHireManager : std::exception{};
-    class ManagerIsNotHired : std::exception{};
-    class EmployeeIsNotHired : std::exception{};
-    class EmployeeNotSelected : std::exception{};
-    class EmployeeAlreadyHired : std::exception{};
 
     shared_ptr<Manager> getManager(int manager_id) const;
     shared_ptr<Employee> getEmployeeFromManager(int employee_id, int manager_id) const;

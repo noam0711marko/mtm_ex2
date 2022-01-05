@@ -64,13 +64,6 @@ public:
     Workplace* getWorkplace(int workplace_id) const;
     shared_ptr<FacultyBase> getFaculty(int faculty_id) const;
 
-    class CitizenAlreadyExists : std::exception{};
-    class WorkplaceAlreadyExists : std::exception{};
-    class FacultyAlreadyExists : std::exception{};
-    class EmployeeDoesNotExist : std::exception{};
-    class ManagerDoesNotExist : std::exception{};
-    class WorkplaceDoesNotExist : std::exception{};
-    class FacultyDoesNotExist : std::exception{};
 
 };
 

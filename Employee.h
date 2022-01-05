@@ -43,9 +43,6 @@ public:
     Citizen* clone() const override;
 
 
-    class SkillAlreadyLearned : std::exception{};
-    class CanNotLearnSkill : std::exception{};
-    class DidNotLearnSkill : std::exception{};
 };
 
 

@@ -28,7 +28,6 @@ public:
 
     void teach(Employee* employee) override;
 
-    class EmployeeNotAccepted : std::exception{};
 };
 
 template<class Condition>

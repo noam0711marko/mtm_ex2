@@ -44,8 +44,6 @@ public:
 
     shared_ptr<Employee> getEmployee(int employee_id);
 
-    class EmployeeAlreadyHired : std::exception{};
-    class EmployeeIsNotHired : std::exception{};
 };
 
 
