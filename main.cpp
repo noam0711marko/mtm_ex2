@@ -294,7 +294,7 @@ int main() {
     cout << "getAllAboveSalary output: " << endl;
     city.getAllAboveSalary(cout,1000);
     cout << endl << "printAllEmployeesWithSkill output" << endl;
-    city.printAllEmployeesWithSkill(cout, 1);
+    city.printAllEmployeesWithSkill(std::cout, 1);
     city.fireManagerAtWorkplace(104,10001);
     cout << "getAllAboveSalary output: " << endl;
     city.getAllAboveSalary(cout,1000);

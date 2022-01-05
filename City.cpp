@@ -8,10 +8,9 @@ void City::addEmployee(int new_id, const string &new_first_name, const string &n
         throw Exception::CitizenAlreadyExists();
     }
     Employee employee(new_id, new_first_name, new_last_name, new_year);
-    shared_ptr<Citizen> sharedPtr(new Employee(employee));
     Employee* ptr=new Employee(employee);
     employees.insert(ptr);
-    citizens.insert(sharedPtr);
+    citizens.insert(shared_ptr<Citizen>(ptr));
 }
 
 void City::addManager(int new_id, const string &new_first_name, const string &new_last_name, int new_year) {
@@ -19,10 +18,9 @@ void City::addManager(int new_id, const string &new_first_name, const string &ne
         throw Exception::CitizenAlreadyExists();
     }
     Manager manager(new_id, new_first_name, new_last_name, new_year);
-    shared_ptr<Citizen> sharedPtr(new Manager(manager));
     Manager* ptr=new Manager(manager);
     managers.insert(ptr);
-    citizens.insert(sharedPtr);
+    citizens.insert(shared_ptr<Citizen>(ptr));
 }
 
 void City::createWorkplace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary) {

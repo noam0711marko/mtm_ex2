@@ -14,7 +14,7 @@ void Manager::addEmployee(Employee* employee) {
     if(hasEmployee(employee->getId())){
         throw Exception::EmployeeAlreadyHired();
     }
-    employees.insert(shared_ptr<Employee> (employee));
+    employees.insert(employee);
     employees_ids.insert(employee->getId());
 }
 
@@ -30,10 +30,10 @@ void Manager::removeEmployee(int id_to_remove) {
     }
     throw EmployeeIsNotHired();
 */
-    for(const shared_ptr<Employee> &n : employees){
+    for(Employee* n : employees){
         if(n->getId()==id_to_remove){
-            employees.erase(n);
             employees_ids.erase(n->getId());
+            employees.erase(n);
             return;
         }
     }
@@ -77,14 +77,14 @@ ostream &Manager::printEmployees(ostream &os) const {
         temp->printShort(os);
         it++;
     }*/
-    for(const shared_ptr<Employee> &n : employees){
+    for(Employee* n : employees){
             n->printShort(os);
     }
     return os;
 }
 
 bool Manager::hasEmployee(int employee_id) {
-    for(const shared_ptr<Employee> &n : employees){
+    for(Employee* n : employees){
         if(n->getId() == employee_id){
             return true;
         }
@@ -103,8 +103,8 @@ void Manager::setManagerWorkplace(int new_workplace_id) {
     new_workplace_id=new_workplace_id;
 }
 
-shared_ptr<Employee> Manager::getEmployee(int employee_id) {
-    for(const shared_ptr<Employee> &n : employees){
+Employee* Manager::getEmployee(int employee_id) {
+    for(Employee* n : employees){
         if(n->getId() == employee_id){
             return n;
         }

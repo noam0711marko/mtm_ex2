@@ -10,7 +10,7 @@ class Workplace {
     string name;
     int employee_salary;
     int manager_salary;
-    set<shared_ptr<Manager>, cmp_citizens_shared_ptr> managers;
+    set<Manager*, cmp_citizens_ptr> managers;
 
 public:
     Workplace(int new_id, const string& new_name, int new_employee_salary, int new_manager_salary);
@@ -50,8 +50,8 @@ public:
     int getNumOfManagers() const;
 
 
-    shared_ptr<Manager> getManager(int manager_id) const;
-    shared_ptr<Employee> getEmployeeFromManager(int employee_id, int manager_id) const;
+    Manager* getManager(int manager_id) const;
+    Employee* getEmployeeFromManager(int employee_id, int manager_id) const;
 };
 
 struct cmp_workplaces{

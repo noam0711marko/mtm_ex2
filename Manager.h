@@ -7,7 +7,7 @@
 
 class Manager: public Citizen{
     int salary;
-    set<shared_ptr<Employee>, cmp_citizens_shared_ptr> employees;
+    set<Employee*, cmp_citizens_ptr> employees;
     int workplace_id;
     set<int> employees_ids;
 
@@ -43,7 +43,7 @@ public:
 
     void setManagerNotHired();
 
-    shared_ptr<Employee> getEmployee(int employee_id);
+    Employee* getEmployee(int employee_id);
 
 };
 
