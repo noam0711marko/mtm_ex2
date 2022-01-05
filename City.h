@@ -80,8 +80,8 @@ public:
     template<class T, class CMP>
     shared_ptr<Citizen> addCitizen(int new_id, const string &new_first_name, const string &new_last_name, int new_year, set<T*, CMP> set ) const {
         T new_citizen(new_id, new_first_name, new_last_name, new_year);
-        shared_ptr<Citizen> sharedPtr(&new_citizen);
-        T* ptr=&new_citizen;
+        shared_ptr<Citizen> sharedPtr(new T(new_citizen));
+        T* ptr=new T(new_citizen);
         set.insert(ptr);
 
         return sharedPtr;

@@ -8,8 +8,8 @@ void City::addEmployee(int new_id, const string &new_first_name, const string &n
         throw Exception::CitizenAlreadyExists();
     }
     Employee employee(new_id, new_first_name, new_last_name, new_year);
-    shared_ptr<Citizen> sharedPtr(&employee);
-    Employee* ptr=&employee;
+    shared_ptr<Citizen> sharedPtr(new Employee(employee));
+    Employee* ptr=new Employee(employee);
     employees.insert(ptr);
     citizens.insert(sharedPtr);
 }
@@ -19,8 +19,8 @@ void City::addManager(int new_id, const string &new_first_name, const string &ne
         throw Exception::CitizenAlreadyExists();
     }
     Manager manager(new_id, new_first_name, new_last_name, new_year);
-    shared_ptr<Citizen> sharedPtr(&manager);
-    Manager* ptr=&manager;
+    shared_ptr<Citizen> sharedPtr(new Manager(manager));
+    Manager* ptr=new Manager(manager);
     managers.insert(ptr);
     citizens.insert(sharedPtr);
 }
@@ -29,16 +29,16 @@ void City::createWorkplace(int new_id, const string &new_name, int new_employee_
     if(exists(new_id, workplaces)){
         throw Exception::WorkplaceAlreadyExists();
     }
-    Workplace workplace(new_id, new_name, new_employee_salary, new_manager_salary);
-    workplaces.insert(&workplace);
+    Workplace* workplace=new Workplace(new_id, new_name, new_employee_salary, new_manager_salary);
+    workplaces.insert(workplace);
 }
 
 void City::addFaculty(int new_id, const Skill& new_skill, int new_points_from_faculty, Condition* new_condition) {
     if(exists(new_id, faculties)){
         throw Exception::FacultyAlreadyExists();
     }
-    Faculty<Condition> faculty(new_id, new_skill, new_points_from_faculty, new_condition);
-    faculties.insert(&faculty);
+    Faculty<Condition>* faculty= new Faculty<Condition>(new_id, new_skill, new_points_from_faculty, new_condition);
+    faculties.insert(faculty);
 }
 
 void City::hireManagerAtWorkplace(int manager_id, int workplace_id) const{
@@ -106,7 +106,7 @@ bool City::isWorkingInTheSameWorkplace(int employee_1, int employee_2) const {
 }
 
 ostream &City::printAllEmployeesWithSkill(ostream &os, int skill_id) const {
-    for(const Employee* n : employees){
+    for(Employee* n : employees){
         if(n->hasSkill(skill_id)){
             n->printShort(os);
         }
