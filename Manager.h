@@ -17,7 +17,7 @@ public:
     Manager(const Manager&) = default;
     Manager &operator=(const Manager&) = default;
 
-    int getSalary();
+    int getSalary() const override;
 
     void addEmployee(Employee* employee);
     void removeEmployee(int id_to_remove);

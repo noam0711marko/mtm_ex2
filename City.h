@@ -6,11 +6,12 @@
 
 class City {
     string name;
-    set<shared_ptr<Employee>, cmp_citizens> employees;
-    set<shared_ptr<Manager>, cmp_citizens> managers;
-    set<shared_ptr<Workplace>, cmp_workplaces> workplaces;
+    set<Employee, cmp_citizens> employees;
+    set<Manager, cmp_citizens> managers;
+    set<shared_ptr<Citizen>, cmp_citizens_ptr> citizens;
+    set<Workplace, cmp_workplaces> workplaces;
     //template<class Condition>
-    //set<shared_ptr<Faculty<Condition>>, cmp_faculties<Condition>> faculties;
+    //set<Faculty<Condition>, cmp_faculties<Condition>> faculties;
 
 public:
     City(string new_name);
@@ -25,13 +26,27 @@ public:
 
     //teachAtFaculty
 
-    //hireEmployeeAtWorkplace
+    template<class Condition>
+    void hireEmployeeAtWorkplace(Condition hiringCondition, int employee_id, int manager_id, int workplace_id) const{
+        if(!EmployeeExist(employee_id)){
+            throw EmployeeDoesNotExist();
+        }
+        if(!ManagerExist(manager_id)){
+            throw ManagerDoesNotExist();
+        }
+        if(!WorkplaceExist(workplace_id)){
+            throw WorkplaceDoesNotExist();
+        }
+        Employee* employee= getEmployee(employee_id);
+        Workplace* workplace= getWorkplace(workplace_id);
+        workplace->template hireEmployee(hiringCondition, employee, manager_id);
+    }
 
-    void hireManagerAtWorkplace(int manager_id, int workplace_id);
+    void hireManagerAtWorkplace(int manager_id, int workplace_id) const;
 
-    void fireEmployeeAtWorkplace(int employee_id, int manager_id, int workplace_id);
+    void fireEmployeeAtWorkplace(int employee_id, int manager_id, int workplace_id) const;
 
-    void fireManagerAtWorkplace(int manager_id, int workplace_id);
+    void fireManagerAtWorkplace(int manager_id, int workplace_id) const;
 
     ostream &getAllAboveSalary(ostream&, int salary) const;
 
@@ -41,6 +56,7 @@ public:
 
     bool EmployeeExist(int employee_id) const;
     bool ManagerExist(int manager_id) const;
+    bool CitizenExist(int citizen_id) const;
     bool WorkplaceExist(int workplace_id) const;
     //bool FacultyExist(int faculty_id) const;
 
@@ -49,8 +65,7 @@ public:
     Workplace* getWorkplace(int workplace_id) const;
     //Employee* getFaculty(int employee_id) const;
 
-    class EmployeeAlreadyExists : std::exception{};
-    class ManagerAlreadyExists : std::exception{};
+    class CitizenAlreadyExists : std::exception{};
     class WorkplaceAlreadyExists : std::exception{};
     class FacultyAlreadyExists : std::exception{};
     class EmployeeDoesNotExist : std::exception{};

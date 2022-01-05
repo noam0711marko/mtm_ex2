@@ -34,7 +34,7 @@ void Workplace::hireManager(Manager *manager_to_hire) {
 
 }
 
-bool Workplace::hasManager(int manager_id) {
+bool Workplace::hasManager(int manager_id) const{
     for(const shared_ptr<Manager> &n : managers){
         if(n->getId()==manager_id){
             return true;
@@ -56,7 +56,7 @@ void Workplace::fireEmployee(int employee_id, int manager_id) {
     employee->setSalary(-employee_salary);
 }
 
-bool Workplace::hasEmployeeInManager(int employee_id, int manager_id) {
+bool Workplace::hasEmployeeInManager(int employee_id, int manager_id) const {
     for(const shared_ptr<Manager> &n : managers){
         if(n->getId()==manager_id){
             return n->hasEmployee(employee_id);
@@ -65,7 +65,7 @@ bool Workplace::hasEmployeeInManager(int employee_id, int manager_id) {
     return false;
 }
 
-shared_ptr<Manager> Workplace::getManager(int manager_id) {
+shared_ptr<Manager> Workplace::getManager(int manager_id) const{
     assert(hasManager(manager_id));
     for(const shared_ptr<Manager> &n : managers){
         if(n->getId() == manager_id){
@@ -75,7 +75,7 @@ shared_ptr<Manager> Workplace::getManager(int manager_id) {
     return nullptr;
 }
 
-shared_ptr<Employee> Workplace::getEmployeeFromManager(int employee_id, int manager_id) {
+shared_ptr<Employee> Workplace::getEmployeeFromManager(int employee_id, int manager_id) const{
     shared_ptr<Manager> manager=getManager(manager_id);
     return manager->getEmployee(employee_id);
 }
@@ -90,7 +90,7 @@ void Workplace::fireManager(int manager_id) {
         fireEmployee(n, manager_id);
     }
     manager->setManagerNotHired();
-    manager->setSalary(-manager_salary);
+    manager->setSalary(0);
     managers.erase(manager);
 }
 
@@ -129,7 +129,7 @@ void Workplace::hireEmployeeAction(Employee *employee, int manager_id) {
     employee->setSalary(employee_salary);
 }
 
-bool Workplace::hasEmployeeInWorkplace(int employee_id) {
+bool Workplace::hasEmployeeInWorkplace(int employee_id) const{
     for(const shared_ptr<Manager>& n : managers){
         if(hasEmployeeInManager(employee_id, n->getId())){
             return true;

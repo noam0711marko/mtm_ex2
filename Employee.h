@@ -23,7 +23,7 @@ public:
     Employee(const Employee&) = default;
     Employee &operator=(const Employee&) = default;
 
-    int getSalary() const;
+    int getSalary() const override;
     int getScore() const;
 
     void learnSkill(const Skill&);

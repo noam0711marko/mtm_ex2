@@ -29,6 +29,7 @@ public:
     string getFirstName() const;
     string getLastName() const;
     int getBirthYear() const;
+    virtual int getSalary() const = 0;
 
     friend bool operator<(const Citizen&, const Citizen&);
     friend bool operator==(const Citizen&, const Citizen&);
@@ -47,8 +48,11 @@ bool operator>(const Citizen&, const Citizen&);
 bool operator>=(const Citizen&, const Citizen&);
 bool operator!=(const Citizen&, const Citizen&);
 
-struct cmp_citizens{
+struct cmp_citizens_ptr{
     bool operator() (const shared_ptr<Citizen>& a, const shared_ptr<Citizen>& b) const {return (*a)<(*b); }
+};
+struct cmp_citizens{
+    bool operator() (const Citizen& a, const Citizen& b) const {return a<b; }
 };
 
 #endif //MTM_EX2_CITIZEN_H

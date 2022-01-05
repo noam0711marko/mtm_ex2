@@ -57,8 +57,8 @@ void Faculty<Condition>::teach(Employee* employee) {
 
 template<class Condition>
 struct cmp_faculties{
-    bool operator() (const shared_ptr<Faculty<Condition>>& a, const shared_ptr<Faculty<Condition>>& b) const {
-        return a->getId()<b->getId();
+    bool operator() (const Faculty<Condition>& a, const Faculty<Condition>& b) const {
+        return a.getId()<b.getId();
     }
 };
 
