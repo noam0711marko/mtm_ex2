@@ -17,8 +17,8 @@ class City {
 public:
     explicit City(const string& new_name);
     ~City() = default;
-    City(const City&) = default;
-    City &operator=(const City&) = default;
+    City(const City&);
+    City &operator=(const City&);
 
     void addEmployee(int new_id, const string& new_first_name, const string& new_last_name, int new_year);
     void addManager(int new_id, const string& new_first_name, const string& new_last_name, int new_year);
@@ -89,5 +89,19 @@ public:
 */
 };
 
+template<class T, class CMP>
+void copy_set(set<T*, CMP> copy_from, set<T*, CMP> copy_to ) {
+    for(T* n : copy_from){
+        copy_to.insert(n->clone());
+    }
+}
+
+template<class T, class CMP>
+void overwrite_set(set<T*, CMP> overwrite_from, set<T*, CMP> overwrite_to ) {
+    overwrite_to.clear();
+    for(T* n : overwrite_from){
+        overwrite_to.insert(n->clone());
+    }
+}
 
 #endif //MTM_EX2_CITY_H
