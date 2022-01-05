@@ -44,7 +44,7 @@ bool operator>=(const Skill&, const Skill&);
 bool operator!=(const Skill&, const Skill&);
 
 struct cmp_skills{
-    bool operator() (const shared_ptr<Skill>& a, const shared_ptr<Skill>& b) const {return (*a)<(*b); }
+    bool operator() (const Skill& a, const Skill& b) const {return a<b; }
 };
 
 

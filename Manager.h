@@ -6,7 +6,7 @@
 
 class Manager: public Citizen{
     int salary;
-    set<shared_ptr<Employee>, cmp_citizens> employees;
+    set<shared_ptr<Employee>, cmp_citizens_shared_ptr> employees;
     int workplace_id;
     set<int> employees_ids;
 

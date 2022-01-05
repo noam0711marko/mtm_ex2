@@ -1,12 +1,10 @@
 #include "Manager.h"
 #include "Citizen.h"
-#include <assert.h>
 
 using std::endl;
 
 Manager::Manager(int new_id, const string &new_first_name, const string &new_last_name, int new_birth_year)
-    : Citizen(new_id, new_first_name, new_last_name, new_birth_year), salary(0),
-        employees(), workplace_id(NOT_HIRED), employees_ids() {}
+    : Citizen(new_id, new_first_name, new_last_name, new_birth_year), salary(0), workplace_id(NOT_HIRED) {}
 
 int Manager::getSalary() const{
     return salary;
@@ -16,7 +14,7 @@ void Manager::addEmployee(Employee* employee) {
     if(hasEmployee(employee->getId())){
         throw EmployeeAlreadyHired();
     }
-    employees.insert(shared_ptr<Employee> (new Employee(*employee)));
+    employees.insert(shared_ptr<Employee> (employee));
     employees_ids.insert(employee->getId());
 }
 
@@ -106,7 +104,6 @@ void Manager::setManagerWorkplace(int new_workplace_id) {
 }
 
 shared_ptr<Employee> Manager::getEmployee(int employee_id) {
-    assert(hasEmployee(employee_id));
     for(const shared_ptr<Employee> &n : employees){
         if(n->getId() == employee_id){
             return n;

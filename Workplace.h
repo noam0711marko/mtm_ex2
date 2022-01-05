@@ -9,7 +9,7 @@ class Workplace {
     string name;
     int employee_salary;
     int manager_salary;
-    set<shared_ptr<Manager>, cmp_citizens> managers;
+    set<shared_ptr<Manager>, cmp_citizens_shared_ptr> managers;
 
 public:
     Workplace(int new_id, const string& new_name, int new_employee_salary, int new_manager_salary);
@@ -17,7 +17,7 @@ public:
     Workplace(const Workplace&) = default;
     Workplace &operator=(const Workplace&) = default;
 
-    int getID() const;
+    int getId() const;
     string getName() const;
     int getWorkersSalary() const;
     int getManagersSalary() const;
@@ -34,7 +34,7 @@ public:
 
     void hireManager(Manager* manager_to_hire);
 
-    void fireEmployee(int employee_id, int manager_id);
+    void fireEmployee(int employee_id, int manager_id) const;
 
     void fireManager(int manager_id);
 
@@ -60,8 +60,8 @@ public:
 };
 
 struct cmp_workplaces{
-    bool operator() (const Workplace& a, const Workplace& b) const {
-        return (a.getID()<b.getID());
+    bool operator() (Workplace* a, Workplace* b) const {
+        return (a->getId() < b->getId());
     }
 };
 
