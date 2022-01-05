@@ -4,14 +4,9 @@
 #include "Employee.h"
 #include "Citizen.h"
 
-
-struct cmp_employees{
-    bool operator() (const shared_ptr<Employee>& a, const shared_ptr<Employee>& b) const {return (*a)<(*b); }
-};
-
 class Manager: public Citizen{
     int salary;
-    set<shared_ptr<Employee>, cmp_employees> employees;
+    set<shared_ptr<Employee>, cmp_citizens> employees;
     int workplace_id;
     set<int> employees_ids;
 

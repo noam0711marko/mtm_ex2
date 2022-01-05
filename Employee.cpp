@@ -86,3 +86,7 @@ Citizen* Employee::clone() const {
     Citizen* copy=new Employee(*this);
     return copy;
 }
+
+int Employee::getNumOfSkills() const {
+    return (int)skills.size();
+}

@@ -4,6 +4,7 @@
 #include "Skill.h"
 #include "Employee.h"
 
+
 template<class Condition>
 class Faculty {
     int id;
@@ -53,6 +54,13 @@ void Faculty<Condition>::teach(Employee* employee) {
     employee->learnSkill(skill);
     employee->setScore(points_from_faculty);
 }
+
+template<class Condition>
+struct cmp_faculties{
+    bool operator() (const shared_ptr<Faculty<Condition>>& a, const shared_ptr<Faculty<Condition>>& b) const {
+        return a->getId()<b->getId();
+    }
+};
 
 
 #endif //MTM_EX2_FACULTY_H

@@ -47,5 +47,8 @@ bool operator>(const Citizen&, const Citizen&);
 bool operator>=(const Citizen&, const Citizen&);
 bool operator!=(const Citizen&, const Citizen&);
 
+struct cmp_citizens{
+    bool operator() (const shared_ptr<Citizen>& a, const shared_ptr<Citizen>& b) const {return (*a)<(*b); }
+};
 
 #endif //MTM_EX2_CITIZEN_H
