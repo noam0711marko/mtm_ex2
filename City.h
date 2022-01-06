@@ -3,7 +3,7 @@
 
 #include "Workplace.h"
 #include "Faculty.h"
-#include "exception.h"
+#include "exceptions.h"
 
 
 class City {
@@ -32,13 +32,13 @@ public:
     template<class Condition>
     void hireEmployeeAtWorkplace(Condition hiringCondition, int employee_id, int manager_id, int workplace_id) const{
         if(!exists(employee_id, employees)){
-            throw exception::EmployeeDoesNotExist();
+            throw exceptions::EmployeeDoesNotExist();
         }
         if(!exists(manager_id, managers)){
-            throw exception::ManagerDoesNotExist();
+            throw exceptions::ManagerDoesNotExist();
         }
         if(!exists(workplace_id, workplaces)){
-            throw exception::WorkplaceDoesNotExist();
+            throw exceptions::WorkplaceDoesNotExist();
         }
         Employee* employee= get(employee_id, employees);
         //Workplace* workplace= get(workplace_id, workplaces);

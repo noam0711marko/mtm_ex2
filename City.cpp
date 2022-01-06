@@ -5,7 +5,7 @@ City::City(const string& new_name) : name(new_name) {}
 
 void City::addEmployee(int new_id, const string &new_first_name, const string &new_last_name, int new_year) {
     if(exists(new_id, employees) || exists(new_id, managers)){
-        throw exception::CitizenAlreadyExists();
+        throw exceptions::CitizenAlreadyExists();
     }
     Employee employee(new_id, new_first_name, new_last_name, new_year);
     Employee* ptr=new Employee(employee);
@@ -15,7 +15,7 @@ void City::addEmployee(int new_id, const string &new_first_name, const string &n
 
 void City::addManager(int new_id, const string &new_first_name, const string &new_last_name, int new_year) {
     if(exists(new_id, employees) || exists(new_id, managers)){
-        throw exception::CitizenAlreadyExists();
+        throw exceptions::CitizenAlreadyExists();
     }
     Manager manager(new_id, new_first_name, new_last_name, new_year);
     Manager* ptr=new Manager(manager);
@@ -25,7 +25,7 @@ void City::addManager(int new_id, const string &new_first_name, const string &ne
 
 void City::createWorkplace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary) {
     if(exists(new_id, workplaces)){
-        throw exception::WorkplaceAlreadyExists();
+        throw exceptions::WorkplaceAlreadyExists();
     }
     //Workplace* workplace=new Workplace(new_id, new_name, new_employee_salary, new_manager_salary);
     shared_ptr<Workplace> workplace(new Workplace(new_id, new_name, new_employee_salary, new_manager_salary));
@@ -34,7 +34,7 @@ void City::createWorkplace(int new_id, const string &new_name, int new_employee_
 
 void City::addFaculty(int new_id, const Skill& new_skill, int new_points_from_faculty, Condition* new_condition) {
     if(exists(new_id, faculties)){
-        throw exception::FacultyAlreadyExists();
+        throw exceptions::FacultyAlreadyExists();
     }
     //Faculty<Condition>* faculty= new Faculty<Condition>(new_id, new_skill, new_points_from_faculty, new_condition);
     shared_ptr<Faculty<Condition>> faculty(new Faculty<Condition>(new_id, new_skill, new_points_from_faculty, new_condition));
@@ -43,10 +43,10 @@ void City::addFaculty(int new_id, const Skill& new_skill, int new_points_from_fa
 
 void City::hireManagerAtWorkplace(int manager_id, int workplace_id) const{
     if(!exists(manager_id, managers)){
-        throw exception::ManagerDoesNotExist();
+        throw exceptions::ManagerDoesNotExist();
     }
     if(!exists(workplace_id, workplaces)){
-        throw exception::WorkplaceDoesNotExist();
+        throw exceptions::WorkplaceDoesNotExist();
     }
     //Workplace* workplace= get(workplace_id, workplaces);
     shared_ptr<Workplace> workplace= get(workplace_id, workplaces);
@@ -57,13 +57,13 @@ void City::hireManagerAtWorkplace(int manager_id, int workplace_id) const{
 
 void City::fireEmployeeAtWorkplace(int employee_id, int manager_id, int workplace_id) const {
     if(!exists(employee_id, employees)){
-        throw exception::EmployeeDoesNotExist();
+        throw exceptions::EmployeeDoesNotExist();
     }
     if(!exists(manager_id, managers)){
-        throw exception::ManagerDoesNotExist();
+        throw exceptions::ManagerDoesNotExist();
     }
     if(!exists(workplace_id, workplaces)){
-        throw exception::WorkplaceDoesNotExist();
+        throw exceptions::WorkplaceDoesNotExist();
     }
     //Workplace* workplace= get(workplace_id, workplaces);
     shared_ptr<Workplace> workplace= get(workplace_id, workplaces);
@@ -72,10 +72,10 @@ void City::fireEmployeeAtWorkplace(int employee_id, int manager_id, int workplac
 
 void City::fireManagerAtWorkplace(int manager_id, int workplace_id) const {
     if(!exists(manager_id, managers)){
-        throw exception::ManagerDoesNotExist();
+        throw exceptions::ManagerDoesNotExist();
     }
     if(!exists(workplace_id, workplaces)){
-        throw exception::WorkplaceDoesNotExist();
+        throw exceptions::WorkplaceDoesNotExist();
     }
     //Workplace* workplace= get(workplace_id, workplaces);
     shared_ptr<Workplace> workplace= get(workplace_id, workplaces);
@@ -95,10 +95,10 @@ ostream &City::getAllAboveSalary(ostream& os, int salary) const {
 
 bool City::isWorkingInTheSameWorkplace(int employee_1, int employee_2) const {
     if(!exists(employee_1, employees)){
-        throw exception::EmployeeDoesNotExist();
+        throw exceptions::EmployeeDoesNotExist();
     }
     if(!exists(employee_2, employees)){
-        throw exception::EmployeeDoesNotExist();
+        throw exceptions::EmployeeDoesNotExist();
     }
     for(const shared_ptr<Workplace>& n : workplaces){
         if(n->hasEmployeeInWorkplace(employee_1) && n->hasEmployeeInWorkplace(employee_2)){
@@ -119,10 +119,10 @@ ostream &City::printAllEmployeesWithSkill(ostream &os, int skill_id) const {
 
 void City::teachAtFaculty(int employee_id, int faculty_id) const{
     if(!exists(employee_id, employees)){
-        throw exception::EmployeeDoesNotExist();
+        throw exceptions::EmployeeDoesNotExist();
     }
     if(!exists(faculty_id, faculties)){
-        throw exception::FacultyDoesNotExist();
+        throw exceptions::FacultyDoesNotExist();
     }
     //Faculty<Condition>* faculty= get(faculty_id, faculties);
     shared_ptr<Faculty<Condition>> faculty= get(faculty_id, faculties);

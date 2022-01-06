@@ -1,9 +1,9 @@
-#ifndef MTM_EX2_EXCEPTION_H
-#define MTM_EX2_EXCEPTION_H
+#ifndef MTM_EX2_EXCEPTIONS_H
+#define MTM_EX2_EXCEPTIONS_H
 
 #include <iostream>
 
-class exception : public std::exception {
+class exceptions : public std::exception {
 public:
     class NegativePoints : public std::exception{};
 
@@ -42,5 +42,5 @@ public:
     class FacultyDoesNotExist : public std::exception{};
 };
 
-#endif //MTM_EX2_EXCEPTION_H
+#endif //MTM_EX2_EXCEPTIONS_H
 

@@ -12,7 +12,7 @@ int Manager::getSalary() const{
 
 void Manager::addEmployee(Employee* employee) {
     if(hasEmployee(employee->getId())){
-        throw exception::EmployeeAlreadyHired();
+        throw exceptions::EmployeeAlreadyHired();
     }
     employees.insert(employee);
     employees_ids.insert(employee->getId());
@@ -37,7 +37,7 @@ void Manager::removeEmployee(int id_to_remove) {
             return;
         }
     }
-    throw exception::EmployeeIsNotHired();
+    throw exceptions::EmployeeIsNotHired();
 }
 
 void Manager::setSalary(int to_add) {

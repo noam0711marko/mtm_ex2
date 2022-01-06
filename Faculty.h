@@ -3,7 +3,7 @@
 
 #include "Skill.h"
 #include "Employee.h"
-#include "exception.h"
+#include "exceptions.h"
 
 class Condition{
 public:
@@ -58,11 +58,12 @@ template<class Condition>
 void Faculty<Condition>::teach(Employee* employee) {
 
     if(!(*condition)(employee)){
-        throw exception::EmployeeNotAccepted();
+        throw exceptions::EmployeeNotAccepted();
     }
     employee->learnSkill(skill);
     employee->setScore(points_from_faculty);
 }
+
 
 template<class Condition>
 bool operator<(const Faculty<Condition>& faculty_1, const Faculty<Condition>& faculty_2) {
