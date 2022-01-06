@@ -16,7 +16,7 @@ class City {
 
 public:
     explicit City(const string& new_name);
-    ~City() = default;
+    ~City();
     City(const City&);
     City &operator=(const City&);
 
@@ -95,11 +95,17 @@ public:
     }
 
     template<class T, class CMP>
-    void overwrite_set(set<T*, CMP> overwrite_from, set<T*, CMP> overwrite_to ) {
-        overwrite_to.clear();
-        for(T* n : overwrite_from){
-            overwrite_to.insert(new T(*n));
+    void delete_set(set<T*, CMP> delete_set) {
+        for(T* m : delete_set){
+            delete_set.erase(m);
+            delete(m);
         }
+    }
+
+    template<class T, class CMP>
+    void overwrite_set(set<T*, CMP> overwrite_from, set<T*, CMP> overwrite_to ) {
+        delete_set(overwrite_to);
+        copy_set(overwrite_from, overwrite_to);
     }
 
 };

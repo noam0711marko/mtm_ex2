@@ -141,6 +141,7 @@ City &City::operator=(const City& city) {
     if(this == &city){
         return *this;
     }
+    name=city.name;
     overwrite_set(city.employees, employees);
     overwrite_set(city.managers, managers);
     overwrite_set(city.workplaces, workplaces);
@@ -154,6 +155,15 @@ City &City::operator=(const City& city) {
     }
     return *this;
 }
+
+City::~City() {
+    delete_set(employees);
+    delete_set(managers);
+    delete_set(workplaces);
+    delete_set(faculties);
+    citizens.clear();
+}
+
 
 
 

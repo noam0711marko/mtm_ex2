@@ -14,9 +14,9 @@ class Workplace {
 
 public:
     Workplace(int new_id, const string& new_name, int new_employee_salary, int new_manager_salary);
-    ~Workplace() = default;
-    Workplace(const Workplace&) = default;
-    Workplace &operator=(const Workplace&) = default;
+    ~Workplace();
+    Workplace(const Workplace&);
+    Workplace &operator=(const Workplace&);
 
     int getId() const;
     string getName() const;
