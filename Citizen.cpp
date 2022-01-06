@@ -5,6 +5,8 @@ using std::shared_ptr;
 using std::ostream;
 using std::string;
 
+using namespace mtm;
+
 Citizen::Citizen(int new_id, const string& new_first_name, const string& new_last_name, int new_year) :
         id(new_id), first_name(new_first_name), last_name(new_last_name), year_of_birth(new_year) {}
 

@@ -4,6 +4,8 @@ using std::string;
 using std::ostream;
 using std::endl;
 
+using namespace mtm;
+
 Skill::Skill(int new_id, const string& new_name, int new_required_points):
         id(new_id), name(new_name), required_points_for_purchase(new_required_points) {
 }
@@ -47,7 +49,7 @@ int Skill::operator++(int) {
 
 int &Skill::operator+=(const int& points) {
     if(points<0){
-        throw Exception::NegativePoints();
+        throw exceptions::NegativePoints();
     }
     this->required_points_for_purchase+=points;
     return this->required_points_for_purchase;
@@ -55,7 +57,7 @@ int &Skill::operator+=(const int& points) {
 
 Skill Skill::operator+(const int& points) {
     if(points<0){
-        throw Exception::NegativePoints();
+        throw exceptions::NegativePoints();
     }
     *this+=points;
     return *this;

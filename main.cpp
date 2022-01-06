@@ -3,6 +3,11 @@
 #include "Employee.h"
 #include "City.h"
 #include "vector"
+using namespace mtm;
+
+using std::cout;
+using std::endl;
+
 
 /*
 ========================== Skill unit-testing =================================

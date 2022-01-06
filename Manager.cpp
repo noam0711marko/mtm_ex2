@@ -3,6 +3,8 @@
 
 using std::endl;
 
+using namespace mtm;
+
 Manager::Manager(int new_id, const string &new_first_name, const string &new_last_name, int new_birth_year)
     : Citizen(new_id, new_first_name, new_last_name, new_birth_year), salary(0), workplace_id(NOT_HIRED) {}
 
@@ -12,7 +14,7 @@ int Manager::getSalary() const{
 
 void Manager::addEmployee(Employee* employee) {
     if(hasEmployee(employee->getId())){
-        throw Exception::EmployeeAlreadyHired();
+        throw exceptions::EmployeeAlreadyHired();
     }
     employees.insert(employee);
     employees_ids.insert(employee->getId());
@@ -37,7 +39,7 @@ void Manager::removeEmployee(int id_to_remove) {
             return;
         }
     }
-    throw Exception::EmployeeIsNotHired();
+    throw exceptions::EmployeeIsNotHired();
 }
 
 void Manager::setSalary(int to_add) {

@@ -2,6 +2,8 @@
 
 using std::endl;
 
+using namespace mtm;
+
 Workplace::Workplace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary) :
     id(new_id), name(new_name), employee_salary(new_employee_salary), manager_salary(new_manager_salary){}
 
@@ -23,10 +25,10 @@ int Workplace::getManagersSalary() const {
 
 void Workplace::hireManager(Manager *manager_to_hire) {
     if(hasManager(manager_to_hire->getId())){
-        throw Exception::ManagerAlreadyHired();
+        throw exceptions::ManagerAlreadyHired();
     }
     if(manager_to_hire->isManagerHired()){
-        throw Exception::CanNotHireManager();
+        throw exceptions::CanNotHireManager();
     }
     managers.insert(manager_to_hire);
     manager_to_hire->setSalary(manager_salary);
@@ -45,10 +47,10 @@ bool Workplace::hasManager(int manager_id) const{
 
 void Workplace::fireEmployee(int employee_id, int manager_id) const{
     if(!hasManager(manager_id)){
-        throw Exception::ManagerIsNotHired();
+        throw exceptions::ManagerIsNotHired();
     }
     if(!hasEmployeeInManager(employee_id,manager_id)){
-        throw Exception::EmployeeIsNotHired();
+        throw exceptions::EmployeeIsNotHired();
     }
     Employee* employee= getEmployeeFromManager(employee_id, manager_id);
     Manager* manager= getManager(manager_id);
@@ -81,7 +83,7 @@ Employee* Workplace::getEmployeeFromManager(int employee_id, int manager_id) con
 
 void Workplace::fireManager(int manager_id) {
     if(!hasManager(manager_id)){
-        throw Exception::ManagerIsNotHired();
+        throw exceptions::ManagerIsNotHired();
     }
     Manager* manager = getManager(manager_id);
     set<int> employees_under_manager = manager->getEmployeesIdsSet();
@@ -89,7 +91,7 @@ void Workplace::fireManager(int manager_id) {
         fireEmployee(n, manager_id);
     }
     manager->setManagerNotHired();
-    manager->setSalary(0);
+    manager->setSalary(-manager_salary);
     managers.erase(manager);
 }
 
@@ -116,11 +118,11 @@ int Workplace::getNumOfManagers() const {
 
 void Workplace::hireEmployeeAction(Employee *employee, int manager_id) {
     if(!hasManager(manager_id)){
-        throw Exception::ManagerIsNotHired();
+        throw exceptions::ManagerIsNotHired();
     }
     for(Manager* n : managers){
         if(hasEmployeeInManager(employee->getId(), n->getId())){
-            throw Exception::EmployeeAlreadyHired();
+            throw exceptions::EmployeeAlreadyHired();
         }
     }
     Manager* manager= getManager(manager_id);
