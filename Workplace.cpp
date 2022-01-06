@@ -89,7 +89,7 @@ void Workplace::fireManager(int manager_id) {
         fireEmployee(n, manager_id);
     }
     manager->setManagerNotHired();
-    manager->setSalary(0);
+    manager->setSalary(-manager_salary);
     managers.erase(manager);
 }
 
