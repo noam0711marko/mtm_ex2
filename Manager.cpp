@@ -12,9 +12,9 @@ int Manager::getSalary() const{
 
 void Manager::addEmployee(Employee* employee) {
     if(hasEmployee(employee->getId())){
-        throw EmployeeAlreadyHired();
+        throw Exception::EmployeeAlreadyHired();
     }
-    employees.insert(shared_ptr<Employee> (employee));
+    employees.insert(employee);
     employees_ids.insert(employee->getId());
 }
 
@@ -30,14 +30,14 @@ void Manager::removeEmployee(int id_to_remove) {
     }
     throw EmployeeIsNotHired();
 */
-    for(const shared_ptr<Employee> &n : employees){
+    for(Employee* n : employees){
         if(n->getId()==id_to_remove){
-            employees.erase(n);
             employees_ids.erase(n->getId());
+            employees.erase(n);
             return;
         }
     }
-    throw EmployeeIsNotHired();
+    throw Exception::EmployeeIsNotHired();
 }
 
 void Manager::setSalary(int to_add) {
@@ -77,14 +77,14 @@ ostream &Manager::printEmployees(ostream &os) const {
         temp->printShort(os);
         it++;
     }*/
-    for(const shared_ptr<Employee> &n : employees){
+    for(Employee* n : employees){
             n->printShort(os);
     }
     return os;
 }
 
 bool Manager::hasEmployee(int employee_id) {
-    for(const shared_ptr<Employee> &n : employees){
+    for(Employee* n : employees){
         if(n->getId() == employee_id){
             return true;
         }
@@ -103,8 +103,8 @@ void Manager::setManagerWorkplace(int new_workplace_id) {
     new_workplace_id=new_workplace_id;
 }
 
-shared_ptr<Employee> Manager::getEmployee(int employee_id) {
-    for(const shared_ptr<Employee> &n : employees){
+Employee* Manager::getEmployee(int employee_id) {
+    for(Employee* n : employees){
         if(n->getId() == employee_id){
             return n;
         }
@@ -118,4 +118,38 @@ set<int> Manager::getEmployeesIdsSet() {
 
 void Manager::setManagerNotHired() {
     workplace_id=NOT_HIRED;
+}
+
+Manager::Manager(const Manager& manager) : Citizen(manager.getId(), manager.getFirstName(), manager.getLastName(),
+                                                   manager.getBirthYear()), salary(manager.salary),
+                                                   workplace_id(manager.workplace_id) {
+    for(Employee* n : manager.employees){
+        employees.insert(new Employee(*n));
+        employees_ids.insert(n->getId());
+    }
+}
+
+Manager &Manager::operator=(const Manager& manager) {
+    if(this == &manager){
+        return *this;
+    }
+    *this=manager;
+    for(Employee* m : employees){
+        employees_ids.erase(m->getId());
+        employees.erase(m);
+        delete(m);
+    }
+    for (Employee* n : manager.employees){
+        employees.insert(new Employee(*n));
+        employees_ids.insert(n->getId());
+    }
+    return *this;
+}
+
+Manager::~Manager() {
+    for(Employee* m : employees){
+        employees_ids.erase(m->getId());
+        employees.erase(m);
+        delete(m);
+    }
 }

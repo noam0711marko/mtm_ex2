@@ -3,19 +3,20 @@
 
 #include "Employee.h"
 #include "Citizen.h"
+#include "Exception.h"
 
 class Manager: public Citizen{
     int salary;
-    set<shared_ptr<Employee>, cmp_citizens_shared_ptr> employees;
+    set<Employee*, cmp_citizens_ptr> employees;
     int workplace_id;
     set<int> employees_ids;
 
     static const int NOT_HIRED=-1;
 public:
     Manager(int new_id, const string &new_first_name, const string &new_last_name, int new_birth_year);
-    ~Manager() = default;
-    Manager(const Manager&) = default;
-    Manager &operator=(const Manager&) = default;
+    ~Manager();
+    Manager(const Manager&);
+    Manager &operator=(const Manager&);
 
     int getSalary() const override;
 
@@ -42,10 +43,8 @@ public:
 
     void setManagerNotHired();
 
-    shared_ptr<Employee> getEmployee(int employee_id);
+    Employee* getEmployee(int employee_id);
 
-    class EmployeeAlreadyHired : std::exception{};
-    class EmployeeIsNotHired : std::exception{};
 };
 
 

@@ -1,12 +1,9 @@
-//////////////////////////////////////////////////////
-//////// don't forget to abstract this class /////////
-//////////////////////////////////////////////////////
-
 #ifndef MTM_EX2_CITIZEN_H
 #define MTM_EX2_CITIZEN_H
 
 #include "memory"
 #include <iostream>
+#include "Exception.h"
 
 using std::string;
 using std::shared_ptr;

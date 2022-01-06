@@ -6,6 +6,7 @@
 #include "Skill.h"
 #include "set"
 #include "memory"
+#include "Exception.h"
 
 using std::shared_ptr;
 using std::set;
@@ -43,9 +44,6 @@ public:
     Citizen* clone() const override;
 
 
-    class SkillAlreadyLearned : std::exception{};
-    class CanNotLearnSkill : std::exception{};
-    class DidNotLearnSkill : std::exception{};
 };
 
 

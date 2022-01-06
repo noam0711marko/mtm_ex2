@@ -2,6 +2,7 @@
 #define MTM_EX2_WORKPLACE_H
 
 #include "Manager.h"
+#include "Exception.h"
 
 
 class Workplace {
@@ -9,13 +10,13 @@ class Workplace {
     string name;
     int employee_salary;
     int manager_salary;
-    set<shared_ptr<Manager>, cmp_citizens_shared_ptr> managers;
+    set<Manager*, cmp_citizens_ptr> managers;
 
 public:
     Workplace(int new_id, const string& new_name, int new_employee_salary, int new_manager_salary);
-    ~Workplace() = default;
-    Workplace(const Workplace&) = default;
-    Workplace &operator=(const Workplace&) = default;
+    ~Workplace();
+    Workplace(const Workplace&);
+    Workplace &operator=(const Workplace&);
 
     int getId() const;
     string getName() const;
@@ -27,7 +28,7 @@ public:
     template<class Condition>
     void hireEmployee(Condition hiringCondition, Employee *employee, int manager_id) {
         if(!hiringCondition(employee)){
-            throw EmployeeNotSelected();
+            throw Exception::EmployeeNotSelected();
         }
         hireEmployeeAction(employee, manager_id);
     }
@@ -48,15 +49,9 @@ public:
 
     int getNumOfManagers() const;
 
-    class ManagerAlreadyHired : std::exception{};
-    class CanNotHireManager : std::exception{};
-    class ManagerIsNotHired : std::exception{};
-    class EmployeeIsNotHired : std::exception{};
-    class EmployeeNotSelected : std::exception{};
-    class EmployeeAlreadyHired : std::exception{};
 
-    shared_ptr<Manager> getManager(int manager_id) const;
-    shared_ptr<Employee> getEmployeeFromManager(int employee_id, int manager_id) const;
+    Manager* getManager(int manager_id) const;
+    Employee* getEmployeeFromManager(int employee_id, int manager_id) const;
 };
 
 struct cmp_workplaces{

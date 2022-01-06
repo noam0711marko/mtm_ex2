@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "memory"
+#include "Exception.h"
 
 using std::shared_ptr;
 
@@ -34,7 +35,6 @@ public:
 
     Skill operator+(const int&);
 
-    class NegativePoints : std::exception{};
 
 };
 
