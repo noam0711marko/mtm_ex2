@@ -10,42 +10,55 @@ using std::shared_ptr;
 using std::string;
 using std::ostream;
 
-class Skill {
-    int id;
-    string name;
-    int required_points_for_purchase;
+namespace mtm {
+    class Skill {
+        int id;
+        string name;
+        int required_points_for_purchase;
 
-public:
-    Skill(int new_id, const string& new_name, int new_required_points);
-    ~Skill()=default;
-    Skill(const Skill&)=default;
-    Skill& operator=(const Skill&)=default;
+    public:
+        Skill(int new_id, const string &new_name, int new_required_points);
 
-    const int& getId() const;
-    const string& getName() const;
-    int getRequiredPoints() const;
+        ~Skill() = default;
 
-    friend ostream& operator<<(ostream&, const Skill&);
-    friend bool operator<(const Skill&, const Skill&);
-    friend bool operator==(const Skill&, const Skill&);
+        Skill(const Skill &) = default;
 
-    int& operator++()=delete;
-    int operator++(int);
-    int& operator+=(const int&);
+        Skill &operator=(const Skill &) = default;
 
-    Skill operator+(const int&);
+        const int &getId() const;
 
+        const string &getName() const;
 
-};
+        int getRequiredPoints() const;
 
-bool operator<=(const Skill&, const Skill&);
-bool operator>(const Skill&, const Skill&);
-bool operator>=(const Skill&, const Skill&);
-bool operator!=(const Skill&, const Skill&);
+        friend ostream &operator<<(ostream &, const Skill &);
 
-struct cmp_skills{
-    bool operator() (const Skill& a, const Skill& b) const {return a<b; }
-};
+        friend bool operator<(const Skill &, const Skill &);
+
+        friend bool operator==(const Skill &, const Skill &);
+
+        int &operator++() = delete;
+
+        int operator++(int);
+
+        int &operator+=(const int &);
+
+        Skill operator+(const int &);
 
 
+    };
+
+    bool operator<=(const Skill &, const Skill &);
+
+    bool operator>(const Skill &, const Skill &);
+
+    bool operator>=(const Skill &, const Skill &);
+
+    bool operator!=(const Skill &, const Skill &);
+
+    struct cmp_skills {
+        bool operator()(const Skill &a, const Skill &b) const { return a < b; }
+    };
+
+}
 #endif //MTM_EX2_SKILL_H

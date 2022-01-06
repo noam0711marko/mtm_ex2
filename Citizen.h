@@ -9,47 +9,62 @@ using std::string;
 using std::shared_ptr;
 using std::ostream;
 
-class Citizen {
-    int id;
-    string first_name;
-    string last_name;
-    int year_of_birth;
+namespace mtm {
+    class Citizen {
+        int id;
+        string first_name;
+        string last_name;
+        int year_of_birth;
 
-protected:
-    Citizen(int new_id, const string& new_first_name, const string& new_last_name, int new_year);
-    ~Citizen() = default;
-    Citizen(const Citizen&) = default;
-    Citizen &operator=(const Citizen&) = default;
+    protected:
+        Citizen(int new_id, const string &new_first_name, const string &new_last_name, int new_year);
 
-public:
-    int getId() const;
-    string getFirstName() const;
-    string getLastName() const;
-    int getBirthYear() const;
-    virtual int getSalary() const = 0;
+        ~Citizen() = default;
 
-    friend bool operator<(const Citizen&, const Citizen&);
-    friend bool operator==(const Citizen&, const Citizen&);
+        Citizen(const Citizen &) = default;
 
-    virtual ostream &printShort(ostream &) const = 0;
-    virtual ostream &printLong(ostream &) const = 0;
+        Citizen &operator=(const Citizen &) = default;
 
-    ostream &printFirstLastName(ostream &out) const;
-    ostream &printIdBirthYear(ostream &out) const;
+    public:
+        int getId() const;
 
-    virtual Citizen* clone() const =0;
-};
+        string getFirstName() const;
 
-bool operator<=(const Citizen&, const Citizen&);
-bool operator>(const Citizen&, const Citizen&);
-bool operator>=(const Citizen&, const Citizen&);
-bool operator!=(const Citizen&, const Citizen&);
+        string getLastName() const;
 
-struct cmp_citizens_shared_ptr{
-    bool operator() (const shared_ptr<Citizen>& a, const shared_ptr<Citizen>& b) const {return (*a)<(*b); }
-};
-struct cmp_citizens_ptr{
-    bool operator() (Citizen* a, Citizen* b) const {return (*a)<(*b); }
-};
+        int getBirthYear() const;
 
+        virtual int getSalary() const = 0;
+
+        friend bool operator<(const Citizen &, const Citizen &);
+
+        friend bool operator==(const Citizen &, const Citizen &);
+
+        virtual ostream &printShort(ostream &) const = 0;
+
+        virtual ostream &printLong(ostream &) const = 0;
+
+        ostream &printFirstLastName(ostream &out) const;
+
+        ostream &printIdBirthYear(ostream &out) const;
+
+        virtual Citizen *clone() const = 0;
+    };
+
+    bool operator<=(const Citizen &, const Citizen &);
+
+    bool operator>(const Citizen &, const Citizen &);
+
+    bool operator>=(const Citizen &, const Citizen &);
+
+    bool operator!=(const Citizen &, const Citizen &);
+
+    struct cmp_citizens_shared_ptr {
+        bool operator()(const shared_ptr<Citizen> &a, const shared_ptr<Citizen> &b) const { return (*a) < (*b); }
+    };
+
+    struct cmp_citizens_ptr {
+        bool operator()(Citizen *a, Citizen *b) const { return (*a) < (*b); }
+    };
+}
 #endif //MTM_EX2_CITIZEN_H

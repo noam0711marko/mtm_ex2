@@ -4,6 +4,8 @@
 
 using std::endl;
 
+using mtm::Employee;
+
 Employee::Employee(int new_id, const string &new_first_name, const string &new_last_name, int new_year) : Citizen(
         new_id, new_first_name, new_last_name, new_year), salary(0), score(0) {}
 
