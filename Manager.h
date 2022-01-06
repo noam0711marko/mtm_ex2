@@ -3,7 +3,7 @@
 
 #include "Employee.h"
 #include "Citizen.h"
-#include "Exception.h"
+#include "exception.h"
 
 class Manager: public Citizen{
     int salary;

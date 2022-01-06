@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-class Exception : public std::exception {
+class exception : public std::exception {
 public:
     class NegativePoints : public std::exception{};
 

@@ -17,10 +17,10 @@ int Employee::getScore() const {
 
 void Employee::learnSkill(const Skill& to_add) {
     if(hasSkill(to_add.getId())){
-        throw Exception::SkillAlreadyLearned();
+        throw exception::SkillAlreadyLearned();
     }
     if(to_add.getRequiredPoints()>score){
-        throw Exception::CanNotLearnSkill();
+        throw exception::CanNotLearnSkill();
     }
     skills.insert(to_add);
     /*setScore(to_add.getRequiredPoints());*/
@@ -34,7 +34,7 @@ void Employee::forgetSkill(const int &id_to_forget) {
             return;
         }
     }
-    throw Exception::DidNotLearnSkill();
+    throw exception::DidNotLearnSkill();
 }
 
 bool Employee::hasSkill(int skill_id) const{
