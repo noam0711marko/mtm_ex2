@@ -120,4 +120,3 @@ void Manager::setManagerNotHired() {
     workplace_id=NOT_HIRED;
 }
 
-//

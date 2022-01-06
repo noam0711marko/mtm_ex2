@@ -11,8 +11,10 @@ class City {
     set<Employee*, cmp_citizens_ptr> employees;
     set<Manager*, cmp_citizens_ptr> managers;
     set<shared_ptr<Citizen>, cmp_citizens_shared_ptr> citizens;
-    set<Workplace*, cmp_workplaces> workplaces;
-    set<Faculty<Condition>*, cmp_faculties> faculties;
+    //set<Workplace*, cmp_workplaces> workplaces;
+    //set<Faculty<Condition>*, cmp_faculties> faculties;
+    set<shared_ptr<Workplace>> workplaces;
+    set<shared_ptr<Faculty<Condition>>> faculties;
 
 public:
     explicit City(const string& new_name);
@@ -39,7 +41,8 @@ public:
             throw Exception::WorkplaceDoesNotExist();
         }
         Employee* employee= get(employee_id, employees);
-        Workplace* workplace= get(workplace_id, workplaces);
+        //Workplace* workplace= get(workplace_id, workplaces);
+        shared_ptr<Workplace> workplace= get(workplace_id, workplaces);
         workplace->template hireEmployee(hiringCondition, employee, manager_id);
     }
 
@@ -68,14 +71,16 @@ public:
     }
 
     template<class T, class CMP>
-    T* get(int id, set<T*, CMP> set ) const {
-        for(T* n : set){
+    T get(int id, set<T, CMP> set ) const {
+        for(T n : set){
             if(n->getId() == id){
                 return n;
             }
         }
         return nullptr;
     }
+
+
 /*
     template<class T, class CMP>
     shared_ptr<Citizen> addCitizen(int new_id, const string &new_first_name, const string &new_last_name, int new_year, set<T*, CMP> set ) const {
