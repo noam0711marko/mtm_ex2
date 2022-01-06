@@ -4,7 +4,8 @@ using std::string;
 using std::ostream;
 using std::endl;
 
-using namespace mtm;
+namespace mtm{
+
 
 Skill::Skill(int new_id, const string& new_name, int new_required_points):
         id(new_id), name(new_name), required_points_for_purchase(new_required_points) {
@@ -90,4 +91,5 @@ bool operator!=(const Skill& skill_1, const Skill& skill_2) {
         return false;
     }
     return true;
+}
 }
