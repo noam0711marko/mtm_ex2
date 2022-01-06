@@ -27,7 +27,8 @@ void City::createWorkplace(int new_id, const string &new_name, int new_employee_
     if(exists(new_id, workplaces)){
         throw Exception::WorkplaceAlreadyExists();
     }
-    Workplace* workplace=new Workplace(new_id, new_name, new_employee_salary, new_manager_salary);
+    //Workplace* workplace=new Workplace(new_id, new_name, new_employee_salary, new_manager_salary);
+    shared_ptr<Workplace> workplace(new Workplace(new_id, new_name, new_employee_salary, new_manager_salary));
     workplaces.insert(workplace);
 }
 
@@ -35,7 +36,8 @@ void City::addFaculty(int new_id, const Skill& new_skill, int new_points_from_fa
     if(exists(new_id, faculties)){
         throw Exception::FacultyAlreadyExists();
     }
-    Faculty<Condition>* faculty= new Faculty<Condition>(new_id, new_skill, new_points_from_faculty, new_condition);
+    //Faculty<Condition>* faculty= new Faculty<Condition>(new_id, new_skill, new_points_from_faculty, new_condition);
+    shared_ptr<Faculty<Condition>> faculty(new Faculty<Condition>(new_id, new_skill, new_points_from_faculty, new_condition));
     faculties.insert(faculty);
 }
 
@@ -46,7 +48,8 @@ void City::hireManagerAtWorkplace(int manager_id, int workplace_id) const{
     if(!exists(workplace_id, workplaces)){
         throw Exception::WorkplaceDoesNotExist();
     }
-    Workplace* workplace= get(workplace_id, workplaces);
+    //Workplace* workplace= get(workplace_id, workplaces);
+    shared_ptr<Workplace> workplace= get(workplace_id, workplaces);
     Manager* manager= get(manager_id, managers);
     workplace->hireManager(manager);
 }
@@ -62,7 +65,8 @@ void City::fireEmployeeAtWorkplace(int employee_id, int manager_id, int workplac
     if(!exists(workplace_id, workplaces)){
         throw Exception::WorkplaceDoesNotExist();
     }
-    Workplace* workplace= get(workplace_id, workplaces);
+    //Workplace* workplace= get(workplace_id, workplaces);
+    shared_ptr<Workplace> workplace= get(workplace_id, workplaces);
     workplace->fireEmployee(employee_id, manager_id);
 }
 
@@ -73,7 +77,8 @@ void City::fireManagerAtWorkplace(int manager_id, int workplace_id) const {
     if(!exists(workplace_id, workplaces)){
         throw Exception::WorkplaceDoesNotExist();
     }
-    Workplace* workplace= get(workplace_id, workplaces);
+    //Workplace* workplace= get(workplace_id, workplaces);
+    shared_ptr<Workplace> workplace= get(workplace_id, workplaces);
     workplace->fireManager(manager_id);
 }
 
@@ -95,7 +100,7 @@ bool City::isWorkingInTheSameWorkplace(int employee_1, int employee_2) const {
     if(!exists(employee_2, employees)){
         throw Exception::EmployeeDoesNotExist();
     }
-    for(const Workplace* n : workplaces){
+    for(const shared_ptr<Workplace>& n : workplaces){
         if(n->hasEmployeeInWorkplace(employee_1) && n->hasEmployeeInWorkplace(employee_2)){
             return true;
         }
@@ -119,7 +124,8 @@ void City::teachAtFaculty(int employee_id, int faculty_id) const{
     if(!exists(faculty_id, faculties)){
         throw Exception::FacultyDoesNotExist();
     }
-    Faculty<Condition>* faculty= get(faculty_id, faculties);
+    //Faculty<Condition>* faculty= get(faculty_id, faculties);
+    shared_ptr<Faculty<Condition>> faculty= get(faculty_id, faculties);
     Employee* employee= get(employee_id, employees);
     faculty->teach(employee);
 }
