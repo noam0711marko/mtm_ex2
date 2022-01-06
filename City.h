@@ -87,21 +87,23 @@ public:
         return sharedPtr;
     }
 */
+    template<class T, class CMP>
+    void copy_set(set<T*, CMP> copy_from, set<T*, CMP> copy_to ) {
+        for(T* n : copy_from){
+            copy_to.insert(new T(*n));
+        }
+    }
+
+    template<class T, class CMP>
+    void overwrite_set(set<T*, CMP> overwrite_from, set<T*, CMP> overwrite_to ) {
+        overwrite_to.clear();
+        for(T* n : overwrite_from){
+            overwrite_to.insert(new T(*n));
+        }
+    }
+
 };
 
-template<class T, class CMP>
-void copy_set(set<T*, CMP> copy_from, set<T*, CMP> copy_to ) {
-    for(T* n : copy_from){
-        copy_to.insert(n->clone());
-    }
-}
 
-template<class T, class CMP>
-void overwrite_set(set<T*, CMP> overwrite_from, set<T*, CMP> overwrite_to ) {
-    overwrite_to.clear();
-    for(T* n : overwrite_from){
-        overwrite_to.insert(n->clone());
-    }
-}
 
 #endif //MTM_EX2_CITY_H
