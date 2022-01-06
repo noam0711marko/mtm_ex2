@@ -3,7 +3,7 @@
 
 using std::endl;
 
-using mtm::Manager;
+using namespace mtm;
 
 Manager::Manager(int new_id, const string &new_first_name, const string &new_last_name, int new_birth_year)
     : Citizen(new_id, new_first_name, new_last_name, new_birth_year), salary(0), workplace_id(NOT_HIRED) {}

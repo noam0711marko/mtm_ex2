@@ -2,7 +2,7 @@
 
 using std::endl;
 
-using mtm::Workplace;
+using namespace mtm;
 
 Workplace::Workplace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary) :
     id(new_id), name(new_name), employee_salary(new_employee_salary), manager_salary(new_manager_salary){}

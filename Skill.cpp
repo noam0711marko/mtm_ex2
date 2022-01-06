@@ -4,7 +4,7 @@ using std::string;
 using std::ostream;
 using std::endl;
 
-using mtm::Skill;
+using namespace mtm;
 
 Skill::Skill(int new_id, const string& new_name, int new_required_points):
         id(new_id), name(new_name), required_points_for_purchase(new_required_points) {

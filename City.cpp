@@ -1,6 +1,6 @@
 #include "City.h"
 
-using mtm::City;
+using namespace mtm;
 
 City::City(const string& new_name) : name(new_name) {}
 

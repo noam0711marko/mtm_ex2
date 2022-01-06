@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-using std::endl;
+using namespace mtm;
 
 using mtm::Employee;
 
