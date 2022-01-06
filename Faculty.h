@@ -27,7 +27,7 @@ public:
     Skill getSkill() const ;
     int getAddedPoints() const;
 
-    friend bool operator<(const Faculty<Condition>&, const Faculty<Condition>&);
+    friend bool operator<(const Faculty&, const Faculty&);
 
     void teach(Employee* employee);
 

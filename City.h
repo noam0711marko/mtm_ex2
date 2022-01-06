@@ -58,8 +58,6 @@ public:
 
     ostream &printAllEmployeesWithSkill(ostream&, int skill_id) const;
 
-    bool employeeExists(int emp_id) const;
-
     template<class T, class CMP>
     bool exists(int id, set<T, CMP> set ) const {
         for(T n : set){
@@ -78,39 +76,6 @@ public:
             }
         }
         return nullptr;
-    }
-
-
-/*
-    template<class T, class CMP>
-    shared_ptr<Citizen> addCitizen(int new_id, const string &new_first_name, const string &new_last_name, int new_year, set<T*, CMP> set ) const {
-        T new_citizen(new_id, new_first_name, new_last_name, new_year);
-        shared_ptr<Citizen> sharedPtr(new T(new_citizen));
-        T* ptr=new T(new_citizen);
-        set.insert(ptr);
-
-        return sharedPtr;
-    }
-*/
-    template<class T, class CMP>
-    void copy_set(set<T*, CMP> copy_from, set<T*, CMP> copy_to ) {
-        for(T* n : copy_from){
-            copy_to.insert(new T(*n));
-        }
-    }
-
-    template<class T, class CMP>
-    void delete_set(set<T*, CMP> delete_set) {
-        for(T* m : delete_set){
-            //delete_set.erase(m);
-            delete(m);
-        }
-    }
-
-    template<class T, class CMP>
-    void overwrite_set(set<T*, CMP> overwrite_from, set<T*, CMP> overwrite_to ) {
-        delete_set(overwrite_to);
-        copy_set(overwrite_from, overwrite_to);
     }
 
 };
