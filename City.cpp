@@ -161,7 +161,7 @@ City::~City() {
     delete_set(managers);
     delete_set(workplaces);
     delete_set(faculties);
-    citizens.clear();
+    //citizens.clear();
 }
 
 

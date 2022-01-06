@@ -149,7 +149,7 @@ Manager &Manager::operator=(const Manager& manager) {
 Manager::~Manager() {
     for(Employee* m : employees){
         employees_ids.erase(m->getId());
-        employees.erase(m);
+        //employees.erase(m);
         delete(m);
     }
 }

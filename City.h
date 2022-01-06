@@ -97,7 +97,7 @@ public:
     template<class T, class CMP>
     void delete_set(set<T*, CMP> delete_set) {
         for(T* m : delete_set){
-            delete_set.erase(m);
+            //delete_set.erase(m);
             delete(m);
         }
     }

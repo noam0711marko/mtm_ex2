@@ -160,7 +160,7 @@ Workplace &Workplace::operator=(const Workplace& workplace) {
     employee_salary=workplace.employee_salary;
     manager_salary=workplace.manager_salary;
     for(Manager* m : managers){
-        managers.erase(m);
+        //managers.erase(m);
         delete(m);
     }
     for(Manager* m : managers){
