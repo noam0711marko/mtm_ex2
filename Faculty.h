@@ -27,7 +27,8 @@ public:
     Skill getSkill() const ;
     int getAddedPoints() const;
 
-    friend bool operator<(const Faculty&, const Faculty&);
+    template<class C>
+    friend bool operator<(const Faculty<C>&, const Faculty<C>&);
 
     void teach(Employee* employee);
 
@@ -65,8 +66,8 @@ void Faculty<Condition>::teach(Employee* employee) {
 }
 
 
-template<class Condition>
-bool operator<(const Faculty<Condition>& faculty_1, const Faculty<Condition>& faculty_2) {
+template<class C>
+bool operator<(const Faculty<C>& faculty_1, const Faculty<C>& faculty_2) {
     if(faculty_1.id < faculty_2.id){
         return true;
     }
