@@ -14,9 +14,9 @@ class Manager: public Citizen{
     static const int NOT_HIRED=-1;
 public:
     Manager(int new_id, const string &new_first_name, const string &new_last_name, int new_birth_year);
-    ~Manager();
-    Manager(const Manager&);
-    Manager &operator=(const Manager&);
+    ~Manager()=default;
+    Manager(const Manager&)=default;
+    Manager &operator=(const Manager&)=default;
 
     int getSalary() const override;
 

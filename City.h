@@ -16,9 +16,9 @@ class City {
 
 public:
     explicit City(const string& new_name);
-    ~City();
-    City(const City&);
-    City &operator=(const City&);
+    ~City()=default;
+    City(const City&)=default;
+    City &operator=(const City&)=default;
 
     void addEmployee(int new_id, const string& new_first_name, const string& new_last_name, int new_year);
     void addManager(int new_id, const string& new_first_name, const string& new_last_name, int new_year);
@@ -97,7 +97,7 @@ public:
     template<class T, class CMP>
     void delete_set(set<T*, CMP> delete_set) {
         for(T* m : delete_set){
-            delete_set.erase(m);
+            //delete_set.erase(m);
             delete(m);
         }
     }

@@ -124,46 +124,6 @@ void City::teachAtFaculty(int employee_id, int faculty_id) const{
     faculty->teach(employee);
 }
 
-City::City(const City& city) : name(city.name){
-    copy_set(city.employees, employees);
-    copy_set(city.managers, managers);
-    copy_set(city.workplaces, workplaces);
-    copy_set(city.faculties, faculties);
-    for(Employee* n: employees){
-        citizens.insert(shared_ptr<Citizen>(n));
-    }
-    for(Manager* m: managers){
-        citizens.insert(shared_ptr<Citizen>(m));
-    }
-}
-
-City &City::operator=(const City& city) {
-    if(this == &city){
-        return *this;
-    }
-    name=city.name;
-    overwrite_set(city.employees, employees);
-    overwrite_set(city.managers, managers);
-    overwrite_set(city.workplaces, workplaces);
-    overwrite_set(city.faculties, faculties);
-    citizens.clear();
-    for(Employee* n: employees){
-        citizens.insert(shared_ptr<Citizen>(n));
-    }
-    for(Manager* m: managers){
-        citizens.insert(shared_ptr<Citizen>(m));
-    }
-    return *this;
-}
-
-City::~City() {
-    delete_set(employees);
-    delete_set(managers);
-    delete_set(workplaces);
-    delete_set(faculties);
-    citizens.clear();
-}
-
 
 
 

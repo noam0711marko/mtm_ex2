@@ -136,34 +136,3 @@ bool Workplace::hasEmployeeInWorkplace(int employee_id) const{
     }
     return false;
 }
-
-Workplace::~Workplace() {
-    for(Manager* m : managers){
-        managers.erase(m);
-        delete(m);
-    }
-}
-
-Workplace::Workplace(const Workplace& workplace) : id(workplace.id), name(workplace.name),
-                        employee_salary(workplace.employee_salary), manager_salary(workplace.manager_salary) {
-    for(Manager* m : workplace.managers){
-        managers.insert(new Manager(*m));
-    }
-}
-
-Workplace &Workplace::operator=(const Workplace& workplace) {
-    if(this == &workplace){
-        return *this;
-    }
-    name=workplace.name;
-    id=workplace.id;
-    employee_salary=workplace.employee_salary;
-    manager_salary=workplace.manager_salary;
-    for(Manager* m : managers){
-        managers.erase(m);
-        delete(m);
-    }
-    for(Manager* m : managers){
-        managers.insert(new Manager(*m));
-    }
-}
