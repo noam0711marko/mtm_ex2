@@ -119,37 +119,3 @@ set<int> Manager::getEmployeesIdsSet() {
 void Manager::setManagerNotHired() {
     workplace_id=NOT_HIRED;
 }
-
-Manager::Manager(const Manager& manager) : Citizen(manager.getId(), manager.getFirstName(), manager.getLastName(),
-                                                   manager.getBirthYear()), salary(manager.salary),
-                                                   workplace_id(manager.workplace_id) {
-    for(Employee* n : manager.employees){
-        employees.insert(new Employee(*n));
-        employees_ids.insert(n->getId());
-    }
-}
-
-Manager &Manager::operator=(const Manager& manager) {
-    if(this == &manager){
-        return *this;
-    }
-    *this=manager;
-    for(Employee* m : employees){
-        employees_ids.erase(m->getId());
-        employees.erase(m);
-        delete(m);
-    }
-    for (Employee* n : manager.employees){
-        employees.insert(new Employee(*n));
-        employees_ids.insert(n->getId());
-    }
-    return *this;
-}
-
-Manager::~Manager() {
-    for(Employee* m : employees){
-        employees_ids.erase(m->getId());
-        //employees.erase(m);
-        delete(m);
-    }
-}
