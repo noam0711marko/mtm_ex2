@@ -21,7 +21,7 @@ using std::ofstream;
 using mtm::exceptions;
 using namespace mtm;
 
-const std::string FILE_PATH = "testOutputsBiadsy";
+const std::string FILE_PATH = "/Users/noammarko/Desktop/mtm_ex2/local";
 
 
 /*************************************************************************/
@@ -144,7 +144,7 @@ bool matchFiles(std::string out, std::string  exp) {
 
 #define OPEN_FILE(streamName, name) std::string fileName = name;\
 std::ofstream streamName(fileName, std::ofstream::trunc | std::ofstream::in);\
-if(!(streamName).is_open()){\
+if(!(streamName).is_open()){                                    \
 throw FileFailed();\
 }
 
@@ -422,7 +422,7 @@ bool testManager() {
     ASSERT_TEST(m6.getLastName() == m1.getLastName());
     out << "test_operator_=" << endl;
     m6.printLong(out);
-    Manager m77(m1);
+    Manager m77( m1);
     ASSERT_TEST(m77 == m1);
     ASSERT_TEST(m77.getBirthYear() == m1.getBirthYear());
     ASSERT_TEST(m77.getSalary() == m1.getSalary());

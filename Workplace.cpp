@@ -29,7 +29,7 @@ void Workplace::hireManager(Manager *manager_to_hire) {
     if(hasManager(manager_to_hire->getId())){
         throw exceptions::ManagerAlreadyHired();
     }
-    if(manager_to_hire->isManagerHired()){
+    if(manager_to_hire->isManagerHired() || manager_to_hire->getSalary()!=0){
         throw exceptions::CanNotHireManager();
     }
     managers.insert(manager_to_hire);
@@ -102,6 +102,9 @@ ostream &operator<<(ostream& os, const Workplace& workplace) {
     if (workplace.getNumOfManagers()!=0){
         workplace.printGroups(os);
     }
+    else{
+        os << endl;
+    }
     return os;
 }
 
@@ -140,4 +143,13 @@ bool Workplace::hasEmployeeInWorkplace(int employee_id) const{
     }
     return false;
 }
+
+
+Workplace::Workplace(const Workplace& wp) : name(wp.getName()), id(wp.getId()),
+        employee_salary(wp.getWorkersSalary()), manager_salary(wp.getManagersSalary()) {
+    for (Manager* m : wp.managers){
+        managers.insert(new Manager(*m));
+    }
+}
+
 }

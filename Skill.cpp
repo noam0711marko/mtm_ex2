@@ -45,9 +45,9 @@ namespace mtm {
     }
 
   Skill Skill::operator++(int) {
-      Skill res=*this;
-     ++res.required_points_for_purchase;
-      return *this;
+        Skill res=*this;
+        ++required_points_for_purchase;
+         return res;
   }
 
 Skill &Skill::operator+=(const int& points) {

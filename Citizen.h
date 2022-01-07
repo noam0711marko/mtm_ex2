@@ -23,7 +23,7 @@ namespace mtm {
 
         Citizen &operator=(const Citizen &) = default;
 
-        ~Citizen()=default;
+        virtual ~Citizen() = default;
 
         int getId() const;
 
