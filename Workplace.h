@@ -17,8 +17,8 @@ namespace mtm {
 
         ~Workplace() = default;
 
-        Workplace(const Workplace &) = default;
-        //Workplace(const Workplace &);
+        //Workplace(const Workplace &) = default;
+        Workplace(const Workplace &);
 
         Workplace &operator=(const Workplace &) = default;
 
