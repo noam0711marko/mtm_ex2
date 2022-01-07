@@ -47,6 +47,7 @@ namespace mtm {
 
         friend Skill operator+(const Skill& skill,const int & num);
 
+
     };
 
     bool operator<=(const Skill &, const Skill &);
