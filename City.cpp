@@ -1,8 +1,10 @@
 #include "City.h"
 
+#include <utility>
+
 using namespace mtm;
 
-City::City(const string& new_name) : name(new_name) {}
+City::City(string  new_name) : name(std::move(new_name)), employees(), managers(), citizens(), workplaces(), faculties() {}
 
 
 void City::addEmployee(int new_id, const string &new_first_name, const string &new_last_name, int new_year) {
@@ -25,7 +27,7 @@ void City::addManager(int new_id, const string &new_first_name, const string &ne
     citizens.insert(shared_ptr<Citizen>(ptr));
 }
 
-void City::createWorkPlace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary) {
+void City::createWorkplace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary) {
     if(exists(new_id, workplaces)){
         throw exceptions::WorkplaceAlreadyExists();
     }

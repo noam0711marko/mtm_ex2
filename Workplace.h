@@ -13,7 +13,7 @@ namespace mtm {
         set<Manager *, cmp_citizens_ptr> managers;
 
     public:
-        Workplace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary);
+        Workplace(int new_id, string new_name, int new_employee_salary, int new_manager_salary);
 
         ~Workplace() = default;
 
@@ -64,7 +64,7 @@ namespace mtm {
     };
 
     struct cmp_workplaces {
-        bool operator()(Workplace *a, Workplace *b) const {
+        bool operator()(const shared_ptr<Workplace>& a, const shared_ptr<Workplace>& b) const {
             return (a->getId() < b->getId());
         }
     };

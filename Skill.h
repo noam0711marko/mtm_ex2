@@ -39,12 +39,14 @@ namespace mtm {
 
         Skill& operator++() = delete;
 
-        Skill& operator++(int);
+        Skill operator++(int);
 
         Skill& operator+=(const int &);
 
+        friend Skill operator+(const int & num,const Skill& skill);
+
         friend Skill operator+(const Skill& skill,const int & num);
-        friend Skill operator+(const int& num,const Skill& skill);
+
 
     };
 

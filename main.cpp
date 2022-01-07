@@ -2,11 +2,12 @@
 #include "Skill.h"
 #include "Employee.h"
 #include "City.h"
-#include "vector"
-using namespace mtm;
+
 
 using std::cout;
 using std::endl;
+
+using namespace mtm;
 
 
 /*
