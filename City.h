@@ -8,8 +8,8 @@
 namespace mtm {
     class City {
         string name;
-        set<Employee *, cmp_citizens_ptr> employees;
-        set<Manager *, cmp_citizens_ptr> managers;
+        set<Employee*, cmp_citizens_ptr> employees;
+        set<Manager*, cmp_citizens_ptr> managers;
         set<shared_ptr<Citizen>, cmp_citizens_shared_ptr> citizens;
         //set<Workplace*, cmp_workplaces> workplaces;
         //set<Faculty<Condition>*, cmp_faculties> faculties;
@@ -21,7 +21,8 @@ namespace mtm {
 
         ~City() = default;
 
-        City(const City &) = default;
+        //City(const City &) = default;
+        City(const City &);
 
         City &operator=(const City &) = default;
 
@@ -85,7 +86,27 @@ namespace mtm {
             return nullptr;
         }
 
+        /*template<class T, class BASE_T, class CMP, class SP_CMP>
+        void copy_set_of_ptrs(set<T*, CMP> copy_from, set<T*, CMP> copy_to,
+                              set<shared_ptr<BASE_T>, SP_CMP> shared_ptr_set) const {
+            for (T* n: copy_from) {
+                T* ptr=new T(*n);
+                copy_to.insert(ptr);
+                shared_ptr_set.insert(shared_ptr<BASE_T>(ptr));
+            }
+        }
+
+        template<class T, class CMP>
+        void copy_set_of_shared_ptrs(set<shared_ptr<T>, CMP> copy_from, set<shared_ptr<T>, CMP> copy_to) const {
+            for (const shared_ptr<T>& n: copy_from) {
+                shared_ptr<T> sp(new T(*n));
+                copy_to.insert(sp);
+            }
+        }*/
+
     };
+
+
 
 
 }
