@@ -21,7 +21,7 @@ using std::ofstream;
 using mtm::exceptions;
 using namespace mtm;
 
-const std::string FILE_PATH = "testOutputsBiadsy";
+const std::string FILE_PATH = "/Users/noammarko/Desktop/mtm_ex2/local";
 
 
 /*************************************************************************/
@@ -144,7 +144,7 @@ bool matchFiles(std::string out, std::string  exp) {
 
 #define OPEN_FILE(streamName, name) std::string fileName = name;\
 std::ofstream streamName(fileName, std::ofstream::trunc | std::ofstream::in);\
-if(!(streamName).is_open()){\
+if(!(streamName).is_open()){                                    \
 throw FileFailed();\
 }
 
