@@ -68,8 +68,8 @@ namespace mtm {
         if (!(*condition)(employee)) {
             throw exceptions::EmployeeNotAccepted();
         }
-        employee->learnSkill(skill);
         employee->setScore(points_from_faculty);
+        employee->learnSkill(skill);
     }
 
 

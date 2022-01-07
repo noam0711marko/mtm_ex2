@@ -25,13 +25,13 @@ void Employee::learnSkill(const Skill& to_add) {
         throw exceptions::CanNotLearnSkill();
     }
     skills.insert(to_add);
-    /*setScore(to_add.getRequiredPoints());*/
+    //setScore(to_add.getRequiredPoints());
 }
 
 void Employee::forgetSkill(const int &id_to_forget) {
     for(const Skill &n : skills){
         if(n.getId()==id_to_forget){
-            /*setScore(-n->getRequiredPoints());*/ //remove skill points of removed skills (?)
+            //setScore(-n.getRequiredPoints()); //remove skill points of removed skills (?)
             skills.erase(n);
             return;
         }

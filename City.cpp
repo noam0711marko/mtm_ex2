@@ -89,7 +89,7 @@ void City::fireManagerAtWorkplace(int manager_id, int workplace_id) const {
 int City::getAllAboveSalary(ostream& os, int salary) const {
     int counter=0;
     for(const shared_ptr<Citizen>& n : citizens){
-        if(n->getSalary() > salary){
+        if(n->getSalary() >= salary){
             n->printShort(os);
             ++counter;
         }
@@ -132,6 +132,31 @@ void City::teachAtFaculty(int employee_id, int faculty_id) const{
     shared_ptr<Faculty<Condition>> faculty= get(faculty_id, faculties);
     Employee* employee= get(employee_id, employees);
     faculty->teach(employee);
+}
+
+City::City(const City& c) : name(c.name){
+    /*copy_set_of_ptrs(c.employees, employees, citizens);
+    copy_set_of_ptrs(c.managers, managers, citizens);
+    copy_set_of_shared_ptrs(c.workplaces, workplaces);
+    copy_set_of_shared_ptrs(c.faculties, faculties);*/
+    for (Employee* e : c.employees){
+        Employee* ptr=new Employee(*e);
+        employees.insert(ptr);
+        citizens.insert(shared_ptr<Citizen>(ptr));
+    }
+    for (Manager* m : c.managers){
+        Manager* ptr=new Manager(*m);
+        managers.insert(ptr);
+        citizens.insert(shared_ptr<Citizen>(ptr));
+    }
+    for (const shared_ptr<Workplace>& wp : c.workplaces){
+        shared_ptr<Workplace> workplace(new Workplace(*wp));
+        workplaces.insert(workplace);
+    }
+    for (const shared_ptr<Faculty<Condition>>& f : c.faculties){
+        shared_ptr<Faculty<Condition>> faculty(new Faculty<Condition>(*f));
+        faculties.insert(faculty);
+    }
 }
 
 
