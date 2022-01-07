@@ -67,7 +67,7 @@ ostream &Manager::printLong(ostream & os) const {
 }
 
 Manager *Manager::clone() const {
-    Manager* copy=new Manager(*this);
+    Manager* copy= new Manager(<#initializer#>, *this);
     return copy;
 }
 
@@ -124,6 +124,4 @@ set<int> Manager::getEmployeesIdsSet() {
 
 void Manager::setManagerNotHired() {
     workplace_id=NOT_HIRED;
-}
-
 }

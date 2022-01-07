@@ -18,7 +18,9 @@ namespace mtm {
 
         ~Manager() = default;
 
-        Manager(const Manager &) = default;
+        //Manager(const Manager &) = default;
+
+        Manager(const Citizen &unnamed, const Manager &m);
 
         Manager &operator=(const Manager &) = default;
 

@@ -22,7 +22,7 @@ void City::addManager(int new_id, const string &new_first_name, const string &ne
         throw exceptions::CitizenAlreadyExists();
     }
     Manager manager(new_id, new_first_name, new_last_name, new_year);
-    Manager* ptr=new Manager(manager);
+    Manager* ptr= new Manager(<#initializer#>, manager);
     managers.insert(ptr);
     citizens.insert(shared_ptr<Citizen>(ptr));
 }

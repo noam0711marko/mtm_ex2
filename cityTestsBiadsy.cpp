@@ -414,7 +414,7 @@ bool testManager() {
     ASSERT_TEST(m1.getSalary() == 0);
     m1.setSalary(55);
     ASSERT_TEST(m1.getSalary() == 55);
-    Manager m6 = m1;
+    Manager m6 = m1(<#initializer#>, <#initializer#>);
     ASSERT_TEST(m6 == m1);
     ASSERT_TEST(m6.getBirthYear() == m1.getBirthYear());
     ASSERT_TEST(m6.getSalary() == m1.getSalary());
@@ -422,7 +422,7 @@ bool testManager() {
     ASSERT_TEST(m6.getLastName() == m1.getLastName());
     out << "test_operator_=" << endl;
     m6.printLong(out);
-    Manager m77(m1);
+    Manager m77(<#initializer#>, m1);
     ASSERT_TEST(m77 == m1);
     ASSERT_TEST(m77.getBirthYear() == m1.getBirthYear());
     ASSERT_TEST(m77.getSalary() == m1.getSalary());
