@@ -17,7 +17,7 @@ namespace mtm {
         int required_points_for_purchase;
 
     public:
-        Skill(int new_id, const string &new_name, int new_required_points);
+        Skill(int new_id, string new_name, int new_required_points);
 
         ~Skill() = default;
 
@@ -37,15 +37,15 @@ namespace mtm {
 
         friend bool operator==(const Skill &, const Skill &);
 
-        int &operator++() = delete;
+        Skill& operator++() = delete;
 
-        Skill& operator++(int);
+        Skill operator++(int);
 
-        Skill & operator+=(const int &);
+        Skill& operator+=(const int &);
 
-         friend Skill operator+(const int & num,Skill& skill);
+        friend Skill operator+(const int & num,const Skill& skill);
 
-        friend Skill operator+(Skill& skill,const int & num);
+        friend Skill operator+(const Skill& skill,const int & num);
 
     };
 

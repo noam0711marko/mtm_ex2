@@ -13,11 +13,11 @@ namespace mtm {
         set<shared_ptr<Citizen>, cmp_citizens_shared_ptr> citizens;
         //set<Workplace*, cmp_workplaces> workplaces;
         //set<Faculty<Condition>*, cmp_faculties> faculties;
-        set<shared_ptr<Workplace>> workplaces;
-        set<shared_ptr<Faculty<Condition>>> faculties;
+        set<shared_ptr<Workplace>, cmp_workplaces> workplaces;
+        set<shared_ptr<Faculty<Condition>>, cmp_faculties> faculties;
 
     public:
-        explicit City(const string &new_name);
+        explicit City(string new_name);
 
         ~City() = default;
 
@@ -29,7 +29,7 @@ namespace mtm {
 
         void addManager(int new_id, const string &new_first_name, const string &new_last_name, int new_year);
 
-        void createWorkPlace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary);
+        void createWorkplace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary);
 
         void addFaculty(int new_id, const Skill &new_skill, int new_points_from_faculty, Condition *new_condition);
 

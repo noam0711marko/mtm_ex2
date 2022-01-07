@@ -22,7 +22,7 @@ namespace mtm {
     public:
         Employee(int new_id, const string &new_first_name, const string &new_last_name, int new_year);
 
-        ~Employee() override = default;
+        ~Employee() = default;
 
         Employee(const Employee &) = default;
 

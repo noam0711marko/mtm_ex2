@@ -1,5 +1,7 @@
 #include "Skill.h"
 
+#include <utility>
+
 using std::string;
 using std::ostream;
 using std::endl;
@@ -7,8 +9,8 @@ using std::endl;
 namespace mtm{
 
 
-Skill::Skill(int new_id, const string& new_name, int new_required_points):
-        id(new_id), name(new_name), required_points_for_purchase(new_required_points) {
+Skill::Skill(int new_id, string  new_name, int new_required_points):
+        id(new_id), name(std::move(new_name)), required_points_for_purchase(new_required_points) {
 }
 
 const int &Skill::getId() const {
@@ -42,7 +44,7 @@ bool operator==(const Skill& skill_1, const Skill& skill_2) {
     return false;
 }
 
-Skill& Skill::operator++(int) {
+Skill Skill::operator++(int) {
     Skill res=*this;
     ++res.required_points_for_purchase;
     return *this;
@@ -56,20 +58,22 @@ Skill &Skill::operator+=(const int& points) {
     return *this;
 }
 
-    Skill operator+(const int &num, Skill &skill) {
+    Skill operator+(const int &num, const Skill &skill) {
         if(num<0){
             throw exceptions::NegativePoints();
         }
-        skill.required_points_for_purchase+=num;
-        return skill;
+        Skill res=skill;
+        res+=num;
+        return res;
     }
 
-    Skill operator+(Skill &skill, const int &num) {
+    Skill operator+(const Skill &skill, const int &num) {
         if(num<0){
             throw exceptions::NegativePoints();
         }
-        skill.required_points_for_purchase+=num;
-        return skill;
+        Skill res=skill;
+        res+=num;
+        return res;
 }
 
     bool operator<=(const Skill& skill_1, const Skill& skill_2) {

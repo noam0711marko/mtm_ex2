@@ -1,11 +1,13 @@
 #include "Workplace.h"
 
+#include <utility>
+
 using std::endl;
 
 namespace mtm{
 
-Workplace::Workplace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary) :
-    id(new_id), name(new_name), employee_salary(new_employee_salary), manager_salary(new_manager_salary){}
+Workplace::Workplace(int new_id, string new_name, int new_employee_salary, int new_manager_salary) :
+    id(new_id), name(std::move(new_name)), employee_salary(new_employee_salary), manager_salary(new_manager_salary){}
 
 int Workplace::getId() const {
     return id;

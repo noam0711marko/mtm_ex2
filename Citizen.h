@@ -1,7 +1,7 @@
 #ifndef MTM_EX2_CITIZEN_H
 #define MTM_EX2_CITIZEN_H
 
-#include "memory"
+#include <memory>
 #include <iostream>
 #include "exceptions.h"
 
@@ -16,16 +16,14 @@ namespace mtm {
         string last_name;
         int year_of_birth;
 
-    protected:
-        Citizen(int new_id, const string &new_first_name, const string &new_last_name, int new_year);
+    public:
+        Citizen(int new_id, string new_first_name, string new_last_name, int new_year);
 
         Citizen(const Citizen &) = default;
 
         Citizen &operator=(const Citizen &) = default;
 
-    public:
-
-         virtual ~Citizen() = 0;
+        ~Citizen()=default;
 
         int getId() const;
 
