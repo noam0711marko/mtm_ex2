@@ -43,6 +43,10 @@ void Manager::removeEmployee(int id_to_remove) {
 }
 
 void Manager::setSalary(int to_add) {
+    if(salary+to_add<0){
+        salary=0;
+        return;
+    }
 salary+= to_add;
 }
 

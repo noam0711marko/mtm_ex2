@@ -49,10 +49,18 @@ bool Employee::hasSkill(int skill_id) const{
 }
 
 void Employee::setSalary(int add_to_salary) {
+    if(salary+add_to_salary<0){
+        salary=0;
+        return;
+    }
     salary+=add_to_salary;
 }
 
 void Employee::setScore(int add_to_score) {
+    if(score+add_to_score<0){
+        score=0;
+        return;
+    }
     score+=add_to_score;
 }
 
