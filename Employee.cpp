@@ -84,8 +84,8 @@ ostream &Employee::printSkills(ostream& os) const {
     return os;
 }
 
-Citizen* Employee::clone() const {
-    Citizen* copy=new Employee(*this);
+Employee* Employee::clone() const {
+    Employee* copy=new Employee(*this);
     return copy;
 }
 

@@ -42,35 +42,43 @@ bool operator==(const Skill& skill_1, const Skill& skill_2) {
     return false;
 }
 
-int Skill::operator++(int) {
+Skill& Skill::operator++(int) {
     Skill res=*this;
     ++res.required_points_for_purchase;
-    return res.required_points_for_purchase;
+    return *this;
 }
 
-int &Skill::operator+=(const int& points) {
+Skill &Skill::operator+=(const int& points) {
     if(points<0){
         throw exceptions::NegativePoints();
     }
     this->required_points_for_purchase+=points;
-    return this->required_points_for_purchase;
-}
-
-Skill Skill::operator+(const int& points) {
-    if(points<0){
-        throw exceptions::NegativePoints();
-    }
-    *this+=points;
     return *this;
 }
 
+    Skill operator+(const int &num, Skill &skill) {
+        if(num<0){
+            throw exceptions::NegativePoints();
+        }
+        skill.required_points_for_purchase+=num;
+        return skill;
+    }
 
-bool operator<=(const Skill& skill_1, const Skill& skill_2) {
+    Skill operator+(Skill &skill, const int &num) {
+        if(num<0){
+            throw exceptions::NegativePoints();
+        }
+        skill.required_points_for_purchase+=num;
+        return skill;
+}
+
+    bool operator<=(const Skill& skill_1, const Skill& skill_2) {
     if(skill_1<skill_2 || skill_1==skill_2){
         return true;
     }
     return false;
 }
+
 
 bool operator>(const Skill& skill_1, const Skill& skill_2) {
     if(skill_2<skill_1){

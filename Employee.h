@@ -22,7 +22,7 @@ namespace mtm {
     public:
         Employee(int new_id, const string &new_first_name, const string &new_last_name, int new_year);
 
-        ~Employee() = default;
+        ~Employee() override = default;
 
         Employee(const Employee &) = default;
 
@@ -50,7 +50,7 @@ namespace mtm {
 
         ostream &printSkills(ostream &) const;
 
-        Citizen *clone() const override;
+        Employee *clone() const override;
 
 
     };

@@ -62,8 +62,8 @@ ostream &Manager::printLong(ostream & os) const {
     return os;
 }
 
-Citizen *Manager::clone() const {
-    Citizen* copy=new Manager(*this);
+Manager *Manager::clone() const {
+    Manager* copy=new Manager(*this);
     return copy;
 }
 

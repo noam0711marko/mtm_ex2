@@ -44,7 +44,7 @@ namespace mtm {
         class WorkplaceAlreadyExists : public std::exception {
         };
 
-        class FacultyAlreadyExists : public std::exception {
+        class FacultyAlreadyExist : public std::exception {
         };
 
         class EmployeeDoesNotExist : public std::exception {

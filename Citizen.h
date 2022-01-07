@@ -19,13 +19,14 @@ namespace mtm {
     protected:
         Citizen(int new_id, const string &new_first_name, const string &new_last_name, int new_year);
 
-        ~Citizen() = default;
-
         Citizen(const Citizen &) = default;
 
         Citizen &operator=(const Citizen &) = default;
 
     public:
+
+         virtual ~Citizen() = 0;
+
         int getId() const;
 
         string getFirstName() const;

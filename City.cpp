@@ -25,7 +25,7 @@ void City::addManager(int new_id, const string &new_first_name, const string &ne
     citizens.insert(shared_ptr<Citizen>(ptr));
 }
 
-void City::createWorkplace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary) {
+void City::createWorkPlace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary) {
     if(exists(new_id, workplaces)){
         throw exceptions::WorkplaceAlreadyExists();
     }
@@ -36,7 +36,7 @@ void City::createWorkplace(int new_id, const string &new_name, int new_employee_
 
 void City::addFaculty(int new_id, const Skill& new_skill, int new_points_from_faculty, Condition* new_condition) {
     if(exists(new_id, faculties)){
-        throw exceptions::FacultyAlreadyExists();
+        throw exceptions::FacultyAlreadyExist();
     }
     //Faculty<Condition>* faculty= new Faculty<Condition>(new_id, new_skill, new_points_from_faculty, new_condition);
     shared_ptr<Faculty<Condition>> faculty(new Faculty<Condition>(new_id, new_skill, new_points_from_faculty, new_condition));
@@ -84,7 +84,7 @@ void City::fireManagerAtWorkplace(int manager_id, int workplace_id) const {
     workplace->fireManager(manager_id);
 }
 
-ostream &City::getAllAboveSalary(ostream& os, int salary) const {
+int City::getAllAboveSalary(ostream& os, int salary) const {
     int counter=0;
     for(const shared_ptr<Citizen>& n : citizens){
         if(n->getSalary() > salary){
@@ -92,7 +92,7 @@ ostream &City::getAllAboveSalary(ostream& os, int salary) const {
             ++counter;
         }
     }
-    return os;
+    return counter;
 }
 
 bool City::isWorkingInTheSameWorkplace(int employee_1, int employee_2) const {

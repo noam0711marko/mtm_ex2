@@ -29,7 +29,7 @@ namespace mtm {
 
         void addManager(int new_id, const string &new_first_name, const string &new_last_name, int new_year);
 
-        void createWorkplace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary);
+        void createWorkPlace(int new_id, const string &new_name, int new_employee_salary, int new_manager_salary);
 
         void addFaculty(int new_id, const Skill &new_skill, int new_points_from_faculty, Condition *new_condition);
 
@@ -50,7 +50,7 @@ namespace mtm {
             Employee *employee = get(employee_id, employees);
             //Workplace* workplace= get(workplace_id, workplaces);
             shared_ptr<Workplace> workplace = get(workplace_id, workplaces);
-            workplace->template hireEmployee(hiringCondition, employee, manager_id);
+            workplace->hireEmployee(hiringCondition, employee, manager_id);
         }
 
         void hireManagerAtWorkplace(int manager_id, int workplace_id) const;
@@ -59,7 +59,7 @@ namespace mtm {
 
         void fireManagerAtWorkplace(int manager_id, int workplace_id) const;
 
-        ostream &getAllAboveSalary(ostream &, int salary) const;
+        int getAllAboveSalary(ostream &, int salary) const;
 
         bool isWorkingInTheSameWorkplace(int employee_1, int employee_2) const;
 
