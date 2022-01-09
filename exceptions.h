@@ -3,62 +3,62 @@
 
 #include <iostream>
 namespace mtm {
-    class exceptions : public std::exception {
-    public:
-        class NegativePoints : public std::exception {
+    class exceptions : public std::exception{};
+
+        class NegativePoints : public exceptions {
         };
 
-        class SkillAlreadyLearned : public std::exception {
+        class SkillAlreadyLearned : public exceptions {
         };
 
-        class CanNotLearnSkill : public std::exception {
+        class CanNotLearnSkill : public exceptions {
         };
 
-        class DidNotLearnSkill : public std::exception {
+        class DidNotLearnSkill : public exceptions {
         };
 
-        class EmployeeAlreadyHired : public std::exception {
+        class EmployeeAlreadyHired : public exceptions {
         };
 
-        class EmployeeIsNotHired : public std::exception {
+        class EmployeeIsNotHired : public exceptions {
         };
 
-        class ManagerAlreadyHired : public std::exception {
+        class ManagerAlreadyHired : public exceptions {
         };
 
-        class CanNotHireManager : public std::exception {
+        class CanNotHireManager : public exceptions {
         };
 
-        class ManagerIsNotHired : public std::exception {
+        class ManagerIsNotHired : public exceptions {
         };
 
-        class EmployeeNotSelected : public std::exception {
+        class EmployeeNotSelected : public exceptions {
         };
 
-        class EmployeeNotAccepted : public std::exception {
+        class EmployeeNotAccepted : public exceptions {
         };
 
-        class CitizenAlreadyExists : public std::exception {
+        class CitizenAlreadyExists : public exceptions {
         };
 
-        class WorkplaceAlreadyExists : public std::exception {
+        class WorkplaceAlreadyExists : public exceptions {
         };
 
-        class FacultyAlreadyExist : public std::exception {
+        class FacultyAlreadyExist : public exceptions {
         };
 
-        class EmployeeDoesNotExist : public std::exception {
+        class EmployeeDoesNotExist : public exceptions {
         };
 
-        class ManagerDoesNotExist : public std::exception {
+        class ManagerDoesNotExist : public exceptions {
         };
 
-        class WorkplaceDoesNotExist : public std::exception {
+        class WorkplaceDoesNotExist : public exceptions {
         };
 
-        class FacultyDoesNotExist : public std::exception {
+        class FacultyDoesNotExist : public exceptions {
         };
     };
-}
+
 #endif //MTM_EX2_EXCEPTIONS_H
 
