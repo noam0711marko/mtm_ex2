@@ -159,7 +159,7 @@ void City::teachAtFaculty(int employee_id, int faculty_id) const {
         shared_ptr<Faculty<Condition>> faculty(new Faculty<Condition>(*f));
         faculties.insert(faculty);
     }*/
-}
+
 
 
 
