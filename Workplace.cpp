@@ -145,8 +145,8 @@ bool Workplace::hasEmployeeInWorkplace(int employee_id) const{
 }
 
 
-Workplace::Workplace(const Workplace& wp) : name(wp.getName()), id(wp.getId()),
-        employee_salary(wp.getWorkersSalary()), manager_salary(wp.getManagersSalary()) {
+Workplace::Workplace(const Workplace& wp) : name(wp.name), id(wp.id),
+        employee_salary(wp.employee_salary), manager_salary(wp.manager_salary) {
     for (Manager* m : wp.managers){
         managers.insert(new Manager(*m));
     }
