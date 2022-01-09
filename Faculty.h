@@ -82,7 +82,9 @@ namespace mtm {
     }
 
     struct cmp_faculties {
-        bool operator()(const shared_ptr<Faculty<Condition>>& a, const shared_ptr<Faculty<Condition>>& b) const { return (*a) < (*b); }
+        bool operator()(const shared_ptr<Faculty<Condition>> &a, const shared_ptr<Faculty<Condition>> &b) const {
+            return (*a) < (*b);
+        }
     };
 }
 #endif //MTM_EX2_FACULTY_H

@@ -37,15 +37,15 @@ namespace mtm {
 
         friend bool operator==(const Skill &, const Skill &);
 
-        Skill& operator++() = delete;
+        Skill &operator++() = delete;
 
         Skill operator++(int);
 
-        Skill& operator+=(const int &);
+        Skill &operator+=(const int &);
 
-        friend Skill operator+(const int & num,const Skill& skill);
+        friend Skill operator+(const int &num, const Skill &skill);
 
-        friend Skill operator+(const Skill& skill,const int & num);
+        friend Skill operator+(const Skill &skill, const int &num);
 
 
     };
@@ -57,7 +57,6 @@ namespace mtm {
     bool operator>=(const Skill &, const Skill &);
 
     bool operator!=(const Skill &, const Skill &);
-
 
 
     struct cmp_skills {

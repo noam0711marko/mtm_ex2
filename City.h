@@ -8,8 +8,8 @@
 namespace mtm {
     class City {
         string name;
-        set<Employee*, cmp_citizens_ptr> employees;
-        set<Manager*, cmp_citizens_ptr> managers;
+        set<Employee *, cmp_citizens_ptr> employees;
+        set<Manager *, cmp_citizens_ptr> managers;
         set<shared_ptr<Citizen>, cmp_citizens_shared_ptr> citizens;
         //set<Workplace*, cmp_workplaces> workplaces;
         //set<Faculty<Condition>*, cmp_faculties> faculties;
@@ -21,8 +21,8 @@ namespace mtm {
 
         ~City() = default;
 
-        //City(const City &) = default;
-        City(const City &);
+        City(const City &) = default;
+        //City(const City &);
 
         City &operator=(const City &) = default;
 
@@ -105,8 +105,6 @@ namespace mtm {
         }*/
 
     };
-
-
 
 
 }

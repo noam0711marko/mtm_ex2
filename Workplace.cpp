@@ -4,152 +4,151 @@
 
 using std::endl;
 
-namespace mtm{
+namespace mtm {
 
-Workplace::Workplace(int new_id, string new_name, int new_employee_salary, int new_manager_salary) :
-    id(new_id), name(std::move(new_name)), employee_salary(new_employee_salary), manager_salary(new_manager_salary){}
+    Workplace::Workplace(int new_id, string new_name, int new_employee_salary, int new_manager_salary) :
+            id(new_id), name(std::move(new_name)), employee_salary(new_employee_salary),
+            manager_salary(new_manager_salary) {}
 
-int Workplace::getId() const {
-    return id;
-}
-
-string Workplace::getName() const {
-    return name;
-}
-
-int Workplace::getWorkersSalary() const {
-    return employee_salary;
-}
-
-int Workplace::getManagersSalary() const {
-    return manager_salary;
-}
-
-void Workplace::hireManager(Manager *manager_to_hire) {
-    if(hasManager(manager_to_hire->getId())){
-        throw exceptions::ManagerAlreadyHired();
+    int Workplace::getId() const {
+        return id;
     }
-    if(manager_to_hire->isManagerHired() || manager_to_hire->getSalary()!=0){
-        throw exceptions::CanNotHireManager();
+
+    string Workplace::getName() const {
+        return name;
     }
-    managers.insert(manager_to_hire);
-    manager_to_hire->setSalary(manager_salary);
-    manager_to_hire->setManagerWorkplace(id);
 
-}
+    int Workplace::getWorkersSalary() const {
+        return employee_salary;
+    }
 
-bool Workplace::hasManager(int manager_id) const{
-    for(Manager* n : managers){
-        if(n->getId()==manager_id){
-            return true;
+    int Workplace::getManagersSalary() const {
+        return manager_salary;
+    }
+
+    void Workplace::hireManager(Manager *manager_to_hire) {
+        if (hasManager(manager_to_hire->getId())) {
+            throw exceptions::ManagerAlreadyHired();
         }
-    }
-    return false;
-}
-
-void Workplace::fireEmployee(int employee_id, int manager_id) const{
-    if(!hasManager(manager_id)){
-        throw exceptions::ManagerIsNotHired();
-    }
-    if(!hasEmployeeInManager(employee_id,manager_id)){
-        throw exceptions::EmployeeIsNotHired();
-    }
-    Employee* employee= getEmployeeFromManager(employee_id, manager_id);
-    Manager* manager= getManager(manager_id);
-    manager->removeEmployee(employee_id);
-    employee->setSalary(-employee_salary);
-}
-
-bool Workplace::hasEmployeeInManager(int employee_id, int manager_id) const {
-    for(Manager* n : managers){
-        if(n->getId()==manager_id){
-            return n->hasEmployee(employee_id);
+        if (manager_to_hire->isManagerHired() || manager_to_hire->getSalary() != 0) {
+            throw exceptions::CanNotHireManager();
         }
-    }
-    return false;
-}
+        managers.insert(manager_to_hire);
+        manager_to_hire->setSalary(manager_salary);
+        manager_to_hire->setManagerWorkplace(id);
 
-Manager* Workplace::getManager(int manager_id) const{
-    for(Manager* n : managers){
-        if(n->getId() == manager_id){
-            return n;
+    }
+
+    bool Workplace::hasManager(int manager_id) const {
+        for (Manager *n: managers) {
+            if (n->getId() == manager_id) {
+                return true;
+            }
         }
+        return false;
     }
-    return nullptr;
-}
 
-Employee* Workplace::getEmployeeFromManager(int employee_id, int manager_id) const{
-    Manager* manager=getManager(manager_id);
-    return manager->getEmployee(employee_id);
-}
-
-void Workplace::fireManager(int manager_id) {
-    if(!hasManager(manager_id)){
-        throw exceptions::ManagerIsNotHired();
-    }
-    Manager* manager = getManager(manager_id);
-    set<int> employees_under_manager = manager->getEmployeesIdsSet();
-    for (int n : employees_under_manager){
-        fireEmployee(n, manager_id);
-    }
-    manager->setManagerNotHired();
-    manager->setSalary(-manager_salary);
-    managers.erase(manager);
-}
-
-ostream &operator<<(ostream& os, const Workplace& workplace) {
-    os << "Workplace name - " << workplace.name;
-    if (workplace.getNumOfManagers()!=0){
-        workplace.printGroups(os);
-    }
-    else{
-        os << endl;
-    }
-    return os;
-}
-
-ostream &Workplace::printGroups(ostream& os) const {
-    os << " Groups:" <<endl;
-    for(Manager* n : managers){
-        os << "Manager ";
-        n->printLong(os);
-    }
-    return os;
-}
-
-int Workplace::getNumOfManagers() const {
-    return (int)managers.size();
-}
-
-void Workplace::hireEmployeeAction(Employee *employee, int manager_id) {
-    if(!hasManager(manager_id)){
-        throw exceptions::ManagerIsNotHired();
-    }
-    for(Manager* n : managers){
-        if(hasEmployeeInManager(employee->getId(), n->getId())){
-            throw exceptions::EmployeeAlreadyHired();
+    void Workplace::fireEmployee(int employee_id, int manager_id) const {
+        if (!hasManager(manager_id)) {
+            throw exceptions::ManagerIsNotHired();
         }
-    }
-    Manager* manager= getManager(manager_id);
-    manager->addEmployee(employee);
-    employee->setSalary(employee_salary);
-}
-
-bool Workplace::hasEmployeeInWorkplace(int employee_id) const{
-    for(Manager* n : managers){
-        if(hasEmployeeInManager(employee_id, n->getId())){
-            return true;
+        if (!hasEmployeeInManager(employee_id, manager_id)) {
+            throw exceptions::EmployeeIsNotHired();
         }
+        Employee *employee = getEmployeeFromManager(employee_id, manager_id);
+        Manager *manager = getManager(manager_id);
+        manager->removeEmployee(employee_id);
+        employee->setSalary(-employee_salary);
     }
-    return false;
-}
+
+    bool Workplace::hasEmployeeInManager(int employee_id, int manager_id) const {
+        for (Manager *n: managers) {
+            if (n->getId() == manager_id) {
+                return n->hasEmployee(employee_id);
+            }
+        }
+        return false;
+    }
+
+    Manager *Workplace::getManager(int manager_id) const {
+        for (Manager *n: managers) {
+            if (n->getId() == manager_id) {
+                return n;
+            }
+        }
+        return nullptr;
+    }
+
+    Employee *Workplace::getEmployeeFromManager(int employee_id, int manager_id) const {
+        Manager *manager = getManager(manager_id);
+        return manager->getEmployee(employee_id);
+    }
+
+    void Workplace::fireManager(int manager_id) {
+        if (!hasManager(manager_id)) {
+            throw exceptions::ManagerIsNotHired();
+        }
+        Manager *manager = getManager(manager_id);
+        set<int> employees_under_manager = manager->getEmployeesIdsSet();
+        for (int n: employees_under_manager) {
+            fireEmployee(n, manager_id);
+        }
+        manager->setManagerNotHired();
+        manager->setSalary(-manager_salary);
+        managers.erase(manager);
+    }
+
+    ostream &operator<<(ostream &os, const Workplace &workplace) {
+        os << "Workplace name - " << workplace.name;
+        if (workplace.getNumOfManagers() != 0) {
+            workplace.printGroups(os);
+        } else {
+            os << endl;
+        }
+        return os;
+    }
+
+    ostream &Workplace::printGroups(ostream &os) const {
+        os << " Groups:" << endl;
+        for (Manager *n: managers) {
+            os << "Manager ";
+            n->printLong(os);
+        }
+        return os;
+    }
+
+    int Workplace::getNumOfManagers() const {
+        return (int) managers.size();
+    }
+
+    void Workplace::hireEmployeeAction(Employee *employee, int manager_id) {
+        if (!hasManager(manager_id)) {
+            throw exceptions::ManagerIsNotHired();
+        }
+        for (Manager *n: managers) {
+            if (hasEmployeeInManager(employee->getId(), n->getId())) {
+                throw exceptions::EmployeeAlreadyHired();
+            }
+        }
+        Manager *manager = getManager(manager_id);
+        manager->addEmployee(employee);
+        employee->setSalary(employee_salary);
+    }
+
+    bool Workplace::hasEmployeeInWorkplace(int employee_id) const {
+        for (Manager *n: managers) {
+            if (hasEmployeeInManager(employee_id, n->getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
-Workplace::Workplace(const Workplace& wp) : name(wp.name), id(wp.id),
-        employee_salary(wp.employee_salary), manager_salary(wp.manager_salary) {
+/*Workplace::Workplace(const Workplace& wp) : name(wp.name), id(wp.id), employee_salary(wp.employee_salary), manager_salary(wp.manager_salary) {
     for (Manager* m : wp.managers){
         managers.insert(new Manager(*m));
     }
-}
+}*/
 
 }

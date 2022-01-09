@@ -17,8 +17,8 @@ namespace mtm {
 
         ~Workplace() = default;
 
-        //Workplace(const Workplace &) = default;
-        Workplace(const Workplace &);
+        Workplace(const Workplace &) = default;
+        //Workplace(const Workplace &);
 
         Workplace &operator=(const Workplace &) = default;
 
@@ -65,7 +65,7 @@ namespace mtm {
     };
 
     struct cmp_workplaces {
-        bool operator()(const shared_ptr<Workplace>& a, const shared_ptr<Workplace>& b) const {
+        bool operator()(const shared_ptr<Workplace> &a, const shared_ptr<Workplace> &b) const {
             return (a->getId() < b->getId());
         }
     };

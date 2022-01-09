@@ -44,37 +44,37 @@ namespace mtm {
         return false;
     }
 
-  Skill Skill::operator++(int) {
-        Skill res=*this;
+    Skill Skill::operator++(int) {
+        Skill res = *this;
         ++required_points_for_purchase;
-         return res;
-  }
-
-Skill &Skill::operator+=(const int& points) {
-    if(points<0){
-        throw exceptions::NegativePoints();
+        return res;
     }
-  required_points_for_purchase+=points;
-  return *this;
-}
 
-    Skill operator+(const int &num, const Skill &skill) {
-        if(num<0){
+    Skill &Skill::operator+=(const int &points) {
+        if (points < 0) {
             throw exceptions::NegativePoints();
         }
-        Skill res=skill;
-        res+=num;
+        required_points_for_purchase += points;
+        return *this;
+    }
+
+    Skill operator+(const int &num, const Skill &skill) {
+        if (num < 0) {
+            throw exceptions::NegativePoints();
+        }
+        Skill res = skill;
+        res += num;
         return res;
     }
 
     Skill operator+(const Skill &skill, const int &num) {
-        if(num<0){
+        if (num < 0) {
             throw exceptions::NegativePoints();
         }
-        Skill res=skill;
-        res+=num;
+        Skill res = skill;
+        res += num;
         return res;
-}
+    }
 
     bool operator<=(const Skill &skill_1, const Skill &skill_2) {
         if (skill_1 < skill_2 || skill_1 == skill_2) {

@@ -18,9 +18,9 @@ namespace mtm {
 
         ~Manager() override = default;
 
-        //Manager(const Manager &) = default;
+        Manager(const Manager &) = default;
 
-        Manager(const Manager &m);
+        //Manager(const Manager &m);
 
         Manager &operator=(const Manager &) = default;
 

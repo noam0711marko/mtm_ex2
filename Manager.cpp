@@ -126,9 +126,9 @@ namespace mtm {
         workplace_id = NOT_HIRED;
     }
 
-    Manager::Manager(const Manager &m) : Citizen(m), salary(m.salary), workplace_id(m.workplace_id) {
+    /*Manager::Manager(const Manager &m) : Citizen(m), salary(m.salary), workplace_id(m.workplace_id) {
         for (Employee* n : m.employees){
             employees.insert(new Employee(*n));
         }
-    }
+    }*/
 }

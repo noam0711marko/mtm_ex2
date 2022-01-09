@@ -2,6 +2,7 @@
 #define MTM_EX2_EXCEPTIONS_H
 
 #include <iostream>
+
 namespace mtm {
     class exceptions : public std::exception {
     public:
