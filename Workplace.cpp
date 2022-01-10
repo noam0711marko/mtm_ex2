@@ -34,6 +34,13 @@ namespace mtm {
             throw CanNotHireManager();
         }
         managers.insert(manager_to_hire);
+        set<int> employees_under_manager = manager_to_hire->getEmployeesIdsSet();
+        for (int n: employees_under_manager) {
+            Employee* emp= getEmployeeFromManager(n,manager_to_hire->getId());
+            if(!hiredForAnotherManager(emp, manager_to_hire->getId())){
+                emp->setSalary(employee_salary);
+            }
+        }
         manager_to_hire->setSalary(manager_salary);
         manager_to_hire->setManagerWorkplace(id);
 
@@ -58,7 +65,9 @@ namespace mtm {
         Employee *employee = getEmployeeFromManager(employee_id, manager_id);
         Manager *manager = getManager(manager_id);
         manager->removeEmployee(employee_id);
-        employee->setSalary(-employee_salary);
+        if(!hiredForAnotherManager(employee, manager_id)){
+            employee->setSalary(-employee_salary);
+        }
     }
 
     bool Workplace::hasEmployeeInManager(int employee_id, int manager_id) const {
@@ -91,7 +100,11 @@ namespace mtm {
         Manager *manager = getManager(manager_id);
         set<int> employees_under_manager = manager->getEmployeesIdsSet();
         for (int n: employees_under_manager) {
-            fireEmployee(n, manager_id);
+            Employee* emp= getEmployeeFromManager(n,manager_id);
+            if(!hiredForAnotherManager(emp, manager_id)){
+                emp->setSalary(-employee_salary);
+            }
+            //fireEmployee(n, manager_id);
         }
         manager->setManagerNotHired();
         manager->setSalary(-manager_salary);
@@ -126,18 +139,29 @@ namespace mtm {
             throw ManagerIsNotHired();
         }
         for (Manager *n: managers) {
-            if (hasEmployeeInManager(employee->getId(), n->getId())) {
+            if(n->getId()==manager_id && hasEmployeeInManager(employee->getId(), n->getId())){
                 throw EmployeeAlreadyHired();
             }
         }
         Manager *manager = getManager(manager_id);
         manager->addEmployee(employee);
-        employee->setSalary(employee_salary);
+        if(!hiredForAnotherManager(employee, manager_id)){
+            employee->setSalary(employee_salary);
+        }
     }
 
     bool Workplace::hasEmployeeInWorkplace(int employee_id) const {
         for (Manager *n: managers) {
             if (hasEmployeeInManager(employee_id, n->getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool Workplace::hiredForAnotherManager(Employee* employee, int manager_id) const{
+        for (Manager *n: managers) {
+            if(n->getId()!=manager_id && hasEmployeeInManager(employee->getId(), n->getId())){
                 return true;
             }
         }
