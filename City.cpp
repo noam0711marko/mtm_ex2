@@ -85,6 +85,11 @@ void City::fireManagerAtWorkplace(int manager_id, int workplace_id) const {
     }
     //Workplace* workplace= get(workplace_id, workplaces);
     shared_ptr<Workplace> workplace = get(workplace_id, workplaces);
+    Manager* manager= workplace->getManager(manager_id);
+    set<int> employees_under_manager = manager->getEmployeesIdsSet();
+    for (int n: employees_under_manager) {
+        workplace->fireEmployee(n, manager_id);
+    }
     workplace->fireManager(manager_id);
 }
 
@@ -159,14 +164,3 @@ void City::teachAtFaculty(int employee_id, int faculty_id) const {
         shared_ptr<Faculty<Condition>> faculty(new Faculty<Condition>(*f));
         faculties.insert(faculty);
     }*/
-
-
-
-
-
-
-
-
-
-
-

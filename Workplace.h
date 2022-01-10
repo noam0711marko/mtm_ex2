@@ -62,6 +62,8 @@ namespace mtm {
         Manager *getManager(int manager_id) const;
 
         Employee *getEmployeeFromManager(int employee_id, int manager_id) const;
+
+        bool hiredForAnotherManager(Employee* employee, int manager_id) const;
     };
 
     struct cmp_workplaces {
@@ -70,4 +72,5 @@ namespace mtm {
         }
     };
 }
+
 #endif //MTM_EX2_WORKPLACE_H

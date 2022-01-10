@@ -60,7 +60,6 @@ namespace mtm {
         printFirstLastName(os);
         printIdBirthYear(os);
         printSalary(os);
-        os << "Employees:" << endl;
         printEmployees(os);
 
         return os;
@@ -83,6 +82,13 @@ namespace mtm {
             temp->printShort(os);
             it++;
         }*/
+        if(!employees.empty()){
+            os << "Employees:" << endl;
+        }
+        else{
+            //os << endl;
+            return os;
+        }
         for (Employee *n: employees) {
             n->printShort(os);
         }
