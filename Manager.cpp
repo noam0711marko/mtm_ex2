@@ -83,7 +83,7 @@ namespace mtm {
             it++;
         }*/
         if(!employees.empty()){
-            os << "Employees:" << endl;
+            os << "Employees: " << endl;
         }
         else{
             //os << endl;
