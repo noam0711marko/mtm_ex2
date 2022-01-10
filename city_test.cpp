@@ -4,7 +4,7 @@
 #include "Workplace.h"
 #include "City.h"
 #include <assert.h>
-#include "exceptions.h"
+#include "Exception.h"
 using std::cout;
 using std::endl;
 using namespace mtm;

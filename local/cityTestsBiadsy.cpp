@@ -1,32 +1,33 @@
 //
 // Created by Muhammad Biadsy on 01/01/2022.
 //
-#include "City.h"
-#include "exceptions.h"
+#include "../City.h"
+#include "../Exception.h"
 #include <iostream>
+#include <memory>
 #include <fstream>
 #include <vector>
-#include "Skill.h"
-#include "Citizen.h"
-#include "Employee.h"
-#include "Manager.h"
-#include "Workplace.h"
-#include "Faculty.h"
+#include "../Skill.h"
+#include "../Citizen.h"
+#include "../Employee.h"
+#include "../Manager.h"
+#include "../Workplace.h"
+#include "../Faculty.h"
 
 
 using std::cout;
 using std::endl;
 using std::ifstream;
 using std::ofstream;
-using mtm::exceptions;
+using mtm::Exception;
 using namespace mtm;
 
 const std::string FILE_PATH = "/Users/noammarko/Desktop/mtm_ex2/local";
 
+/*************************************************************************/
+/*************************************************************************/
+/*************************************************************************/
 
-/*************************************************************************/
-/*************************************************************************/
-/*************************************************************************/
 /**
  * Evaluates expr and continues if expr is true.
  * If expr is false, ends the test by returning false and prints a detailed
@@ -34,46 +35,39 @@ const std::string FILE_PATH = "/Users/noammarko/Desktop/mtm_ex2/local";
  */
 #define ASSERT_TEST(expr)                                                         \
      do {                                                                          \
-         if (!(expr)) {                                                            \
-             printf("\nAssertion failed at %s:%d %s ", __FILE__, __LINE__, #expr); \
+         if (!(expr)) {   red();                                                         \
+             printf("\nAssertion failed at %s:%d %s ", __FILE__, __LINE__, #expr);\
+             red();\
             return false;                                                         \
         }                                                                         \
      } while (0)
 
 
-/*************************************************************************/
-/*************************************************************************/
-/*************************************************************************/
 
 static long NumTestsPassed = 0;
 
-static void red () {
-    printf("\033[1;91m");
-    fflush(stdout);
+static void red() {
+    system("Color C");
 }
 
 static void green() {
-    printf("\033[0;92m");
-    fflush(stdout);
+    system("Color A");
 }
 
 static void purple() {
-    printf("\033[0;95m");
-}
-
-static void yellow() {
-    printf("\033[0;93m");
-    fflush(stdout);
+    system("Color D");
 }
 
 static void blue() {
-    printf("\033[0;94m");
-    fflush(stdout);
+    system("Color B");
 }
 
-static void reset() {
-    printf("\033[0m");
-    fflush(stdout);
+static void yellow () {
+    system("Color E");
+}
+
+static void reset () {
+    system("Color E");
 }
 
 static void printIfSuccess(long num_tests)
@@ -90,29 +84,38 @@ static void printIfSuccess(long num_tests)
     {
         yellow();
     }
-
-    printf("####  Summary: Passed %ld out of %ld ####\n" ,NumTestsPassed, num_tests);
-    reset();
+    cout<< "####  Summary: Passed " << NumTestsPassed << " out of " << num_tests << " ####\n" << endl;
+    if (0 == NumTestsPassed)
+    {
+        red();
+    }
+    if (num_tests == NumTestsPassed)
+    {
+        green();
+    }
+    else
+    {
+        yellow();
+    }
 }
 
 
 #define RUN_COLORFULL_TEST(test, name, id)                  \
 do {                                 \
-purple();      printf("Running test# %ld %s ... ", id + 1, name);  reset(); \
-fflush(stdout); \
-if (test()) {                    \
-green();\
-printf("[OK]\n");            \
-reset();\
+if (test()) {                                               purple();\
+cout << "Running test# " << id+1  << " " << name << "..." << " [OK]\n"; \
+purple();\
 ++NumTestsPassed;   \
-} else {    \
+} else {                                                    red();\
+cout << "Running test# " << id+1  << " " << name << "..." << " [Failed]\n"; \
 red();\
-printf("[Failed]\n");        \
-reset();\
 }                                \
 } while (0)
 
 /*************************************************************************/
+/*************************************************************************/
+/*************************************************************************/
+
 
 class FileFailed {
 public:
@@ -144,7 +147,7 @@ bool matchFiles(std::string out, std::string  exp) {
 
 #define OPEN_FILE(streamName, name) std::string fileName = name;\
 std::ofstream streamName(fileName, std::ofstream::trunc | std::ofstream::in);\
-if(!(streamName).is_open()){                                    \
+if(!(streamName).is_open()){\
 throw FileFailed();\
 }
 
@@ -153,11 +156,9 @@ template <class T> void print(const T& x, ofstream& stream) { stream << x << end
 #define ASSERT(expr) ASSERT_TEST(expr)
 
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////*HERE START THE TESTS*//////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
-
 
 bool testSkill() {
     OPEN_FILE(out, FILE_PATH + std::string("/printed/testSkill.txt"));
@@ -192,7 +193,7 @@ bool testSkill() {
     {
         s1+=-1;
     }
-    catch (mtm::exceptions::NegativePoints&)
+    catch (mtm::NegativePoints&)
     {
         print("NegativePoints", out);
     }
@@ -200,7 +201,7 @@ bool testSkill() {
     {
         s1=s2+(-1);
     }
-    catch (mtm::exceptions::NegativePoints&)
+    catch (mtm::NegativePoints&)
     {
         print("NegativePoints", out);
     }
@@ -208,7 +209,7 @@ bool testSkill() {
     {
         s1=-2+s1;
     }
-    catch (mtm::exceptions::NegativePoints&)
+    catch (mtm::NegativePoints&)
     {
         print("NegativePoints", out);
     }
@@ -227,7 +228,7 @@ bool testSkill() {
     {
         s1 = s1 + 1 + -5;
     }
-    catch (mtm::exceptions::NegativePoints&)
+    catch (mtm::NegativePoints&)
     {
         out << "NegativePoints" << endl;
     }
@@ -235,7 +236,7 @@ bool testSkill() {
     {
         s1 = -1 + s1 + -5;
     }
-    catch (mtm::exceptions::NegativePoints&)
+    catch (mtm::NegativePoints&)
     {
         out << "NegativePoints" << endl;
     }
@@ -243,7 +244,7 @@ bool testSkill() {
     {
         s1 = -1 + s1 + 4;
     }
-    catch (mtm::exceptions::NegativePoints&)
+    catch (mtm::NegativePoints&)
     {
         out << "NegativePoints" << endl;
     }
@@ -251,7 +252,7 @@ bool testSkill() {
     {
         s1 = 7 + s1 + -5;
     }
-    catch (mtm::exceptions::NegativePoints&)
+    catch (mtm::NegativePoints&)
     {
         out << "NegativePoints" << endl;
     }
@@ -285,7 +286,7 @@ bool testEmployee() {
     {
         e1.learnSkill(s1);
     }
-    catch (mtm::exceptions::SkillAlreadyLearned&)
+    catch (mtm::SkillAlreadyLearned&)
     {
         print("SkillAlreadyLearned", out);
     }
@@ -294,7 +295,7 @@ bool testEmployee() {
     {
         e1.learnSkill(s5);
     }
-    catch (mtm::exceptions::CanNotLearnSkill&)
+    catch (mtm::CanNotLearnSkill&)
     {
         print("CanNotLearnSkill", out);
     }
@@ -302,7 +303,7 @@ bool testEmployee() {
     {
         e1.forgetSkill(5);
     }
-    catch (mtm::exceptions::DidNotLearnSkill&)
+    catch (mtm::DidNotLearnSkill&)
     {
         print("DidNotLearnSkill", out);
     }
@@ -361,6 +362,9 @@ bool testEmployee() {
     ASSERT_TEST(clone_e99->getLastName() == e99.getLastName());
     ASSERT_TEST(clone_e99->getBirthYear() == e99.getBirthYear());
     clone_e99->printLong(out);
+    e99.forgetSkill(s1.getId());
+    e99.forgetSkill(s2.getId());
+    e99.printLong(out);
     out.close();
     delete clone_e1;
     delete clone_e99;
@@ -377,7 +381,7 @@ bool testManager() {
     {
         m1.removeEmployee(1);
     }
-    catch (mtm::exceptions::EmployeeIsNotHired&)
+    catch (mtm::EmployeeIsNotHired&)
     {
         print("EmployeeIsNotHired", out);
     }
@@ -386,7 +390,7 @@ bool testManager() {
     {
         m1.addEmployee(&e2);
     }
-    catch (mtm::exceptions::EmployeeAlreadyHired&)
+    catch (mtm::EmployeeAlreadyHired&)
     {
         print("EmployeeAlreadyHired", out);
     }
@@ -405,7 +409,7 @@ bool testManager() {
     {
         m1.removeEmployee(1);
     }
-    catch (mtm::exceptions::EmployeeIsNotHired&)
+    catch (mtm::EmployeeIsNotHired&)
     {
         print("EmployeeIsNotHired_after_delete", out);
     }
@@ -414,37 +418,21 @@ bool testManager() {
     ASSERT_TEST(m1.getSalary() == 0);
     m1.setSalary(55);
     ASSERT_TEST(m1.getSalary() == 55);
-    Manager m6 = m1;
-    ASSERT_TEST(m6 == m1);
-    ASSERT_TEST(m6.getBirthYear() == m1.getBirthYear());
-    ASSERT_TEST(m6.getSalary() == m1.getSalary());
-    ASSERT_TEST(m6.getFirstName() == m1.getFirstName());
-    ASSERT_TEST(m6.getLastName() == m1.getLastName());
-    out << "test_operator_=" << endl;
-    m6.printLong(out);
-    Manager m77( m1);
-    ASSERT_TEST(m77 == m1);
-    ASSERT_TEST(m77.getBirthYear() == m1.getBirthYear());
-    ASSERT_TEST(m77.getSalary() == m1.getSalary());
-    ASSERT_TEST(m77.getFirstName() == m1.getFirstName());
-    ASSERT_TEST(m77.getLastName() == m1.getLastName());
-    out << "test_copy_constructor" << endl;
-    m77.printLong(out);
-    m77.addEmployee(&e1);
-    out << "test_copy_constructor_after_add_employee" << endl;
-    m77.printLong(out);
-    out << "check_if_the_original_is_not_modified" << endl;
+    out << "check_if_the_original_modified" << endl;
     m1.printLong(out);
-    Manager* clone_m6 = m6.clone();
-    ASSERT_TEST(*clone_m6 == m6);
-    ASSERT_TEST(clone_m6->getBirthYear() == m6.getBirthYear());
-    ASSERT_TEST(clone_m6->getSalary() == m6.getSalary());
-    ASSERT_TEST(clone_m6->getFirstName() == m6.getFirstName());
-    ASSERT_TEST(clone_m6->getLastName() == m6.getLastName());
-    clone_m6->printLong(out);
+    Manager* clone_m1_2 = m1.clone();
+    ASSERT_TEST(*clone_m1_2 == m1);
+    ASSERT_TEST(clone_m1_2->getBirthYear() == m1.getBirthYear());
+    ASSERT_TEST(clone_m1_2->getSalary() == m1.getSalary());
+    ASSERT_TEST(clone_m1_2->getFirstName() == m1.getFirstName());
+    ASSERT_TEST(clone_m1_2->getLastName() == m1.getLastName());
+    e2.setScore(50);
+    clone_m1_2->printLong(out);
+    m1.removeEmployee(2);
+    m1.printLong(out);
     out.close();
     delete clone_m1;
-    delete clone_m6;
+    delete clone_m1_2;
     ASSERT(matchFiles(fileName, FILE_PATH + std::string("/expected/testManager.txt")));
     return true;
 }
@@ -474,7 +462,7 @@ bool testWorkplace() {
     {
         Meta.hireEmployee(condition1,e1,1);
     }
-    catch (mtm::exceptions::ManagerIsNotHired&)
+    catch (mtm::ManagerIsNotHired&)
     {
         print("ManagerIsNotHired", out);
     }
@@ -484,7 +472,7 @@ bool testWorkplace() {
     {
         Meta.hireManager(m1);
     }
-    catch (mtm::exceptions::CanNotHireManager&)
+    catch (mtm::CanNotHireManager&)
     {
         print("CanNotHireManager", out);
     }
@@ -494,7 +482,7 @@ bool testWorkplace() {
     {
         Meta.hireManager(m1);
     }
-    catch (mtm::exceptions::ManagerAlreadyHired&)
+    catch (mtm::ManagerAlreadyHired&)
     {
         print("ManagerAlreadyHired", out);
     }
@@ -502,7 +490,7 @@ bool testWorkplace() {
     {
         Meta.hireEmployee(condition2,e1,1);
     }
-    catch (mtm::exceptions::EmployeeNotSelected&)
+    catch (mtm::EmployeeNotSelected&)
     {
         print("EmployeeNotSelected", out);
     }
@@ -510,7 +498,7 @@ bool testWorkplace() {
     {
         Meta.fireEmployee(e1->getId(),m1->getId());
     }
-    catch (mtm::exceptions::EmployeeIsNotHired&)
+    catch (mtm::EmployeeIsNotHired&)
     {
         print("EmployeeIsNotHired", out);
     }
@@ -519,7 +507,7 @@ bool testWorkplace() {
     {
         Meta.hireEmployee(condition1,e1,m1->getId());
     }
-    catch (mtm::exceptions::EmployeeAlreadyHired&)
+    catch (mtm::EmployeeAlreadyHired&)
     {
         print("EmployeeAlreadyHired", out);
     }
@@ -530,29 +518,9 @@ bool testWorkplace() {
     e3->setScore(20);
     Meta.hireManager(m2);
     Meta.hireEmployee(condition2,e3,6);
-    Workplace copy_meta = Meta;
-    Workplace copy_constructor_meta(Meta);
-    ASSERT_TEST(copy_meta.getId() == Meta.getId());
-    ASSERT_TEST(copy_meta.getName() == Meta.getName());
-    ASSERT_TEST(copy_meta.getWorkersSalary() == Meta.getWorkersSalary());
-    ASSERT_TEST(copy_meta.getManagersSalary() == Meta.getManagersSalary());
-    ASSERT_TEST(copy_constructor_meta.getId() == Meta.getId());
-    ASSERT_TEST(copy_constructor_meta.getName() == Meta.getName());
-    ASSERT_TEST(copy_constructor_meta.getWorkersSalary() == Meta.getWorkersSalary());
-    ASSERT_TEST(copy_constructor_meta.getManagersSalary() == Meta.getManagersSalary());
     print("print_with_two_groups",out);
     print(Meta, out);
-    print("print_with_two_groups_operator_=",out);
-    print(copy_meta, out);
-    print("print_with_two_groups_copy_constructor",out);
-    print(copy_constructor_meta, out);
-    copy_meta.fireManager(m1->getId());
-    copy_constructor_meta.fireManager(m2->getId());
-    print("print_with_two_groups_operator_=_after_delete_group_of_Robert_Stark",out);
-    print(copy_meta, out);
-    print("print_with_two_groups_copy_constructor_after_delete_group_of_Omar_Sharafy",out);
-    print(copy_constructor_meta, out);
-    print("print_with_two_groups_check_if_the_original_is_not_modified",out);
+    print("print_with_two_groups_check_if_the_original_modified",out);
     print(Meta, out);
     Meta.fireManager(m1->getId());
     print("print_after_delete_group_of_Robert_Stark",out);
@@ -564,7 +532,7 @@ bool testWorkplace() {
     {
         Meta.fireEmployee(e1->getId(),m1->getId());
     }
-    catch (mtm::exceptions::ManagerIsNotHired&)
+    catch (mtm::ManagerIsNotHired&)
     {
         print("ManagerIsNotHired_after_delete_manager" , out);
     }
@@ -572,14 +540,20 @@ bool testWorkplace() {
     {
         Meta.fireManager(m1->getId());
     }
-    catch (mtm::exceptions::ManagerIsNotHired&)
+    catch (mtm::ManagerIsNotHired&)
     {
         print("ManagerIsNotHired" , out);
     }
+    Meta.hireManager(m2);
+    print("print_after_delete_all_groups_and_add_second_group_again",out);
+    print(Meta, out);
+    Meta.hireManager(m1);
+    print("print_after_delete_all_groups_and_add_two_groups_again",out);
+    print(Meta, out);
     out.close();
     delete e1;
     delete e2;
-	delete e3;
+    delete e3;
     delete m1;
     delete m2;
     ASSERT(matchFiles(fileName, FILE_PATH + std::string("/expected/testWorkplace.txt")));
@@ -648,7 +622,7 @@ bool testFaculty()
     {
         faculty4.teach(&e3);
     }
-    catch (mtm::exceptions::EmployeeNotAccepted&)
+    catch (mtm::EmployeeNotAccepted&)
     {
         print("EmployeeNotAccepted" , out);
     }
@@ -657,7 +631,7 @@ bool testFaculty()
     faculty3.teach(&e3);
     print("Print_Long_after_skill_teach" , out);
     e3.printLong(out);
-    Skill skill9(800,"TEST_FACULTY_WITHOUT_CLASS_Condition",80);
+    Skill skill9(800,"TEST_FACULTY_WITHOUT_CLASS_Condition",5);
     Condition3 condition3;
     Faculty<Condition3> faculty5(3,skill9,80,&condition3);
     e3.setSalary(9);
@@ -718,8 +692,8 @@ bool testCity()
     Skill skill1(1,"Programming with c++",0);
     Skill skill2(2,"Programming with c",10);
     city.addEmployee(11, "John", "Williams", 2002);
-    city.addEmployee(12, "Alex", "Martinez", 2000);
     city.addEmployee(13, "Lionel", "Smith", 2000);
+    city.addEmployee(12, "Alex", "Martinez", 2000);
     city.addManager(104,"Mohamad","Masarwa",1998);
     FacultyCondition1 fc1;
     FacultyCondition3 fc3;
@@ -739,6 +713,7 @@ bool testCity()
     ASSERT_TEST(city.isWorkingInTheSameWorkplace(11,12));
     ASSERT_TEST(city.isWorkingInTheSameWorkplace(12,13));
     city.fireEmployeeAtWorkplace(12,104,10001);
+    ASSERT_TEST(!city.isWorkingInTheSameWorkplace(12,11));
     print("printAllAboveSalary output: " ,out);
     city.getAllAboveSalary(out,1000);
     print("printAllEmployeesWithSkill output",out);
@@ -750,10 +725,34 @@ bool testCity()
     city.printAllEmployeesWithSkill(out, 1);
     try
     {
+        city.isWorkingInTheSameWorkplace(80,90);
+    }
+    catch (mtm::EmployeeDoesNotExist&)
+    {
+        out << "EmployeeDoesNotExist" << endl;
+    }
+    try
+    {
+        city.isWorkingInTheSameWorkplace(11,90);
+    }
+    catch (mtm::EmployeeDoesNotExist&)
+    {
+        out << "EmployeeDoesNotExist" << endl;
+    }
+    try
+    {
+        city.isWorkingInTheSameWorkplace(80,11);
+    }
+    catch (mtm::EmployeeDoesNotExist&)
+    {
+        out << "EmployeeDoesNotExist" << endl;
+    }
+    try
+    {
         city.addEmployee(11,"can_not_add","lets_try",0);
 
     }
-    catch (mtm::exceptions::CitizenAlreadyExists&)
+    catch (mtm::CitizenAlreadyExists&)
     {
         out << "CitizenAlreadyExists" << endl;
     }
@@ -761,7 +760,7 @@ bool testCity()
     {
         city.addManager(104,"can_not_add","lets_try",10000);
     }
-    catch (mtm::exceptions::CitizenAlreadyExists&)
+    catch (mtm::CitizenAlreadyExists&)
     {
         out << "CitizenAlreadyExists" << endl;
     }
@@ -769,7 +768,7 @@ bool testCity()
     {
         city.addFaculty(1001, skill1, 10, &fc1);
     }
-    catch (mtm::exceptions::FacultyAlreadyExist&)
+    catch (mtm::FacultyAlreadyExists&)
     {
         out << "FacultyAlreadyExists" << endl;
     }
@@ -777,7 +776,7 @@ bool testCity()
     {
         city.createWorkplace(10001, "Meta", 10000, 20000);
     }
-    catch (mtm::exceptions::WorkplaceAlreadyExists&)
+    catch (mtm::WorkplaceAlreadyExists&)
     {
         out << "WorkplaceAlreadyExists" << endl;
     }
@@ -786,7 +785,7 @@ bool testCity()
     {
         city.teachAtFaculty(900,1001);
     }
-    catch (mtm::exceptions::EmployeeDoesNotExist&)
+    catch (mtm::EmployeeDoesNotExist&)
     {
         out << "EmployeeDoesNotExist" << endl;
     }
@@ -794,7 +793,7 @@ bool testCity()
     {
         city.teachAtFaculty(11,80);
     }
-    catch (mtm::exceptions::FacultyDoesNotExist&)
+    catch (mtm::FacultyDoesNotExist&)
     {
         out << "FacultyDoesNotExist" << endl;
     }
@@ -802,7 +801,7 @@ bool testCity()
     {
         city.hireEmployeeAtWorkplace(hiringCondition,11,104,5000);
     }
-    catch (mtm::exceptions::WorkplaceDoesNotExist&)
+    catch (mtm::WorkplaceDoesNotExist&)
     {
         out << "WorkplaceDoesNotExist" << endl;
     }
@@ -810,7 +809,7 @@ bool testCity()
     {
         city.hireEmployeeAtWorkplace(hiringCondition,11,700,10001);
     }
-    catch (mtm::exceptions::ManagerDoesNotExist&)
+    catch (mtm::ManagerDoesNotExist&)
     {
      out << "ManagerDoesNotExist" << endl;
     }
@@ -818,7 +817,7 @@ bool testCity()
     {
         city.hireEmployeeAtWorkplace(hiringCondition,60000,104,10001);
     }
-    catch (mtm::exceptions::EmployeeDoesNotExist&)
+    catch (mtm::EmployeeDoesNotExist&)
     {
         out << "EmployeeDoesNotExist" << endl;
     }
@@ -826,7 +825,7 @@ bool testCity()
     {
         city.hireManagerAtWorkplace(104,12000);
     }
-    catch (mtm::exceptions::WorkplaceDoesNotExist&)
+    catch (mtm::WorkplaceDoesNotExist&)
     {
         out << "WorkplaceDoesNotExist" << endl;
     }
@@ -834,7 +833,7 @@ bool testCity()
     {
         city.hireManagerAtWorkplace(7000,10001);
     }
-    catch (mtm::exceptions::ManagerDoesNotExist&)
+    catch (mtm::ManagerDoesNotExist&)
     {
         out << "ManagerDoesNotExist" << endl;
     }
@@ -842,7 +841,7 @@ bool testCity()
     {
         city.fireEmployeeAtWorkplace(90,104,10001);
     }
-    catch (mtm::exceptions::EmployeeDoesNotExist&)
+    catch (mtm::EmployeeDoesNotExist&)
     {
         out << "EmployeeDoesNotExist" << endl;
     }
@@ -850,7 +849,7 @@ bool testCity()
     {
     city.fireEmployeeAtWorkplace(11,200,10001);
     }
-    catch (mtm::exceptions::ManagerDoesNotExist&)
+    catch (mtm::ManagerDoesNotExist&)
     {
         out << "ManagerDoesNotExist" << endl;
     }
@@ -858,7 +857,7 @@ bool testCity()
     {
         city.fireEmployeeAtWorkplace(11,104,2000000);
     }
-    catch (mtm::exceptions::WorkplaceDoesNotExist&)
+    catch (mtm::WorkplaceDoesNotExist&)
     {
         out << "WorkplaceDoesNotExist" << endl;
     }
@@ -866,7 +865,7 @@ bool testCity()
     {
         city.fireManagerAtWorkplace(111,10001);
     }
-    catch (mtm::exceptions::ManagerDoesNotExist&)
+    catch (mtm::ManagerDoesNotExist&)
     {
         out << "ManagerDoesNotExist" << endl;
     }
@@ -874,7 +873,7 @@ bool testCity()
     {
         city.fireManagerAtWorkplace(104,1233);
     }
-    catch (mtm::exceptions::WorkplaceDoesNotExist&)
+    catch (mtm::WorkplaceDoesNotExist&)
     {
         out << "WorkplaceDoesNotExist" << endl;
     }
@@ -882,57 +881,191 @@ bool testCity()
     {
         city.addEmployee(104,"citizen_already_exists","chack",1999);
     }
-    catch (mtm::exceptions::CitizenAlreadyExists&)
+    catch (mtm::CitizenAlreadyExists&)
     {
         out << "CitizenAlreadyExists" << endl;
     }
+    try
+    {
+        city.addManager(11,"citizen_already_exists","chack",1999);
+    }
+    catch (mtm::CitizenAlreadyExists&)
+    {
+        out << "CitizenAlreadyExists" << endl;
+    }
+    HiringCondition1 hiringCondition1;
+    try
+    {
+        city.hireEmployeeAtWorkplace(hiringCondition1,104,10,10001);
+    }
+    catch (mtm::EmployeeDoesNotExist&)
+    {
+        out << "EmployeeDoesNotExist" << endl;
+    }
+    try
+    {
+        city.hireEmployeeAtWorkplace(hiringCondition1,11,12,10001);
+    }
+    catch (mtm::ManagerDoesNotExist&)
+    {
+        out << "ManagerDoesNotExist" << endl;
+    }
+    try
+    {
+        city.hireEmployeeAtWorkplace(hiringCondition1,11,104,1000);
+    }
+    catch (mtm::WorkplaceDoesNotExist&)
+    {
+        out << "WorkplaceDoesNotExist" << endl;
+    }
+    try
+    {
+        city.teachAtFaculty(104,1001);
+    }
+    catch (mtm::EmployeeDoesNotExist&)
+    {
+        out << "EmployeeDoesNotExist" << endl;
+    }
     ASSERT_TEST(city.getAllAboveSalary(out,0) == 4);
     ASSERT_TEST(city.getAllAboveSalary(out,5000) == 0);
-    City copy_city = city;
-    out << "test operator = getAllAboveSalary" << endl;
-    ASSERT_TEST(copy_city.getAllAboveSalary(out,0) == city.getAllAboveSalary(out,0));
-    out << "test operator = printAllEmployeesWithSkill" << endl;
-    city.printAllEmployeesWithSkill(out,1);
-    copy_city.printAllEmployeesWithSkill(out,1);
-    copy_city.hireManagerAtWorkplace(104,10001);
-    out << "test operator = getAllAboveSalary check if the original does not modified" << endl;
-    ASSERT_TEST(copy_city.getAllAboveSalary(out,10000)-1 == city.getAllAboveSalary(out,10000));
-    copy_city.addEmployee(79,"Adi","Williams",1790);
-    HiringCondition1 hiringCondition1;
-    copy_city.hireEmployeeAtWorkplace(hiringCondition1,79,104,10001);
-    ASSERT_TEST(copy_city.getAllAboveSalary(out,10000)-2 == city.getAllAboveSalary(out,10000));
-    Skill skill3(88,"run_c++_tests",10);
-    FacultyCondition5 facultyCondition5;
-    copy_city.addFaculty(1003,skill3,20,&facultyCondition5);
-    copy_city.teachAtFaculty(79,1003);
-    out << "test operator = printAllEmployeesWithSkill check if the original does not modified" << endl;
-    city.printAllEmployeesWithSkill(out,88);
-    copy_city.printAllEmployeesWithSkill(out,88);
-    City copy_constructor_city(city);
-    out << "test copy constructor getAllAboveSalary" << endl;
-    ASSERT_TEST(copy_constructor_city.getAllAboveSalary(out,0) == city.getAllAboveSalary(out,0));
-    out << "test copy constructor printAllEmployeesWithSkill" << endl;
-    city.printAllEmployeesWithSkill(out,1);
-    copy_constructor_city.printAllEmployeesWithSkill(out,1);
-    copy_constructor_city.hireManagerAtWorkplace(104,10001);
-    out << "test copy constructor getAllAboveSalary check if the original does not modified" << endl;
-    ASSERT_TEST(copy_constructor_city.getAllAboveSalary(out,10000)-1 == city.getAllAboveSalary(out,10000));
-    copy_constructor_city.addEmployee(400,"Fahd","Williams",9999);
-    copy_constructor_city.hireEmployeeAtWorkplace(hiringCondition1,400,104,10001);
-    ASSERT_TEST(copy_constructor_city.getAllAboveSalary(out,10000)-2 == city.getAllAboveSalary(out,10000));
-    copy_constructor_city.addFaculty(1003,skill3,20,&facultyCondition5);
-    copy_constructor_city.teachAtFaculty(400,1003);
-    out << "test copy constructor printAllEmployeesWithSkill check if the original does not modified" << endl;
-    city.printAllEmployeesWithSkill(out,88);
-    copy_constructor_city.printAllEmployeesWithSkill(out,88);
-    copy_constructor_city.addManager(7001,"Muhammad","Biadsy",5000);
-    out << "test copy constructor getAllAboveSalary check if the original does not modified added another manager" << endl;
-    ASSERT_TEST(copy_constructor_city.getAllAboveSalary(out,0)-2 == city.getAllAboveSalary(out,0));
+    city.hireManagerAtWorkplace(104,10001);
+    ASSERT_TEST(city.getAllAboveSalary(out,5000) == 1);
+    city.fireManagerAtWorkplace(104,10001);
+    city.addManager(888,"moshe","moshe",1999);
+    city.hireManagerAtWorkplace(888,10001);
+    HiringCondition1 hiringCondition2;
+    city.hireEmployeeAtWorkplace(hiringCondition2,12,888,10001);
+    city.hireEmployeeAtWorkplace(hiringCondition2,13,888,10001);
+    city.hireEmployeeAtWorkplace(hiringCondition2,11,888,10001);
+    city.hireManagerAtWorkplace(104,10001);
+    city.hireEmployeeAtWorkplace(hiringCondition, 11, 104, 10001);
+    city.hireEmployeeAtWorkplace(hiringCondition, 12, 104, 10001);
+    city.hireEmployeeAtWorkplace(hiringCondition, 13, 104, 10001);
+    city.fireManagerAtWorkplace(104,10001);
+    city.hireManagerAtWorkplace(104,10001);
+    ASSERT_TEST(city.getAllAboveSalary(out,5000) == 5);
     out.close();
     ASSERT_TEST(matchFiles(fileName, FILE_PATH + std::string("/expected/testCity.txt")));
     return true;
 }
 
+bool testEmployeeSegel()
+{
+    OPEN_FILE(out, FILE_PATH + std::string("/printed/testEmployeeSegel.txt"));
+    Employee e1(1, "John", "Williams", 2002);
+    out << "Short Print" << endl;
+    e1.printShort(out);
+    out << "Long Print" << endl;
+    e1.printLong(out);
+    out << "----------" << endl;
+    Skill s1(1,"C++",0);
+    Skill s2(2, "Java", 0);
+    e1.learnSkill(s1);
+    e1.learnSkill(s2);
+    out << "Short Print" << endl;
+    e1.printShort(out);
+    out << "Long Print" << endl;
+    e1.printLong(out);
+    ASSERT_TEST(matchFiles(fileName, FILE_PATH + std::string("/expected/testEmployeeSegel.txt")));
+    return true;
+}
+
+bool testManagerSegel()
+{
+    OPEN_FILE(out, FILE_PATH + std::string("/printed/testManagerSegel.txt"));
+    Employee e1(1, "John", "Williams", 2002);
+    Skill s1(1,"C++",0);
+    Skill s2(2, "Java", 0);
+    Employee e2(2, "Alex", "Martinez", 2000);
+    e1.learnSkill(s1);
+    e1.learnSkill(s2);
+    e2.learnSkill(s2);
+    Manager m1(1,"Robert", "stark", 1980);
+    out << "Short Print" << endl;
+    m1.printShort(out);
+    out << "Long Print" << endl;
+    m1.printLong(out);
+    out << "----------" << endl;
+    m1.addEmployee(&e1);
+    m1.addEmployee(&e2);
+    out << "Short Print" << endl;
+    m1.printShort(out);
+    m1.setSalary(10000);
+    out << "Long Print" << endl;
+    m1.printLong(out);
+    ASSERT_TEST(matchFiles(fileName, FILE_PATH + std::string("/expected/testManagerSegel.txt")));
+    return true;
+}
+
+class Condition4{
+public:
+    bool operator()(Employee* emp){
+        return emp->getId()>0;
+    }
+};
+
+bool testWorkplaceSegel()
+{
+    OPEN_FILE(out, FILE_PATH + std::string("/printed/testWorkplaceSegel.txt"));
+    Workplace Meta(1,"Meta", 10000, 20000);
+    Employee* e1 = new Employee(1, "John", "Williams", 2002);
+    Employee* e2 = new Employee(2, "Alex", "Martinez", 2000);
+    Manager* m1 = new Manager(1,"Robert", "stark", 1980);
+    Meta.hireManager(m1);
+    Condition4 condition;
+    Meta.hireEmployee(condition,e1,m1->getId());
+    Meta.hireEmployee(condition,e2,m1->getId());
+    out << Meta;
+    Meta.fireEmployee(e1->getId(),m1->getId());
+    Meta.fireManager(m1->getId());
+    out << "-----------" << endl;
+    out << Meta;
+    out.close();
+    delete e1;
+    delete e2;
+    delete m1;
+    ASSERT_TEST(matchFiles(fileName, FILE_PATH + std::string("/expected/testWorkplaceSegel.txt")));
+    return true;
+}
+
+bool testCitySegel()
+{
+    OPEN_FILE(out, FILE_PATH + std::string("/printed/testCitySegel.txt"));
+    City city ("TLV");
+    Skill skill1(1,"Programming with c++",0);
+    Skill skill2(2,"Programming with c",10);
+    city.addEmployee(11, "John", "Williams", 2002);
+    city.addEmployee(12, "Alex", "Martinez", 2000);
+    city.addEmployee(13, "Lionel", "Smith", 2000);
+    city.addManager(104,"Mohamad","Masarwa",1998);
+    FacultyCondition1 fc1;
+    FacultyCondition2 fc2;
+    city.addFaculty(1001, skill1, 10, &fc1);
+    city.addFaculty(1002, skill2, 15, &fc2);
+    city.teachAtFaculty(11,1001);
+    city.teachAtFaculty(11,1002);
+    city.teachAtFaculty(12,1001);
+    city.teachAtFaculty(13,1001);
+    city.createWorkplace(10001, "Meta", 10000, 20000);
+    city.hireManagerAtWorkplace(104,10001);
+    HiringCondition hiringCondition;
+    city.hireEmployeeAtWorkplace(hiringCondition, 11, 104, 10001);
+    city.hireEmployeeAtWorkplace(hiringCondition, 12, 104, 10001);
+    city.hireEmployeeAtWorkplace(hiringCondition, 13, 104, 10001);
+    city.fireEmployeeAtWorkplace(12,104,10001);
+    out << "getAllAboveSalary output: " << endl;
+    city.getAllAboveSalary(out,1000);
+    out << endl << "printAllEmployeesWithSkill output" << endl;
+    city.printAllEmployeesWithSkill(out, 1);
+    city.fireManagerAtWorkplace(104,10001);
+    out << "getAllAboveSalary output: " << endl;
+    city.getAllAboveSalary(out,1000);
+    out << endl << "printAllEmployeesWithSkill output" << endl;
+    city.printAllEmployeesWithSkill(out, 1);
+    out.close();
+    ASSERT_TEST(matchFiles(fileName, FILE_PATH + std::string("/expected/testCitySegel.txt")));
+    return true;
+}
 
 /*The functions for the tests should be added here*/
 bool (*tests[]) (void) = {
@@ -941,7 +1074,11 @@ bool (*tests[]) (void) = {
         testManager,
         testWorkplace,
         testFaculty,
-		testCity,
+        testCity,
+        testEmployeeSegel,
+        testManagerSegel,
+        testWorkplaceSegel,
+        testCitySegel,
 };
 
 #define NUMBER_TESTS ((long)(sizeof(tests)/sizeof(*tests)))
@@ -953,13 +1090,18 @@ const char* testNames[NUMBER_TESTS] = {
         "testManager",
         "testWorkplace",
         "testFaculty",
-		"testCity",
+        "testCity",
+        "testEmployeeSegel",
+        "testManagerSegel",
+        "testWorkplaceSegel",
+        "testCitySegel",
 };
 
 int main(int argc, char *argv[])
 {
-	blue();
-	cout << "Running Tests C++ ..." << endl; 
+    blue();
+    cout << "Running Tests C++ ..." << endl;
+    blue();
     long number_tests = NUMBER_TESTS;
     if (argc == 1)
     {
@@ -985,9 +1127,8 @@ int main(int argc, char *argv[])
         number_tests = 1;
         RUN_COLORFULL_TEST(tests[test_idx - 1], testNames[test_idx - 1], test_idx - 1);
     }
-	printf("\033[1;36m");
-    fflush(stdout);
-	cout << "@@@@ by Muhammad Biadsy GOOD LUCK @@@@" << endl;
-	reset();
+    blue();
+    cout << "@@@@ by Muhammad Biadsy GOOD LUCK @@@@" << endl;
+    blue();
     return 0;
 }

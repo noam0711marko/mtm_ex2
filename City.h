@@ -3,13 +3,13 @@
 
 #include "Workplace.h"
 #include "Faculty.h"
-#include "exceptions.h"
+#include "Exception.h"
 
 namespace mtm {
     class City {
         string name;
-        set<Employee*, cmp_citizens_ptr> employees;
-        set<Manager*, cmp_citizens_ptr> managers;
+        set<Employee *, cmp_citizens_ptr> employees;
+        set<Manager *, cmp_citizens_ptr> managers;
         set<shared_ptr<Citizen>, cmp_citizens_shared_ptr> citizens;
         //set<Workplace*, cmp_workplaces> workplaces;
         //set<Faculty<Condition>*, cmp_faculties> faculties;
@@ -21,8 +21,8 @@ namespace mtm {
 
         ~City() = default;
 
-        //City(const City &) = default;
-        City(const City &);
+        City(const City &) = default;
+        //City(const City &);
 
         City &operator=(const City &) = default;
 
@@ -40,13 +40,13 @@ namespace mtm {
         void
         hireEmployeeAtWorkplace(Condition hiringCondition, int employee_id, int manager_id, int workplace_id) const {
             if (!exists(employee_id, employees)) {
-                throw exceptions::EmployeeDoesNotExist();
+                throw EmployeeDoesNotExist();
             }
             if (!exists(manager_id, managers)) {
-                throw exceptions::ManagerDoesNotExist();
+                throw ManagerDoesNotExist();
             }
             if (!exists(workplace_id, workplaces)) {
-                throw exceptions::WorkplaceDoesNotExist();
+                throw WorkplaceDoesNotExist();
             }
             Employee *employee = get(employee_id, employees);
             //Workplace* workplace= get(workplace_id, workplaces);
@@ -105,8 +105,6 @@ namespace mtm {
         }*/
 
     };
-
-
 
 
 }

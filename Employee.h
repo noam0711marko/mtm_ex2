@@ -6,7 +6,7 @@
 #include "Skill.h"
 #include "set"
 #include "memory"
-#include "exceptions.h"
+#include "Exception.h"
 
 using std::shared_ptr;
 using std::set;
@@ -22,7 +22,7 @@ namespace mtm {
     public:
         Employee(int new_id, const string &new_first_name, const string &new_last_name, int new_year);
 
-        ~Employee() override= default;
+        ~Employee() override = default;
 
         Employee(const Employee &) = default;
 

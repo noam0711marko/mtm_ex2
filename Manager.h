@@ -3,7 +3,7 @@
 
 #include "Employee.h"
 #include "Citizen.h"
-#include "exceptions.h"
+#include "Exception.h"
 
 namespace mtm {
     class Manager : public Citizen {
@@ -18,9 +18,9 @@ namespace mtm {
 
         ~Manager() override = default;
 
-        //Manager(const Manager &) = default;
+        Manager(const Manager &) = default;
 
-        Manager(const Manager &m);
+        //Manager(const Manager &m);
 
         Manager &operator=(const Manager &) = default;
 
