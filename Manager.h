@@ -3,7 +3,7 @@
 
 #include "Employee.h"
 #include "Citizen.h"
-#include "exceptions.h"
+#include "Exception.h"
 
 namespace mtm {
     class Manager : public Citizen {

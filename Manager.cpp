@@ -14,7 +14,7 @@ namespace mtm {
 
     void Manager::addEmployee(Employee *employee) {
         if (hasEmployee(employee->getId())) {
-            throw exceptions::EmployeeAlreadyHired();
+            throw EmployeeAlreadyHired();
         }
         employees.insert(employee);
         employees_ids.insert(employee->getId());
@@ -39,7 +39,7 @@ namespace mtm {
                 return;
             }
         }
-        throw exceptions::EmployeeIsNotHired();
+        throw EmployeeIsNotHired();
     }
 
     void Manager::setSalary(int to_add) {

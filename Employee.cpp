@@ -19,10 +19,10 @@ namespace mtm {
 
     void Employee::learnSkill(const Skill &to_add) {
         if (hasSkill(to_add.getId())) {
-            throw exceptions::SkillAlreadyLearned();
+            throw SkillAlreadyLearned();
         }
         if (to_add.getRequiredPoints() > score) {
-            throw exceptions::CanNotLearnSkill();
+            throw CanNotLearnSkill();
         }
         skills.insert(to_add);
         //setScore(to_add.getRequiredPoints());
@@ -36,7 +36,7 @@ namespace mtm {
                 return;
             }
         }
-        throw exceptions::DidNotLearnSkill();
+        throw DidNotLearnSkill();
     }
 
     bool Employee::hasSkill(int skill_id) const {
@@ -85,9 +85,14 @@ namespace mtm {
     }
 
     ostream &Employee::printSkills(ostream &os) const {
-        os << " Skills:" << endl;
-        for (const Skill &n: skills) {
-            os << n.getName() << endl;
+        if(!skills.empty()){
+            os << " Skills:" << endl;
+            for (const Skill &n: skills) {
+                os << n.getName() << endl;
+            }
+        }
+        else{
+            os << endl;
         }
         return os;
     }

@@ -52,7 +52,7 @@ namespace mtm {
 
     Skill &Skill::operator+=(const int &points) {
         if (points < 0) {
-            throw exceptions::NegativePoints();
+            throw NegativePoints();
         }
         required_points_for_purchase += points;
         return *this;
@@ -60,7 +60,7 @@ namespace mtm {
 
     Skill operator+(const int &num, const Skill &skill) {
         if (num < 0) {
-            throw exceptions::NegativePoints();
+            throw NegativePoints();
         }
         Skill res = skill;
         res += num;
@@ -69,7 +69,7 @@ namespace mtm {
 
     Skill operator+(const Skill &skill, const int &num) {
         if (num < 0) {
-            throw exceptions::NegativePoints();
+            throw NegativePoints();
         }
         Skill res = skill;
         res += num;

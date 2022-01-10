@@ -28,10 +28,10 @@ namespace mtm {
 
     void Workplace::hireManager(Manager *manager_to_hire) {
         if (hasManager(manager_to_hire->getId())) {
-            throw exceptions::ManagerAlreadyHired();
+            throw ManagerAlreadyHired();
         }
         if (manager_to_hire->isManagerHired() || manager_to_hire->getSalary() != 0) {
-            throw exceptions::CanNotHireManager();
+            throw CanNotHireManager();
         }
         managers.insert(manager_to_hire);
         manager_to_hire->setSalary(manager_salary);
@@ -50,10 +50,10 @@ namespace mtm {
 
     void Workplace::fireEmployee(int employee_id, int manager_id) const {
         if (!hasManager(manager_id)) {
-            throw exceptions::ManagerIsNotHired();
+            throw ManagerIsNotHired();
         }
         if (!hasEmployeeInManager(employee_id, manager_id)) {
-            throw exceptions::EmployeeIsNotHired();
+            throw EmployeeIsNotHired();
         }
         Employee *employee = getEmployeeFromManager(employee_id, manager_id);
         Manager *manager = getManager(manager_id);
@@ -86,7 +86,7 @@ namespace mtm {
 
     void Workplace::fireManager(int manager_id) {
         if (!hasManager(manager_id)) {
-            throw exceptions::ManagerIsNotHired();
+            throw ManagerIsNotHired();
         }
         Manager *manager = getManager(manager_id);
         set<int> employees_under_manager = manager->getEmployeesIdsSet();
@@ -123,11 +123,11 @@ namespace mtm {
 
     void Workplace::hireEmployeeAction(Employee *employee, int manager_id) {
         if (!hasManager(manager_id)) {
-            throw exceptions::ManagerIsNotHired();
+            throw ManagerIsNotHired();
         }
         for (Manager *n: managers) {
             if (hasEmployeeInManager(employee->getId(), n->getId())) {
-                throw exceptions::EmployeeAlreadyHired();
+                throw EmployeeAlreadyHired();
             }
         }
         Manager *manager = getManager(manager_id);

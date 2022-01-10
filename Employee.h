@@ -6,7 +6,7 @@
 #include "Skill.h"
 #include "set"
 #include "memory"
-#include "exceptions.h"
+#include "Exception.h"
 
 using std::shared_ptr;
 using std::set;

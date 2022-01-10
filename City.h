@@ -3,7 +3,7 @@
 
 #include "Workplace.h"
 #include "Faculty.h"
-#include "exceptions.h"
+#include "Exception.h"
 
 namespace mtm {
     class City {
@@ -40,13 +40,13 @@ namespace mtm {
         void
         hireEmployeeAtWorkplace(Condition hiringCondition, int employee_id, int manager_id, int workplace_id) const {
             if (!exists(employee_id, employees)) {
-                throw exceptions::EmployeeDoesNotExist();
+                throw EmployeeDoesNotExist();
             }
             if (!exists(manager_id, managers)) {
-                throw exceptions::ManagerDoesNotExist();
+                throw ManagerDoesNotExist();
             }
             if (!exists(workplace_id, workplaces)) {
-                throw exceptions::WorkplaceDoesNotExist();
+                throw WorkplaceDoesNotExist();
             }
             Employee *employee = get(employee_id, employees);
             //Workplace* workplace= get(workplace_id, workplaces);

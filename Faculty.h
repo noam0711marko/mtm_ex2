@@ -3,7 +3,7 @@
 
 #include "Skill.h"
 #include "Employee.h"
-#include "exceptions.h"
+#include "Exception.h"
 
 namespace mtm {
     class Condition {
@@ -66,7 +66,7 @@ namespace mtm {
     void Faculty<Condition>::teach(Employee *employee) {
 
         if (!(*condition)(employee)) {
-            throw exceptions::EmployeeNotAccepted();
+            throw EmployeeNotAccepted();
         }
         employee->setScore(points_from_faculty);
         employee->learnSkill(skill);

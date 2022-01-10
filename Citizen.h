@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <iostream>
-#include "exceptions.h"
+#include "Exception.h"
 
 using std::string;
 using std::shared_ptr;
