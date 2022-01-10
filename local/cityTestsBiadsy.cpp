@@ -46,28 +46,33 @@ const std::string FILE_PATH = "/Users/noammarko/Desktop/mtm_ex2/local";
 
 static long NumTestsPassed = 0;
 
-static void red() {
-    system("Color C");
+static void red () {
+    printf("\033[1;91m");
+    fflush(stdout);
 }
 
 static void green() {
-    system("Color A");
+    printf("\033[0;92m");
+    fflush(stdout);
 }
 
 static void purple() {
-    system("Color D");
+    printf("\033[0;95m");
+}
+
+static void yellow() {
+    printf("\033[0;93m");
+    fflush(stdout);
 }
 
 static void blue() {
-    system("Color B");
+    printf("\033[0;94m");
+    fflush(stdout);
 }
 
-static void yellow () {
-    system("Color E");
-}
-
-static void reset () {
-    system("Color E");
+static void reset() {
+    printf("\033[0m");
+    fflush(stdout);
 }
 
 static void printIfSuccess(long num_tests)
