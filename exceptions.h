@@ -1,5 +1,5 @@
-#ifndef MTM_EX2_EXCEPTION_H
-#define MTM_EX2_EXCEPTION_H
+#ifndef MTM_EX2_EXCEPTIONS_H
+#define MTM_EX2_EXCEPTIONS_H
 
 #include <iostream>
 
@@ -62,5 +62,5 @@ namespace mtm {
     };
 
 }
-#endif //MTM_EX2_EXCEPTION_H
+#endif //MTM_EX2_EXCEPTIONS_H
 
