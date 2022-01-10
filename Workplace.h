@@ -2,7 +2,7 @@
 #define MTM_EX2_WORKPLACE_H
 
 #include "Manager.h"
-#include "Exception.h"
+#include "exceptions.h"
 
 namespace mtm {
     class Workplace {

@@ -3,7 +3,7 @@
 
 #include "Workplace.h"
 #include "Faculty.h"
-#include "Exception.h"
+#include "exceptions.h"
 
 namespace mtm {
     class City {
