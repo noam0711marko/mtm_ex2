@@ -86,7 +86,7 @@ namespace mtm {
 
     ostream &Employee::printSkills(ostream &os) const {
         if(!skills.empty()){
-            os << " Skills:" << endl;
+            os << " Skills: " << endl;
             for (const Skill &n: skills) {
                 os << n.getName() << endl;
             }
