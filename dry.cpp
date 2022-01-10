@@ -2,12 +2,12 @@
 #include "vector"
 #include "memory"
 
-class BadInput {
+class BadInput : public std::exception {
 };
 
 template<class T>
 std::vector<T> slice(std::vector<T> vec, int start, int step, int stop) {
-    if (start < 0 || start >= vec.size() || stop < 0 || stop >= vec.size() || step <= 0) {
+    if (start < 0 || start >= vec.size() || stop < 0 || stop > vec.size() || step <= 0) {
         throw BadInput();
     }
     std::vector<T> new_vec = {};
