@@ -102,4 +102,17 @@ namespace mtm {
         return copy;
     }
 
+    /*bool Employee::alreadyInFaculty(int faculty_id) {
+        for(int n : faculties_id){
+            if (n==faculty_id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void Employee::addFacultyToEmployee(int faculty_id) {
+        faculties_id.insert(faculty_id);
+    }*/
+
 }
