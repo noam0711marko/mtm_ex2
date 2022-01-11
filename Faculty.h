@@ -68,8 +68,13 @@ namespace mtm {
         if (!(*condition)(employee)) {
             throw EmployeeNotAccepted();
         }
-        employee->setScore(points_from_faculty);
+        /*if(!employee->alreadyInFaculty(id)){
+            employee->setScore(points_from_faculty);
+            employee->addFacultyToEmployee(id);
+        }
+        //employee->setScore(points_from_faculty);*/
         employee->learnSkill(skill);
+        employee->setScore(points_from_faculty);
     }
 
 

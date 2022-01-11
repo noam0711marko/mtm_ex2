@@ -18,6 +18,7 @@ namespace mtm {
         int salary;
         int score;
         set<Skill, cmp_skills> skills;
+        set<int> faculties_id;
 
     public:
         Employee(int new_id, const string &new_first_name, const string &new_last_name, int new_year);
@@ -52,6 +53,9 @@ namespace mtm {
 
         Employee *clone() const override;
 
+        //bool alreadyInFaculty(int faculty_id);
+
+        //void addFacultyToEmployee(int faculty_id);
 
     };
 
