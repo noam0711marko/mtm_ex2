@@ -191,8 +191,6 @@ namespace mtm {
          *      A new employee which is a copy of the employee sent to the method.
          */
         Employee *clone() const override;
-
     };
-
 }
 #endif //MTM_EX2_EMPLOYEE_H

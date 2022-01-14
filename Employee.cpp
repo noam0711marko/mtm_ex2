@@ -101,5 +101,4 @@ namespace mtm {
         Employee *copy = new Employee(*this);
         return copy;
     }
-
 }

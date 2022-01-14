@@ -5,8 +5,9 @@ using std::endl;
 
 namespace mtm {
 
-    Manager::Manager(int new_id, const string &new_first_name, const string &new_last_name, int new_birth_year)
-            : Citizen(new_id, new_first_name, new_last_name, new_birth_year), salary(0), workplace_id(NOT_HIRED) {}
+    Manager::Manager(int new_id, const string &new_first_name, const string &new_last_name, int new_birth_year) :
+                Citizen(new_id, new_first_name, new_last_name, new_birth_year),
+                    salary(0), workplace_id(NOT_HIRED) {}
 
     int Manager::getSalary() const {
         return salary;
@@ -21,17 +22,6 @@ namespace mtm {
     }
 
     void Manager::removeEmployee(int id_to_remove) {
-        /*set<Employee*>::iterator it= employees.begin();
-        while(it!=employees.end()) {
-            int curr_id=(*it)->getId();
-            if (curr_id == id_to_remove) {
-                employees.erase(it);
-                return;
-            }
-            ++it;
-        }
-        throw EmployeeIsNotHired();
-    */
         for (Employee *n: employees) {
             if (n->getId() == id_to_remove) {
                 employees_ids.erase(n->getId());
@@ -76,17 +66,10 @@ namespace mtm {
     }
 
     ostream &Manager::printEmployees(ostream &os) const {
-        /*set<Employee*>::iterator it=employees.begin();
-        while (it!=employees.end()){
-            Employee* temp= *it;
-            temp->printShort(os);
-            it++;
-        }*/
         if(!employees.empty()){
             os << "Employees: " << endl;
         }
         else{
-            //os << endl;
             return os;
         }
         for (Employee *n: employees) {
@@ -132,9 +115,4 @@ namespace mtm {
         workplace_id = NOT_HIRED;
     }
 
-    /*Manager::Manager(const Manager &m) : Citizen(m), salary(m.salary), workplace_id(m.workplace_id) {
-        for (Employee* n : m.employees){
-            employees.insert(new Employee(*n));
-        }
-    }*/
 }
