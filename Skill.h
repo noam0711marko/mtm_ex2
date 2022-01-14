@@ -147,6 +147,9 @@ namespace mtm {
          *
          * @param- amount to add to skill's required points for purchase
          *
+         * @exceptions
+         *      NegativePoints - if the num sent is negative
+         *
          * @return
          *      The skill with it's required points for purchase increased by the amount sent to the function
          */
@@ -157,6 +160,9 @@ namespace mtm {
          *
          * @param skill - the skill which it's required points for purchase is requested to be updated.
          * @param num- amount to add to skill's required points for purchase
+         *
+         * @exceptions
+         *      NegativePoints - if the num sent is negative
          *
          * @return
          *      The skill with it's required points for purchase increased by num
