@@ -169,8 +169,6 @@ namespace mtm {
          */
         friend Skill operator+(const int &num, const Skill &skill);
         friend Skill operator+(const Skill &skill, const int &num);
-
-
     };
 
     /*

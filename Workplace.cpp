@@ -43,7 +43,6 @@ namespace mtm {
         }
         manager_to_hire->setSalary(manager_salary);
         manager_to_hire->setManagerWorkplace(id);
-
     }
 
     bool Workplace::hasManager(int manager_id) const {
@@ -104,7 +103,6 @@ namespace mtm {
             if(!hiredForAnotherManager(emp, manager_id)){
                 emp->setSalary(-employee_salary);
             }
-            //fireEmployee(n, manager_id);
         }
         manager->setManagerNotHired();
         manager->setSalary(-manager_salary);
@@ -167,12 +165,4 @@ namespace mtm {
         }
         return false;
     }
-
-
-/*Workplace::Workplace(const Workplace& wp) : name(wp.name), id(wp.id), employee_salary(wp.employee_salary), manager_salary(wp.manager_salary) {
-    for (Manager* m : wp.managers){
-        managers.insert(new Manager(*m));
-    }
-}*/
-
 }

@@ -253,7 +253,6 @@ namespace mtm {
      */
     bool operator!=(const Citizen &citizen_1, const Citizen &citizen_2);
 
-
     /*
      * cmp_citizens_shared_ptr:
      * struct which contains only the operator() which compare between shared pointers to citizen by citizen's

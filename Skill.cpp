@@ -7,6 +7,7 @@ using std::ostream;
 using std::endl;
 
 namespace mtm {
+
     Skill::Skill(int new_id, string new_name, int new_required_points) :
             id(new_id), name(std::move(new_name)), required_points_for_purchase(new_required_points) {
     }
