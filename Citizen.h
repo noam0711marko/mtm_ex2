@@ -27,8 +27,8 @@ using std::ostream;
  *   getSalary                  - Pure Virtual method which Returns the salary of a citizen.
  *   operator<                  - Returns if one citizen's ID is smaller than the second's ID.
  *   operator==                 - Returns if one citizen's ID is equal to the second's ID.
- *   printShort                 - Prints short details about the citizen
- *   printLong                  - Prints long details about the citizen
+ *   printShort                 - Virtual method which prints short details about the citizen.
+ *   printLong                  - Virtual method which prints long details about the citizen.
  *   printFullName              - Prints citizen's full name.
  *   printIdBirthYear           - Prints citizen's id and year of birth.
  *   clone                      - Pure virtual method which creates a (deep) copy of a citizen.
@@ -42,6 +42,7 @@ namespace mtm {
         int year_of_birth;
 
     public:
+
         /*
          * Citizen: Constructor for citizen.
          *
@@ -147,7 +148,7 @@ namespace mtm {
         friend bool operator==(const Citizen &citizen_1, const Citizen &citizen_2);
 
         /*
-         * printShort: Prints short details about the citizen
+         * printShort: Virtual method which prints short details about the citizen.
          *
          * note: It's a pure virtual method, so it can be used only in derived classes!
          *       Therefore, it's not implemented in this base abstract class.
@@ -160,7 +161,7 @@ namespace mtm {
         virtual ostream &printShort(ostream &) const = 0;
 
         /*
-         * printLong: Prints long details about the citizen
+         * printLong: Virtual method which prints long details about the citizen.
          *
          * note: It's a pure virtual method, so it can be used only in derived classes!
          *       Therefore, it's not implemented in this base abstract class.
