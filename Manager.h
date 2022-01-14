@@ -14,7 +14,7 @@ namespace mtm {
 
         static const int NOT_HIRED = -1;
     public:
-        Manager(int new_id, const string &new_first_name, const string &new_last_name, int new_birth_year);
+        explicit Manager(int new_id, const string &new_first_name, const string &new_last_name, int new_birth_year);
 
         ~Manager() override = default;
 

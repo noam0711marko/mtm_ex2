@@ -17,7 +17,7 @@ namespace mtm {
         int required_points_for_purchase;
 
     public:
-        Skill(int new_id, string new_name, int new_required_points);
+        explicit Skill(int new_id, string new_name, int new_required_points);
 
         ~Skill() = default;
 

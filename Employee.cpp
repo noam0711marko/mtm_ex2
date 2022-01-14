@@ -65,14 +65,14 @@ namespace mtm {
     }
 
     ostream &Employee::printShort(ostream &os) const {
-        printFirstLastName(os);
+        printFullName(os);
         printSalaryScore(os);
         os << endl;
         return os;
     }
 
     ostream &Employee::printLong(ostream &os) const {
-        printFirstLastName(os);
+        printFullName(os);
         printIdBirthYear(os);
         printSalaryScore(os);
         printSkills(os);

@@ -13,7 +13,7 @@ namespace mtm {
         set<Manager *, cmp_citizens_ptr> managers;
 
     public:
-        Workplace(int new_id, string new_name, int new_employee_salary, int new_manager_salary);
+        explicit Workplace(int new_id, string new_name, int new_employee_salary, int new_manager_salary);
 
         ~Workplace() = default;
 

@@ -19,7 +19,7 @@ namespace mtm {
         Condition *condition;
 
     public:
-        Faculty(int new_id, const Skill &new_skill, int new_points_from_faculty, Condition *new_condition);
+        explicit Faculty(int new_id, const Skill &new_skill, int new_points_from_faculty, Condition *new_condition);
 
         ~Faculty() = default;
 

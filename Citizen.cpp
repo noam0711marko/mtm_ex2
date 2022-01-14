@@ -29,9 +29,9 @@ namespace mtm {
         return year_of_birth;
     }
 
-    ostream &Citizen::printFirstLastName(ostream &os) const {
-        os << first_name << " " << last_name << endl;
-        return os;
+    ostream &Citizen::printFullName(ostream &out) const {
+        out << first_name << " " << last_name << endl;
+        return out;
     }
 
     ostream &Citizen::printIdBirthYear(ostream &os) const {

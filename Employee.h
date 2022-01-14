@@ -21,7 +21,7 @@ namespace mtm {
         set<int> faculties_id;
 
     public:
-        Employee(int new_id, const string &new_first_name, const string &new_last_name, int new_year);
+        explicit Employee(int new_id, const string &new_first_name, const string &new_last_name, int new_year);
 
         ~Employee() override = default;
 
