@@ -25,8 +25,8 @@ using std::ostream;
  *   getLastName                - Returns the last name of a citizen.
  *   getBirthYear               - Returns the year of birth of a citizen.
  *   getSalary                  - Pure Virtual method which Returns the salary of a citizen.
- *   operator<                  - Returns if one citizen's ID is smaller than the second's ID.
- *   operator==                 - Returns if one citizen's ID is equal to the second's ID.
+ *   operator<                  - Overloads the operator '<' for citizen (compare by ID).
+ *   operator==                 - Overloads the operator '==' for citizen (compare by ID).
  *   printShort                 - Virtual method which prints short details about the citizen.
  *   printLong                  - Virtual method which prints long details about the citizen.
  *   printFullName              - Prints citizen's full name.
@@ -124,7 +124,7 @@ namespace mtm {
         virtual int getSalary() const = 0;
 
         /*
-         * operator<: Returns if one citizen's ID is smaller than the second's ID.
+         * operator<: Overloads the operator '<' for citizen (compare by ID).
          *
          * @param citizen_1- the first citizen to compare.
          * @param citizen_2- the second citizen to compare.
@@ -136,7 +136,7 @@ namespace mtm {
         friend bool operator<(const Citizen &citizen_1, const Citizen &citizen_2);
 
         /*
-         * operator==: Returns if one citizen's ID is equal to the second's ID.
+         * operator==: Overloads the operator '==' for citizen (compare by ID).
          *
          * @param citizen_1- the first citizen to compare.
          * @param citizen_2- the second citizen to compare.
@@ -206,7 +206,7 @@ namespace mtm {
     };
 
     /*
-     * operator<=: Returns if one citizen's ID is smaller than or equal to the second's ID.
+     * operator<=: Overloads the operator '<=' for citizen (compare by ID).
      *
      * @param citizen_1- the first citizen to compare.
      * @param citizen_2- the second citizen to compare.
@@ -218,7 +218,7 @@ namespace mtm {
     bool operator<=(const Citizen &citizen_1, const Citizen &citizen_2);
 
     /*
-     * operator>: Returns if one citizen's ID is bigger than the second's ID.
+     * operator>: Overloads the operator '>' for citizen (compare by ID).
      *
      * @param citizen_1- the first citizen to compare.
      * @param citizen_2- the second citizen to compare.
@@ -230,7 +230,7 @@ namespace mtm {
     bool operator>(const Citizen &citizen_1, const Citizen &citizen_2);
 
     /*
-     * operator>=: Returns if one citizen's ID is bigger than or equal to the second's ID.
+     * operator>=: Overloads the operator '>=' for citizen (compare by ID).
      *
      * @param citizen_1- the first citizen to compare.
      * @param citizen_2- the second citizen to compare.
@@ -242,7 +242,7 @@ namespace mtm {
     bool operator>=(const Citizen &citizen_1, const Citizen &citizen_2);
 
     /*
-     * operator<=: Returns if one citizen's ID is not equal to the second's ID.
+     * operator!=: Overloads the operator '!=' for citizen (compare by ID).
      *
      * @param citizen_1- the first citizen to compare.
      * @param citizen_2- the second citizen to compare.
