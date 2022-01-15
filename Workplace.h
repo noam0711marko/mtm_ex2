@@ -132,6 +132,8 @@ namespace mtm {
          *
          * @exceptions
          *      EmployeeNotSelected - If the employee not meeting the hiring condition for the workplace
+         *      ManagerIsNotHired - If the manager is not hired in the workplace
+         *      EmployeeAlreadyHired - If the employee is already hired in the workplace under this specific manager
          */
         template<class Condition>
         void hireEmployee(Condition hiringCondition, Employee *employee, int manager_id) {
